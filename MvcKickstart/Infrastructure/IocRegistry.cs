@@ -17,9 +17,6 @@ namespace MvcKickstart.Infrastructure
 						scan.WithDefaultConventions();
 					});
 
-//			For<IDependencyResolver>().Singleton().Use<StructureMapSignalrDependencyResolver>();
-//			For<IConnectionManager>().Singleton().Use(GlobalHost.ConnectionManager);
-
 			For<IDocumentStore>()
 				.Singleton()
 				.Use(x =>

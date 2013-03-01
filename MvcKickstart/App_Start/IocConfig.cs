@@ -14,7 +14,7 @@ namespace MvcKickstart
 
 			DependencyResolver.SetResolver(new StructureMapDependencyResolver(ObjectFactory.Container));
 			// Override signalr's default dependency resolver
-			//GlobalHost.DependencyResolver = ObjectFactory.GetInstance<IDependencyResolver>();
+			//GlobalHost.DependencyResolver = new StructureMapSignalrDependencyResolver(ObjectFactory.Container);
 			//RouteTable.Routes.MapHubs();
 		}
 	}
