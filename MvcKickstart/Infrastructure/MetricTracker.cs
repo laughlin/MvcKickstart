@@ -13,8 +13,15 @@ namespace MvcKickstart.Infrastructure
 
 		public MetricTracker(string host, int port)
 		{
-			if (!string.IsNullOrEmpty(host))
-				_udpClient = new UdpClient(host, port);
+			try
+			{
+				if (!string.IsNullOrEmpty(host))
+					_udpClient = new UdpClient(host, port);
+			}
+			catch
+			{
+				// Any failures creating the udpclient should not affect the rest of the site
+			}
 		}
 
 		#region Guage
