@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MvcKickstart.Infrastructure;
@@ -40,8 +37,8 @@ namespace MvcKickstart
 			IocConfig.Bootstrap();
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
-			RavenConfig.Bootstrap();
 			AutomapperConfig.CreateMappings();
+			DbConfig.Bootstrap();
 		}
 
 		public override string GetVaryByCustomString(HttpContext context, string custom)

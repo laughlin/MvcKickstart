@@ -12,10 +12,9 @@ namespace MvcKickstart
 		{
 			ObjectFactory.Initialize(x => x.AddRegistry(new IocRegistry()));
 
-			DependencyResolver.SetResolver(new StructureMapDependencyResolver(ObjectFactory.Container));
+			DependencyResolver.SetResolver(new StructureMapDependencyScope(ObjectFactory.Container));
 			// Override signalr's default dependency resolver
-			//GlobalHost.DependencyResolver = new StructureMapSignalrDependencyResolver(ObjectFactory.Container);
-			//RouteTable.Routes.MapHubs();
+//			GlobalHost.DependencyResolver = ObjectFactory.GetInstance<IDependencyResolver>();
 		}
 	}
 }

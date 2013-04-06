@@ -20,12 +20,6 @@ namespace MvcKickstart.ViewModels.Account
 		[PasswordStrength]
 		public string Password { get; set; }
 
-		[Display(Name = "Confirm Password", Description = "Please enter your password again for good measure.")]
-		[DataType(DataType.Password)]
-		[Required(ErrorMessage = "{0} is required")]
-		[Compare("Password", ErrorMessage = "Passwords do not match")]
-		public string PasswordConfirm { get; set; }
-
 		public string ReturnUrl { get; set; }
 	}
 }

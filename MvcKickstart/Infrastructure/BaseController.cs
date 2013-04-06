@@ -1,18 +1,21 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Web.Mvc;
+using Dapper;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models.Users;
 using MvcKickstart.ViewModels.Shared;
-using Raven.Client;
 using ServiceStack.Logging;
+using ServiceStack.Text;
 
 namespace MvcKickstart.Infrastructure
 {
-	public abstract class RavenController : Controller
+	public abstract class BaseController : Controller
 	{
-		protected IDocumentSession RavenSession { get; private set; }
+		protected IDbConnection Db { get; private set; }
 		protected IMetricTracker Metrics { get; private set; }
 		protected ILog Log { get; private set; }
 
@@ -24,9 +27,9 @@ namespace MvcKickstart.Infrastructure
 			}
 		}
 
-		protected RavenController(IDocumentSession connection, IMetricTracker metrics)
+		protected BaseController(IDbConnection db, IMetricTracker metrics)
 		{
-			RavenSession = connection;
+			Db = db;
 			Metrics = metrics;
 			Log = LogManager.GetLogger(GetType());
 		}
@@ -40,12 +43,12 @@ namespace MvcKickstart.Infrastructure
 				return;
 			}
 
-			User user;
+			User user = null;
 			if (filterContext.HttpContext.User.Identity.IsAuthenticated && filterContext.HttpContext.User.Identity.AuthenticationType == "Forms")
 			{
-				user = RavenSession.Query<User>().Customize(x => x.WaitForNonStaleResults()).SingleOrDefault(x => x.Username == filterContext.HttpContext.User.Identity.Name);
+				user = Db.Query<User>("select * from [{0}] where Username=@username".Fmt(Db.GetTableName<User>()), new { Username = filterContext.HttpContext.User.Identity.Name }).SingleOrDefault();
 			}
-			else
+			if (user == null)
 			{
 				user = new User();
 			}
@@ -65,9 +68,14 @@ namespace MvcKickstart.Infrastructure
 			}
 		}
 
-		public new JsonNetResult Json(object data)
+		protected override JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior)
 		{
-			return new JsonNetResult { Data = data };
+			return new ServiceStackJsonResult
+			{
+				Data = data,
+				ContentType = contentType,
+				ContentEncoding = contentEncoding
+			};
 		}
 
 		/// <summary>
@@ -75,7 +83,7 @@ namespace MvcKickstart.Infrastructure
 		/// </summary>
 		/// <param name="error">Error to return</param>
 		/// <returns></returns>
-		public JsonNetResult JsonError(Error error)
+		protected JsonResult JsonError(Error error)
 		{
 			return JsonError(error, error.ErrorCode ?? (int) HttpStatusCode.InternalServerError);
 		}
@@ -85,10 +93,51 @@ namespace MvcKickstart.Infrastructure
 		/// <param name="error">Error to return</param>
 		/// <param name="responseCode">StatusCode to return with the response</param>
 		/// <returns></returns>
-		public JsonNetResult JsonError(Error error, int responseCode)
+		protected JsonResult JsonError(Error error, int responseCode)
 		{
 			Response.StatusCode = responseCode;
-			return new JsonNetResult { Data = error };
+			return Json(error);
+		}
+
+		/// <summary>
+		/// Specify a success notification to be shown this request
+		/// </summary>
+		/// <param name="message"></param>
+		protected void NotifySuccess(string message)
+		{
+			Notify(message, NotificationType.Success);
+		}
+		/// <summary>
+		/// Specify a info notification to be shown this request
+		/// </summary>
+		/// <param name="message"></param>
+		protected void NotifyInfo(string message)
+		{
+			Notify(message, NotificationType.Info);
+		}
+		/// <summary>
+		/// Specify a warning notification to be shown this request
+		/// </summary>
+		/// <param name="message"></param>
+		protected void NotifyWarning(string message)
+		{
+			Notify(message, NotificationType.Warning);
+		}
+		/// <summary>
+		/// Specify an error notification to be shown this request
+		/// </summary>
+		/// <param name="message"></param>
+		protected void NotifyError(string message)
+		{
+			Notify(message, NotificationType.Error);
+		}
+		/// <summary>
+		/// Specify a notification to be shown this request
+		/// </summary>
+		/// <param name="message"></param>
+		protected void Notify(string message, NotificationType type)
+		{
+			TempData[ViewDataConstants.Notification] = new Notification(message, type);
 		}
 	}
 }

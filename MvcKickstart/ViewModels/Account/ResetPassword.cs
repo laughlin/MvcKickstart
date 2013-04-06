@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using MvcKickstart.Infrastructure.Attributes;
 using MvcKickstart.Models.Users;
 
@@ -13,7 +10,7 @@ namespace MvcKickstart.ViewModels.Account
 		public Guid Token { get; set; }
 		public PasswordRetrieval Data { get; set; }
 
-		[Display(Name = "Password")]
+		[Display(Name = "New Password")]
 		[DataType(DataType.Password)]
 		[Required(ErrorMessage = "{0} is required")]
 		[StringLength(1000, ErrorMessage = "{0} must be at least {2} characters", MinimumLength = 8)]

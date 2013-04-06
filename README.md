@@ -19,16 +19,20 @@ Conventions
     * Eg. ~/content/js/Account/Login.js and ~/content/js/Admin/Home/Index.js
     * Similarly: ~/content/less/Account/Register.less and ~/content/less/Admin/Users/Index.less
 * The site takes advantage of the mythical donut caching technique via the [MVC donut caching library](http://mvcdonutcaching.codeplex.com/).  Content should be cached via the *ConfiguredOutputCache* attribute.  The idea with that attribute is that the cache duration can be controlled via an admin screen. 
+* Data model objects can add CreatedBy, CreatedOn, ModifiedBy and ModifiedOn properties. The Save() method will auto update those properties, if they're present.
 
-Additional Information
+Optional inclusions
 ----------------------
 * This project incorporates tracking internal metrics via [statsd](https://github.com/etsy/statsd).  It's good to know how your app is behaving.  If you don't have statsd setup, you should.  If you still don't want it, removing the "Metrics:*" keys from appSettings will disable metric tracking.
 * Unit testing is built into this solution.  Please use what I have as a _starting point_.
-* Some technology choices:
-    * [RavenDb](http://ravendb.net/) is the datalayer of choice.
-    * Asset bundling and minification is handled by [cassette](http://getcassette.net/).  The built in asp.net bundler sucks in comparison.
-    * This template uses [bootstrap](http://twitter.github.com/bootstrap/) for a UI starting point. Enjoy...
-    * I use various parts of [Service Stack](http://www.servicestack.net/) throughout this project.  Service Stack is to asp.net projects as Resharper is to Visual Studio.
+* This project includes a basic data migration framework. Migrations are one way (no rolling back) and are handled all in code.
+
+Technology Choices
+------------------
+* [Dapper](https://github.com/SamSaffron/dapper-dot-net) is the ORM of choice.
+* Asset bundling and minification is handled by [cassette](http://getcassette.net/).  The built in asp.net bundler sucks in comparison.
+* This template uses [bootstrap](http://twitter.github.com/bootstrap/) for a UI starting point. Enjoy...
+* [Service Stack](http://www.servicestack.net/) is used throughout this project.  Service Stack is to asp.net projects as Resharper is to Visual Studio.
 
 Renaming Utility
 ----------------

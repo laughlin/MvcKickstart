@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Http.Dependencies;
 using Microsoft.Practices.ServiceLocation;
 using StructureMap;
 
@@ -10,7 +9,7 @@ namespace MvcKickstart.Infrastructure
 	/// <summary>
 	/// Wrapper for IDependencyScope, so that StructureMap plays nicely with built in mvc4 dependency resolution.
 	/// </summary>
-	public class StructureMapDependencyScope : ServiceLocatorImplBase, IDependencyScope
+	public class StructureMapDependencyScope : ServiceLocatorImplBase
 	{
 		protected readonly IContainer Container;
 
@@ -77,22 +76,6 @@ namespace MvcKickstart.Infrastructure
 		public void Dispose()
 		{
 			Container.Dispose();
-		}
-	}
-
-	/// <summary>
-	/// Wrapper for IDependencyResolver so that StructureMap plays nicely with built in mvc 4 dependency resolution. 
-	/// </summary>
-	public class StructureMapDependencyResolver : StructureMapDependencyScope, IDependencyResolver
-	{
-		public StructureMapDependencyResolver(IContainer container) : base(container)
-		{
-		}
-
-		public IDependencyScope BeginScope()
-		{
-			var child = Container.GetNestedContainer();
-			return new StructureMapDependencyResolver(child);
 		}
 	}
 }

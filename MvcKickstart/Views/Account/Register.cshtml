@@ -41,14 +41,6 @@
 					<span class="validation">@Html.ValidationMessageFor(x => x.Password)</span>
 				</span>
 			</div>
-			<div class="control-group">
-				@Html.LabelFor(x => x.PasswordConfirm)
-				@Html.PasswordWithMaxLengthFor(x => x.PasswordConfirm)
-				<span class="message-box">
-					<span class="description">@Html.DescriptionFor(x => x.PasswordConfirm)</span>
-					<span class="validation">@Html.ValidationMessageFor(x => x.PasswordConfirm)</span>
-				</span>
-			</div>
 			<button type="submit" class="btn btn-primary">Join Now</button>
 			<div class="control-group">
 				Already a member? <a href="@Url.Account().Login()">Sign in</a>

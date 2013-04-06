@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Linq;
 using System.Net;
 using System.Security.Principal;
@@ -7,11 +6,12 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Dapper;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models.Users;
 using MvcKickstart.ViewModels.Shared;
-using Raven.Client;
 using ServiceStack.CacheAccess;
+using ServiceStack.Text;
 
 namespace MvcKickstart.Infrastructure.Attributes
 {
@@ -19,9 +19,9 @@ namespace MvcKickstart.Infrastructure.Attributes
 	{
 		public bool RequireAdmin { get; set; }
 		protected ICacheClient Cache { get; private set; }
-		protected IDocumentSession RavenSession { get; private set; }
+		protected IDbConnection Db { get; private set; }
 
-	/// <summary>
+		/// <summary>
 		/// The key to the authentication token that should be submitted somewhere in the request.
 		/// </summary>
 		private const string TokenKey = "AuthenticationToken";
@@ -29,7 +29,7 @@ namespace MvcKickstart.Infrastructure.Attributes
 		public RestrictedAttribute()
 		{
 			Cache = StructureMap.ObjectFactory.GetInstance<ICacheClient>();
-			RavenSession = StructureMap.ObjectFactory.GetInstance<IDocumentSession>();
+			Db = StructureMap.ObjectFactory.GetInstance<IDbConnection>();
 		}
 		protected override bool AuthorizeCore(HttpContextBase httpContext)
 		{
@@ -57,7 +57,10 @@ namespace MvcKickstart.Infrastructure.Attributes
 				User userObject;
 				if (httpContext.User.Identity.IsAuthenticated && httpContext.User.Identity.AuthenticationType == "Forms")
 				{
-					userObject = RavenSession.Query<User>().Customize(x => x.WaitForNonStaleResults()).SingleOrDefault(x => x.Username == httpContext.User.Identity.Name);
+					userObject = Db.Query<User>("select * from [{0}] where IsDeleted=0 and Username=@Username".Fmt(Db.GetTableName<User>()), new
+						{
+							Username = httpContext.User.Identity.Name
+						}).SingleOrDefault();
 				}
 				else
 				{
@@ -88,7 +91,7 @@ namespace MvcKickstart.Infrastructure.Attributes
 					var returnUrl = filterContext.HttpContext.Request.Url != null
 										? filterContext.HttpContext.Request.Url.AbsolutePath
 										: string.Empty;
-					filterContext.Result = new JsonNetResult
+					filterContext.Result = new ServiceStackJsonResult
 					{
 						Data = new RedirectError
 						{

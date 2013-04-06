@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Data;
 using System.Web.Mvc;
 using AttributeRouting;
 using AttributeRouting.Web.Mvc;
 using MvcKickstart.Areas.Admin.ViewModels.Home;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
-using Raven.Client;
 
 namespace MvcKickstart.Areas.Admin.Controllers
 {
 	[RouteArea("admin")]
 	[Restricted(RequireAdmin = true)]
-	public class HomeController : RavenController
+	public class HomeController : BaseController
     {
-		public HomeController(IDocumentSession session, IMetricTracker metrics) : base(session, metrics)
+		public HomeController(IDbConnection db, IMetricTracker metrics) : base(db, metrics)
 		{
 		}
 

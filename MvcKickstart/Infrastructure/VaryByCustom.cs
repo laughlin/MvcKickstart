@@ -1,6 +1,6 @@
 ﻿namespace MvcKickstart.Infrastructure
 {
-	public class VaryByCustom
+	public static class VaryByCustom
 	{
 		/// <summary>
 		/// Each user should have their own cached copy

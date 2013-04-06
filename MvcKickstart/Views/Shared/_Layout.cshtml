@@ -28,6 +28,7 @@
 	@Bundles.RenderScripts("head")
 </head>
 <body>
+	@Html.Action("Menu", "Home", new { Area = "Admin" }, true)
 	<div class="navbar navbar-static-top">
 		<div class="navbar-inner">
 			<div class="container">

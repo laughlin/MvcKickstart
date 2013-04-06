@@ -1,16 +1,16 @@
-﻿using System.Web.Mvc;
+﻿using System.Data;
+using System.Web.Mvc;
 using AttributeRouting.Web.Mvc;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
 using MvcKickstart.ViewModels.Home;
-using Raven.Client;
 using StackExchange.Profiling;
 
 namespace MvcKickstart.Controllers
 {
-	public class HomeController : RavenController
+	public class HomeController : BaseController
 	{
-		public HomeController(IDocumentSession session, IMetricTracker metrics) : base(session, metrics)
+		public HomeController(IDbConnection db, IMetricTracker metrics) : base(db, metrics)
 		{
 		}
 
@@ -27,14 +27,10 @@ namespace MvcKickstart.Controllers
 		[Route("__partial__Home_Profiler")]
 		public ActionResult Profiler()
 		{
-#if !DEBUG
 			if (User.IsAdmin)
 			{
-#endif
 				return Content(MiniProfiler.RenderIncludes().ToHtmlString());
-#if !DEBUG
 			}
-#endif
 			return new EmptyResult();
 		}
 

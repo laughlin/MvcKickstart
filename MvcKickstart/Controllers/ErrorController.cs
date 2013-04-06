@@ -1,16 +1,16 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
 using MvcKickstart.ViewModels.Error;
-using Raven.Client;
 
 namespace MvcKickstart.Controllers
 {
-	public class ErrorController : RavenController
+	public class ErrorController : BaseController
 	{
-		public ErrorController(IDocumentSession session, IMetricTracker metrics) : base (session, metrics){}
+		public ErrorController(IDbConnection db, IMetricTracker metrics) : base (db, metrics){}
 
 		[GetOrPost("Error", RouteName = "Error_Index")]
 		[ConfiguredOutputCache]
