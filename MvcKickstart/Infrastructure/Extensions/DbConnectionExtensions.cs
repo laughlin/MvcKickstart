@@ -227,7 +227,7 @@ namespace MvcKickstart.Infrastructure.Extensions
 			}
 
 			var createdOn = entityType.GetProperty("CreatedOn");
-			if (createdOn != null && (DateTime) createdOn.GetValue(obj) == default(DateTime))
+			if (createdOn != null && (createdOn.GetValue(obj) == null || (DateTime) createdOn.GetValue(obj) == default(DateTime)))
 				createdOn.SetValue(obj, DateTime.UtcNow);
 			var modifiedOn = entityType.GetProperty("ModifiedOn");
 			if (modifiedOn != null)
