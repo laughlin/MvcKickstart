@@ -1,5 +1,8 @@
 ﻿using System.Web.Mvc;
+using MvcKickstart.Infrastructure.Extensions;
+using FizzWare.NBuilder.Generators;
 using Moq;
+using MvcKickstart.Infrastructure;
 using MvcKickstart.Models.Users;
 using MvcKickstart.Tests.Utilities;
 using MvcKickstart.ViewModels.Account;
@@ -47,7 +50,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 			var model = new Login
 			{
 				Username = User.Username,
-				Password = "asdfasdf"
+				Password = GetRandom.String(20)
 			};
 
 			var result = Controller.Login(model) as ViewResult;
@@ -61,7 +64,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 			result.ViewName.Should().Equal("");
 
 			var modelState = result.ViewData.ModelState;
-			modelState.ContainsKey("InvalidCredentials").Should().Be.True();
+			modelState.ContainsKey("Username").Should().Be.True();
 		}
 
 		[Test]

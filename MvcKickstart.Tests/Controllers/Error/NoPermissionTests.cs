@@ -11,7 +11,7 @@ namespace MvcKickstart.Tests.Controllers.Error
 		[Test]
 		public void GivenRequest_ReturnsNoPermissionPageView()
 		{
-			var controller = new ErrorController(Session, Metrics);
+			var controller = new ErrorController(Db, Metrics);
 			ControllerUtilities.SetupControllerContext(controller);
 
 			var result = controller.NoPermission() as ViewResult;

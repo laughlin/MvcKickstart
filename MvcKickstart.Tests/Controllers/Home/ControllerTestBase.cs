@@ -1,5 +1,6 @@
 ﻿using MvcKickstart.Controllers;
 using MvcKickstart.Tests.Utilities;
+using NUnit.Framework;
 
 namespace MvcKickstart.Tests.Controllers.Home
 {
@@ -11,7 +12,7 @@ namespace MvcKickstart.Tests.Controllers.Home
 		{
 			base.Setup();
 
-			Controller = new HomeController(Session, Metrics);
+			Controller = new HomeController(Db, Metrics);
 			ControllerUtilities.SetupControllerContext(Controller);
 		}
 	}

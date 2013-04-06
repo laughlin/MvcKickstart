@@ -16,7 +16,7 @@ namespace MvcKickstart.Infrastructure.Data.Migrations
 					    Username = "admin",
 					    Password = "admin".ToSHAHash(),
 						IsAdmin = true,
-					    Email = "jim@biacreations.com",
+					    Email = "notset@localhost.com",
 					});
 		}
 	}

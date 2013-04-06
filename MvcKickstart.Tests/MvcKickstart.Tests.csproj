@@ -106,7 +106,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Account\ForgotPasswordTests.cs" />
     <Compile Include="Controllers\Account\IndexTests.cs" />
+    <Compile Include="Controllers\Account\ResetPasswordTests.cs" />
     <Compile Include="Controllers\Admin\AdminAreaTests.cs" />
     <Compile Include="Controllers\Admin\Home\ControllerTestBase.cs" />
     <Compile Include="Controllers\Admin\Home\IndexTests.cs" />
@@ -128,10 +130,12 @@
     <Compile Include="Routing\ErrorTests.cs" />
     <Compile Include="Routing\HomeTests.cs" />
     <Compile Include="Routing\RouteTestBase.cs" />
+    <Compile Include="SqlSetup.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Utilities\ControllerUtilities.cs" />
-    <Compile Include="Utilities\ForceNonStaleQueryListener.cs" />
+    <Compile Include="Utilities\Generator.cs" />
     <Compile Include="Utilities\RequestExtensions.cs" />
+    <Compile Include="Utilities\Terminator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

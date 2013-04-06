@@ -94,7 +94,7 @@ namespace MvcKickstart.Tests.Utilities
 		}
 
 		/// <summary>
-		/// Asserts that a controller is decorated with the QuadAuthorize attribute.
+		/// Asserts that a controller is decorated with the Restricted attribute.
 		/// </summary>
 		/// <remarks>
 		///	Seems like there should be a better way to verify that an action requires authentication...

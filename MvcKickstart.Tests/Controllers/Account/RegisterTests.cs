@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using FizzWare.NBuilder.Generators;
+using Moq;
 using MvcKickstart.Tests.Utilities;
 using MvcKickstart.ViewModels.Account;
 using NUnit.Framework;
@@ -46,7 +47,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 		{
 			var model = new Register
 			{
-				Username = "user1",
+				Username = GetRandom.String(20),
 				Email = GetRandom.Email(),
 				Password = "password1"
 			};
@@ -90,7 +91,6 @@ namespace MvcKickstart.Tests.Controllers.Account
 			var model = new Register
 			{
 				Username = User.Username,
-				Email = GetRandom.Email(),
 				Password = "password1"
 			};
 
@@ -108,8 +108,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 			{
 				Username = GetRandom.String(20),
 				Email = User.Email,
-				Password = "password1",
-				PasswordConfirm = "password1"
+				Password = "password1"
 			};
 
 			var result = Controller.Register(model) as ViewResult;
@@ -152,6 +151,20 @@ namespace MvcKickstart.Tests.Controllers.Account
 			var result = Controller.Register(model) as ViewResult;
 			result.Should().Not.Be.Null();
 			result.ViewName.Should().Equal("RegisterConfirmation");
+		}
+		[Test]
+		public void GivenValidPostRequest_SendsEmail()
+		{
+			var model = new Register
+			{
+				Username = GetRandom.String(20),
+				Email = GetRandom.Email(),
+				Password = "password1"
+			};
+
+			Controller.Register(model);
+
+			MailController.Verify(x => x.Welcome(It.Is<ViewModels.Mail.Welcome>(m => m.To == model.Email && m.Username == model.Username)), Times.Once());
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Mvc;
 using MvcContrib.TestHelper;
 using MvcKickstart.Controllers;
 using NUnit.Framework;
@@ -37,8 +36,8 @@ namespace MvcKickstart.Tests.Routing
 		[Test]
 		public void ResetPassword()
 		{
-			var guid = Guid.NewGuid();
-			("~/account/reset-password/" + guid).ShouldMapTo<AccountController>(x => x.ResetPassword(guid));
+			var id = Guid.NewGuid().ToString("N");
+			("~/account/reset-password/" + id).ShouldMapTo<AccountController>(x => x.ResetPassword(id));
 		}
 
 	}

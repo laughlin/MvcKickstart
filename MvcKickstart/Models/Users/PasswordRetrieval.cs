@@ -20,6 +20,7 @@ namespace MvcKickstart.Models.Users
 
 		public Guid Token { get; set; }
 
+//		[References(typeof(User))]
 		public int UserId { get; set; }
 
 		public DateTime CreatedOn { get; set; }

@@ -11,11 +11,10 @@ namespace MvcKickstart.Tests.Controllers.Home
 {
 	public class ProfilerTests : ControllerTestBase
 	{
-#if !DEBUG
 		[Test]
 		public void GivenAnonymousUser_ReturnsEmptyResult()
 		{
-			var controller = new HomeController(Session, Metrics);
+			var controller = new HomeController(Db, Metrics);
 
 			ControllerUtilities.SetupControllerContext(controller);
 
@@ -26,19 +25,18 @@ namespace MvcKickstart.Tests.Controllers.Home
 		[Test]
 		public void GivenInvalidPermissions_ReturnsEmptyResult()
 		{
-			var controller = new HomeController(Session, Metrics);
+			var controller = new HomeController(Db, Metrics);
 
 			ControllerUtilities.SetupControllerContext(controller, new User { Username = "testUser" });
 
 			var result = controller.Profiler() as EmptyResult;
 			result.Should().Not.Be.Null();
 		}
-#endif
 
 		[Test]
 		public void GivenValidPermissions_ReturnsStringResult()
 		{
-			var controller = new HomeController(Session, Metrics);
+			var controller = new HomeController(Db, Metrics);
 
 			ControllerUtilities.SetupControllerContext(controller, new User
 				                                                       {
