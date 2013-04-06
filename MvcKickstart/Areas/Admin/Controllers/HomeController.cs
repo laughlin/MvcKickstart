@@ -9,7 +9,6 @@ using MvcKickstart.Infrastructure.Attributes;
 namespace MvcKickstart.Areas.Admin.Controllers
 {
 	[RouteArea("admin")]
-	[Restricted(RequireAdmin = true)]
 	public class HomeController : BaseController
     {
 		public HomeController(IDbConnection db, IMetricTracker metrics) : base(db, metrics)
@@ -17,6 +16,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 		}
 
 		[GET("", RouteName = "Admin_Home_Index")]
+		[Restricted(RequireAdmin = true)]
 		public ActionResult Index()
 		{
 			var model = new Index();
@@ -28,7 +28,11 @@ namespace MvcKickstart.Areas.Admin.Controllers
 		[Route("__partial__Menu")]
 		public ActionResult Menu()
 		{
-			return PartialView("_Menu");
+			if (User.IsAdmin)
+			{
+				return PartialView("_Menu");
+			}
+			return new EmptyResult();
 		}
 
 		#endregion

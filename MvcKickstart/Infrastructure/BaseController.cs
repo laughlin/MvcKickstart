@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Linq;
 using System.Net;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Web.Mvc;
@@ -53,7 +54,9 @@ namespace MvcKickstart.Infrastructure
 				user = new User();
 			}
 
-			filterContext.HttpContext.User = new UserPrincipal(user, filterContext.HttpContext.User.Identity);
+			var identity = filterContext.HttpContext.User != null ? filterContext.HttpContext.User.Identity : new GenericIdentity(user.Username ?? string.Empty);
+			filterContext.HttpContext.User = new UserPrincipal(user, identity);
+
 			Thread.CurrentPrincipal = filterContext.HttpContext.User;
 			base.OnAuthorization(filterContext);
 		}
