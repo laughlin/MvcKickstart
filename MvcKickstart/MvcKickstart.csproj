@@ -186,6 +186,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\Index.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MailController.cs" />
@@ -439,6 +440,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Error\NoPermission.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Mail\ForgotPassword.html.cshtml" />
+    <Content Include="Views\Mail\ForgotPassword.txt.cshtml" />
+    <Content Include="Views\Mail\Web.config" />
+    <Content Include="Views\Mail\Welcome.html.cshtml" />
+    <Content Include="Views\Mail\Welcome.txt.cshtml" />
+    <Content Include="Views\Mail\_Layout.html.cshtml" />
+    <Content Include="Views\Mail\_Layout.txt.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

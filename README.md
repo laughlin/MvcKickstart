@@ -19,6 +19,7 @@ Conventions
     * Eg. ~/content/js/Account/Login.js and ~/content/js/Admin/Home/Index.js
     * Similarly: ~/content/less/Account/Register.less and ~/content/less/Admin/Users/Index.less
 * The site takes advantage of the mythical donut caching technique via the [MVC donut caching library](http://mvcdonutcaching.codeplex.com/).  Content should be cached via the *ConfiguredOutputCache* attribute.  The idea with that attribute is that the cache duration can be controlled via an admin screen. 
+* Only MS SQL Server is supported at this time. It would take just a few tweaks to support other databases.
 * Data model objects can add CreatedBy, CreatedOn, ModifiedBy and ModifiedOn properties. The Save() method will auto update those properties, if they're present.
 
 Optional inclusions

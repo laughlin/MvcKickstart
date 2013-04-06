@@ -1,0 +1,28 @@
+﻿@model Welcome
+@{
+	Layout = "_Layout.txt.cshtml";
+}
+Welcome to MvcKickstart!
+
+It's a real honor to have you as a new Member. Thanks for joining!
+
+To complete your registration, click:
+
+@Url.Absolute(Url.Account().Activate(Model.ActivationId))
+
+==================================================
+Your login information:
+--------------------------------------------------
+
+Username: @Model.Username
+Forgot your password? You can retrieve it from the 
+login page @Url.Absolute(Url.Account().Login())
+
+==================================================
+
+Any questions, don't hesitate to get in touch at @@biacreations or just reply to this email. Thanks again for signing up!
+
+http://twitter.com/biacreations
+
+All the best,
+Bia Creations Team

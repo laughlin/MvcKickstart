@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Web.Mvc;
+using MvcKickstart.ViewModels.Mail;
 using ServiceStack.CacheAccess;
 using ServiceStack.Text;
 using StructureMap;
@@ -153,6 +154,54 @@ namespace MvcKickstart.Infrastructure.Extensions
 				return Url.RouteUrl("Account_ResetPassword", new { token });
 			}
 
+		}
+
+		#endregion
+
+		#region Email
+
+		public static EmailUrls Email(this UrlHelper helper)
+		{
+			return new EmailUrls(helper);
+		}
+
+		public class EmailUrls
+		{
+			protected UrlHelper Url { get; set; }
+
+			public EmailUrls(UrlHelper url)
+			{
+				Url = url;
+			}
+
+			public string TrackView(string id)
+			{
+				return Url.RouteUrl("Email_View", new
+					{
+						id
+					});
+			}
+			public string TrackClick(Guid id, string url)
+			{
+				var data = new TrackClick
+					{
+						Id = id,
+						Url = url
+					};
+				return TrackClick(data);
+			}
+			public string TrackClick(TrackClick data)
+			{
+				return Url.RouteUrl("Email_Click", new
+					{
+						data.Url,
+						data.Id
+					});
+			}
+			public string Asset(string filename)
+			{
+				return Url.Content("~/Content/Email/" + filename);
+			}
 		}
 
 		#endregion
