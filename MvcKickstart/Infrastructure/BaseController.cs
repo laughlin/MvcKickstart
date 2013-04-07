@@ -47,7 +47,7 @@ namespace MvcKickstart.Infrastructure
 			User user = null;
 			if (filterContext.HttpContext.User.Identity.IsAuthenticated && filterContext.HttpContext.User.Identity.AuthenticationType == "Forms")
 			{
-				user = Db.Query<User>("select * from [{0}] where Username=@username".Fmt(Db.GetTableName<User>()), new { Username = filterContext.HttpContext.User.Identity.Name }).SingleOrDefault();
+				user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@username".Fmt(Db.GetTableName<User>()), new { Username = filterContext.HttpContext.User.Identity.Name }).SingleOrDefault();
 			}
 			if (user == null)
 			{
@@ -105,7 +105,7 @@ namespace MvcKickstart.Infrastructure
 		/// <summary>
 		/// Specify a success notification to be shown this request
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Notification message</param>
 		protected void NotifySuccess(string message)
 		{
 			Notify(message, NotificationType.Success);
@@ -113,7 +113,7 @@ namespace MvcKickstart.Infrastructure
 		/// <summary>
 		/// Specify a info notification to be shown this request
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Notification message</param>
 		protected void NotifyInfo(string message)
 		{
 			Notify(message, NotificationType.Info);
@@ -121,7 +121,7 @@ namespace MvcKickstart.Infrastructure
 		/// <summary>
 		/// Specify a warning notification to be shown this request
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Notification message</param>
 		protected void NotifyWarning(string message)
 		{
 			Notify(message, NotificationType.Warning);
@@ -129,7 +129,7 @@ namespace MvcKickstart.Infrastructure
 		/// <summary>
 		/// Specify an error notification to be shown this request
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Notification message</param>
 		protected void NotifyError(string message)
 		{
 			Notify(message, NotificationType.Error);
@@ -137,7 +137,8 @@ namespace MvcKickstart.Infrastructure
 		/// <summary>
 		/// Specify a notification to be shown this request
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Notification message</param>
+		/// <param name="type">Notification type</param>
 		protected void Notify(string message, NotificationType type)
 		{
 			TempData[ViewDataConstants.Notification] = new Notification(message, type);

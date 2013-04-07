@@ -51,29 +51,28 @@ namespace MvcKickstart.Infrastructure.Attributes
 			if (!httpContext.Request.IsAuthenticated)
 				return false;
 
-			// If it's not a UserPrincipal, we need to create it (b/c this happens before RavenController.OnAuthorization)
+			// If it's not a UserPrincipal, we need to create it (b/c this happens before BaseController.OnAuthorization)
 			if (!(httpContext.User is UserPrincipal))
 			{
-				User userObject;
+				User user = null;
 				if (httpContext.User.Identity.IsAuthenticated && httpContext.User.Identity.AuthenticationType == "Forms")
 				{
-					userObject = Db.Query<User>("select * from [{0}] where IsDeleted=0 and Username=@Username".Fmt(Db.GetTableName<User>()), new
-						{
-							Username = httpContext.User.Identity.Name
-						}).SingleOrDefault();
+					user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@username".Fmt(Db.GetTableName<User>()), new { Username = httpContext.User.Identity.Name }).SingleOrDefault();
 				}
-				else
+				if (user == null)
 				{
-					userObject = new User();
+					user = new User();
 				}
 
-				httpContext.User = new UserPrincipal(userObject, httpContext.User.Identity);
+				var identity = httpContext.User != null ? httpContext.User.Identity : new GenericIdentity(user.Username ?? string.Empty);
+				httpContext.User = new UserPrincipal(user, identity);
+
 				Thread.CurrentPrincipal = httpContext.User;
 			}
 
-			var user = httpContext.User as UserPrincipal;
+			var userObject = httpContext.User as UserPrincipal;
 
-			return !RequireAdmin || user.IsAdmin;
+			return !RequireAdmin || userObject.IsAdmin;
 		}
 		protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
 		{
@@ -102,7 +101,9 @@ namespace MvcKickstart.Infrastructure.Attributes
 					};
 				}
 				else
+				{
 					base.HandleUnauthorizedRequest(filterContext);
+				}
 			}
 		}
 	}
