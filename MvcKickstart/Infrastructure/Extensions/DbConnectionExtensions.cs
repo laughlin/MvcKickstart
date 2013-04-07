@@ -35,12 +35,12 @@ namespace MvcKickstart.Infrastructure.Extensions
 		/// <param name="db"></param>
 		public static string GetTableName(this IDbConnection db, Type type)
 		{
-            string name;
-            if (!TypeTableName.TryGetValue(type.TypeHandle, out name))
-            {
+			string name;
+			if (!TypeTableName.TryGetValue(type.TypeHandle, out name))
+			{
 				if (type.IsSubclassOf(typeof(ScriptedObject)))
 				{
-					var scriptedObject = (ScriptedObject)Activator.CreateInstance(type);
+					var scriptedObject = (ScriptedObject) Activator.CreateInstance(type);
 					name = scriptedObject.Name;
 				}
 				else
@@ -57,12 +57,12 @@ namespace MvcKickstart.Infrastructure.Extensions
 					else
 					{
 						name = tableattr.Name;
-					}              
+					}
 				}
-                TypeTableName[type.TypeHandle] = name;
-            }
-            return name;
-        }
+				TypeTableName[type.TypeHandle] = name;
+			}
+			return name;
+		}
 		/// <summary>
 		/// Saves the specified item. New items will have their Id property set accordingly
 		/// </summary>
@@ -83,7 +83,7 @@ namespace MvcKickstart.Infrastructure.Extensions
 				var id = db.Insert(item);
 				if (prop.PropertyType == typeof(int))
 				{
-					prop.SetValue(item, (int)id, null);
+					prop.SetValue(item, (int) id, null);
 				}
 				else
 				{
@@ -101,12 +101,12 @@ namespace MvcKickstart.Infrastructure.Extensions
 			var sql = new StringBuilder();
 			sql.AppendFormat("insert into {0} (", db.GetTableName<T>());
 			var columns = db.GetColumns<T>().Where(x => !x.IsPrimary).ToList();
-			
+
 			for (var i = 0; i < columns.Count; i++)
 			{
 				var column = columns.ElementAt(i);
 				sql.Append(column.Name);
-				if (i != columns.Count -1)
+				if (i != columns.Count - 1)
 				{
 					sql.Append(",");
 				}
@@ -116,13 +116,14 @@ namespace MvcKickstart.Infrastructure.Extensions
 			{
 				var column = columns.ElementAt(i);
 				sql.AppendFormat("@{0}", column.Name);
-				if (i != columns.Count -1)
+				if (i != columns.Count - 1)
 				{
 					sql.Append(",");
 				}
 			}
 			sql.AppendLine(")");
 			sql.AppendLine("select cast(SCOPE_IDENTITY() as bigint)");
+
 			return db.Query<long>(sql.ToString(), item).Single();
 		}
 		private static void Update<T>(this IDbConnection db, T item)
@@ -135,7 +136,7 @@ namespace MvcKickstart.Infrastructure.Extensions
 			{
 				var column = columnsWithoutPrimary.ElementAt(i);
 				sql.AppendFormat("{0}=@{0}", column.Name);
-				if (i != columnsWithoutPrimary.Count -1)
+				if (i != columnsWithoutPrimary.Count - 1)
 				{
 					sql.Append(",");
 				}
@@ -144,11 +145,79 @@ namespace MvcKickstart.Infrastructure.Extensions
 			db.Execute(sql.ToString(), item);
 		}
 
+		/// <summary>
+		/// Get a list of items using sql paging to limit the result set
+		/// </summary>
+		/// <typeparam name="T">Type of object to query and return</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="page">Zero based index of the page to retrieve</param>
+		/// <param name="pageSize">Total number of items to return per page</param>
+		/// <param name="where">Where statement to limit results</param>
+		/// <param name="orderBy">Order statement to order the results before paging</param>
+		/// <param name="param">Parameters to pass to the sql query</param>
+		/// <returns></returns>
+		public static IList<T> PagedList<T>(this IDbConnection db, int page, int pageSize, string where = null, string orderBy = null, object param = null)
+		{
+			var tableName = db.GetTableName<T>();
 
-		public static int BulkInsert<T>(this IDbConnection db, IEnumerable<T> items, SqlTransaction transaction = null) where T: class
+			var startRow = page * pageSize;
+			var maxRow = page * pageSize + pageSize;
+			var sql = new StringBuilder();
+			sql.AppendLine("DECLARE @Temp" + tableName + " TABLE");
+			sql.AppendLine("(");
+			sql.AppendLine("Id int IDENTITY,");
+			sql.AppendLine("FKId int");
+			sql.AppendLine(")");
+
+			sql.AppendLine("DECLARE @maxRow int");
+
+			sql.AppendLine("SET @maxRow = " + maxRow);
+
+			sql.AppendLine("SET ROWCOUNT @maxRow");
+
+			sql.AppendLine("INSERT INTO @Temp" + tableName + " (FKId)");
+			sql.AppendLine("SELECT Id");
+			sql.AppendLine("FROM " + tableName);
+			if (!string.IsNullOrWhiteSpace(where))
+			{
+				sql.Append("WHERE ");
+				sql.AppendLine(where);
+			}
+			if (!string.IsNullOrWhiteSpace(orderBy))
+			{
+				sql.Append("ORDER BY ");
+				sql.AppendLine(orderBy);
+			}
+			else
+			{
+				sql.AppendLine("ORDER BY Id ASC");
+			}
+
+			sql.AppendLine("SET ROWCOUNT " + pageSize);
+
+			sql.AppendLine("SELECT s.*");
+			sql.AppendLine("FROM @Temp" + tableName + " t");
+			sql.AppendLine(" INNER JOIN " + tableName + " s ON");
+			sql.AppendLine(" s.Id = t.FKId");
+			sql.AppendLine("WHERE t.ID > " + startRow);
+
+			sql.AppendLine("SET ROWCOUNT 0");
+
+			return db.Query<T>(sql.ToString(), param).ToList();
+		}
+
+		/// <summary>
+		/// Efficiently insert multiple items into the database. Will insert in chunks of 5,000
+		/// </summary>
+		/// <typeparam name="T">Type of object to insert</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="items">Items to insert</param>
+		/// <param name="transaction">Transaction to use while inserting items</param>
+		/// <returns></returns>
+		public static int BulkInsert<T>(this IDbConnection db, IEnumerable<T> items, SqlTransaction transaction = null) where T : class
 		{
 			var totalCount = 0;
-			using (var bulkInsert = new SqlBulkCopy((SqlConnection)db, SqlBulkCopyOptions.Default, transaction))
+			using (var bulkInsert = new SqlBulkCopy((SqlConnection) db, SqlBulkCopyOptions.Default, transaction))
 			{
 				bulkInsert.DestinationTableName = db.GetTableName<T>();
 				var count = 0;
@@ -177,11 +246,11 @@ namespace MvcKickstart.Infrastructure.Extensions
 
 					totalCount++;
 					// Insert in blocks of 5,000 rows
-					if (++count%5000 == 0)
-                    {
-                        bulkInsert.WriteToServer(dt);
-                        dt.Clear();
-                    }
+					if (++count % 5000 == 0)
+					{
+						bulkInsert.WriteToServer(dt);
+						dt.Clear();
+					}
 
 				}
 				if (dt != null && dt.Rows.Count > 0)

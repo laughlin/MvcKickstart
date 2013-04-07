@@ -17,6 +17,7 @@ namespace MvcKickstart.Infrastructure.Data.Schema
 		public bool HasForeignKey { get; set; }
 		public string ForeignKeyName { get; set; }
 		public string ReferencedTableName { get; set; }
+		public string ReferencedTableColumnName { get; set; }
 		public Func<object, object> GetValue { get; set; }
 	}
 }
