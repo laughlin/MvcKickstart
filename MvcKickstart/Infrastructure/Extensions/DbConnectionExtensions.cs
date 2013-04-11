@@ -6,6 +6,7 @@ using System.Data.Entity.Design.PluralizationServices;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Web;
@@ -76,31 +77,26 @@ namespace MvcKickstart.Infrastructure.Extensions
 			UpdateAuditFields(item);
 
 			var type = item.GetType();
-			var prop = type.GetProperty("Id");
-			var isInsert = Equals(prop.GetValue(item), GetDefault(prop.PropertyType));
+			var columns = db.GetColumns(type);
+			var primary = columns.SingleOrDefault(x => x.IsPrimary);
+			if (primary == null)
+				throw new Exception("Unable to find Id field for type: " + type);
+			var isInsert = Equals(primary.GetValue(item), GetDefault(primary.Type));
 			if (isInsert)
 			{
-				var id = db.Insert(item);
-				if (prop.PropertyType == typeof(int))
-				{
-					prop.SetValue(item, (int) id, null);
-				}
-				else
-				{
-					prop.SetValue(item, id, null);
-				}
+				db.Insert(item, columns, primary);
 			}
 			else
 			{
-				db.Update(item);
+				db.Update(item, columns);
 			}
 			return item;
 		}
-		private static long Insert<T>(this IDbConnection db, T item)
+		private static void Insert<T>(this IDbConnection db, T item, IList<Column> allColumns, Column primary)
 		{
 			var sql = new StringBuilder();
 			sql.AppendFormat("insert into {0} (", db.GetTableName<T>());
-			var columns = db.GetColumns<T>().Where(x => !x.IsPrimary).ToList();
+			var columns = allColumns.Where(x => !x.IsPrimary).ToList();
 
 			for (var i = 0; i < columns.Count; i++)
 			{
@@ -111,7 +107,13 @@ namespace MvcKickstart.Infrastructure.Extensions
 					sql.Append(",");
 				}
 			}
-			sql.Append(") values (");
+			sql.AppendLine(")");
+			if (primary.Type == typeof(Guid))
+			{
+				sql.Append("OUTPUT inserted.");
+				sql.AppendLine(primary.Name);
+			}
+			sql.Append("values (");
 			for (var i = 0; i < columns.Count; i++)
 			{
 				var column = columns.ElementAt(i);
@@ -122,15 +124,31 @@ namespace MvcKickstart.Infrastructure.Extensions
 				}
 			}
 			sql.AppendLine(")");
-			sql.AppendLine("select cast(SCOPE_IDENTITY() as bigint)");
+			if (primary.Type == typeof(Guid))
+			{
+				var id = db.Query<Guid>(sql.ToString(), item).Single();
+				primary.SetValue(item, id);
+			}
+			else
+			{
+				sql.AppendLine("select cast(SCOPE_IDENTITY() as bigint)");
 
-			return db.Query<long>(sql.ToString(), item).Single();
+				var id = db.Query<long>(sql.ToString(), item).Single();
+				if (primary.Type == typeof(int))
+				{
+					primary.SetValue(item, (int) id);
+				}
+				else
+				{
+					primary.SetValue(item, id);
+				}
+
+			}
 		}
-		private static void Update<T>(this IDbConnection db, T item)
+		private static void Update<T>(this IDbConnection db, T item, IList<Column> columns)
 		{
 			var sql = new StringBuilder();
 			sql.AppendFormat("update [{0}] set ", db.GetTableName<T>());
-			var columns = db.GetColumns<T>();
 			var columnsWithoutPrimary = columns.Where(x => !x.IsPrimary).ToList();
 			for (var i = 0; i < columnsWithoutPrimary.Count; i++)
 			{

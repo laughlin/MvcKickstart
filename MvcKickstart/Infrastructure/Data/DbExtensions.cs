@@ -185,6 +185,7 @@ namespace MvcKickstart.Infrastructure.Data
 							SqlType = sqlType,
 							AutoIncrement = autoIncrement,
 							DefaultValue = defaultValue,
+							SetValue = closureProperty.SetValue,
 							GetValue = closureProperty.GetValue
 						};
 
