@@ -39,3 +39,7 @@ Renaming Utility
 ----------------
 The Rename Utility (/__Rename Utility/rename.bat) can be used to rename the project from 'MvcKickstart' to whatever you need it named. 
 When you run that file, it will prompt you for the new name. Once the name is entered, the utility will run through all the files to replace any occurrances of 'MvcKickstart' (primarily the namespaces) to the name you entered. It will also rename the project files/folders, solution file, and update the solution file to reference the new project names.
+
+Questions
+-----------------
+Please have a look at the [wiki](https://github.com/jgeurts/MvcKickstart/wiki). If you have a question about something that isn't in the wiki, please feel free to submit an [issue](https://github.com/jgeurts/MvcKickstart/issues) and I'll do my best to provide an answer.
