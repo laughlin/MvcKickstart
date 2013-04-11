@@ -10,7 +10,7 @@ namespace MvcKickstart.Models.Users
 		public int Id { get; set; }
 		[StringLength(50)]
 		public string Username { get; set; }
-		[StringLength(50)]
+		[StringLength(64)]
 		public string Password { get; set; }
 
 		[StringLength(50)]

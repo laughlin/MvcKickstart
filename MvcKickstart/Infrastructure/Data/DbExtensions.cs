@@ -289,6 +289,8 @@ namespace MvcKickstart.Infrastructure.Data
 					IF EXISTS(select * from sys.columns where Name = N'{1}' and Object_ID = Object_ID(N'{0}')) 
 					AND NOT EXISTS(select * from sys.columns where Name = N'{2}' and Object_ID = Object_ID(N'{0}'))
 						EXEC SP_RENAME '{0}.{1}', '{2}', 'COLUMN'", table, oldColumnName, newColumnName));
+
+			// TODO: Rename constraints?
 		}
 		/// <summary>
 		/// Generate and execute ALTER SQL needed to drop a column from a table
@@ -455,22 +457,23 @@ COMMIT TRANSACTION;".Fmt(table, columnName);
 			};
 		private static string GetSqlType(Type type)
 		{
+			// Override any field type to map to an nvarchar field, if StringLength attribute is applied to the property
+			var stringLengthAttribute = type.FirstAttribute<StringLengthAttribute>(true);
+			if (stringLengthAttribute != null)
+			{
+				return TypeToSqlType[typeof(string)].Fmt(stringLengthAttribute.MaximumLength);
+			}
+
 			string sqlType;
 			var isTypeDefined = TypeToSqlType.TryGetValue(type, out sqlType);
-
 			// Default to nvarchar(50) if the field type is not defined.
 			if (!isTypeDefined)
 				sqlType = TypeToSqlType[typeof(string)].Fmt(50);
 
+			// If we made it this far and the type is string, that means no length was specified, so default to nvarchar(max)
 			if (type == typeof(string))
 			{
-				var stringLength = "MAX";
-				var stringLengthAttribute = type.FirstAttribute<StringLengthAttribute>(true);
-				if (stringLengthAttribute != null)
-				{
-					stringLength = stringLengthAttribute.MaximumLength.ToString();
-				}
-				sqlType = sqlType.Fmt(stringLength);
+				sqlType = sqlType.Fmt("MAX");
 			}
 
 			return sqlType;
