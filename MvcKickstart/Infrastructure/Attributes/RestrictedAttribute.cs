@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Security.Principal;
@@ -12,6 +13,7 @@ using MvcKickstart.Models.Users;
 using MvcKickstart.ViewModels.Shared;
 using ServiceStack.CacheAccess;
 using ServiceStack.Text;
+using StructureMap;
 
 namespace MvcKickstart.Infrastructure.Attributes
 {
@@ -19,7 +21,6 @@ namespace MvcKickstart.Infrastructure.Attributes
 	{
 		public bool RequireAdmin { get; set; }
 		protected ICacheClient Cache { get; private set; }
-		protected IDbConnection Db { get; private set; }
 
 		/// <summary>
 		/// The key to the authentication token that should be submitted somewhere in the request.
@@ -29,7 +30,6 @@ namespace MvcKickstart.Infrastructure.Attributes
 		public RestrictedAttribute()
 		{
 			Cache = StructureMap.ObjectFactory.GetInstance<ICacheClient>();
-			Db = StructureMap.ObjectFactory.GetInstance<IDbConnection>();
 		}
 		protected override bool AuthorizeCore(HttpContextBase httpContext)
 		{
@@ -57,9 +57,15 @@ namespace MvcKickstart.Infrastructure.Attributes
 				User user = null;
 				if (httpContext.User.Identity.IsAuthenticated && httpContext.User.Identity.AuthenticationType == "Forms")
 				{
-					user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@username".Fmt(Db.GetTableName<User>()), new { Username = httpContext.User.Identity.Name }).SingleOrDefault();
+					using (var db = ObjectFactory.GetInstance<SqlConnection>())
+					{
+						db.Open();
+						user = db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@username".Fmt(db.GetTableName<User>()), new { Username = httpContext.User.Identity.Name }).SingleOrDefault();
+					}
+					if (user == null)
+						return false;
 				}
-				if (user == null)
+				else
 				{
 					user = new User();
 				}

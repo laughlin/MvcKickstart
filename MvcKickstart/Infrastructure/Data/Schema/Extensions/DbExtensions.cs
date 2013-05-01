@@ -8,13 +8,12 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Dapper;
-using MvcKickstart.Infrastructure.Data.Schema;
 using MvcKickstart.Infrastructure.Data.Schema.Attributes;
 using MvcKickstart.Infrastructure.Extensions;
 using ServiceStack.Common.Extensions;
 using ServiceStack.Text;
 
-namespace MvcKickstart.Infrastructure.Data
+namespace MvcKickstart.Infrastructure.Data.Schema.Extensions
 {
 	/// <summary>
 	/// These extensions are only really useful in the data namespace, so they are separate from the other DbConnectionExtensions.
@@ -24,6 +23,13 @@ namespace MvcKickstart.Infrastructure.Data
 	{
 		#region Tables
 
+		/// <summary>
+		/// Check if the specified table exists
+		/// </summary>
+		/// <param name="db">Database Connection</param>
+		/// <param name="name">Name of the table</param>
+		/// <param name="transaction">Database transaction</param>
+		/// <returns></returns>
 		public static bool TableExists(this IDbConnection db, string name, IDbTransaction transaction = null)
 		{
 			string schemaName = null;
@@ -52,7 +58,7 @@ namespace MvcKickstart.Infrastructure.Data
 		/// <summary>
 		/// Creates the sql table for the specified type
 		/// </summary>
-		/// <param name="db"></param>
+		/// <param name="db">Database Connection</param>
 		/// <typeparam name="T">Type representing the table to create</typeparam>
 		public static void CreateTable<T>(this IDbConnection db)
 		{
@@ -62,7 +68,7 @@ namespace MvcKickstart.Infrastructure.Data
 		/// <summary>
 		/// Creates the sql table for the specified type
 		/// </summary>
-		/// <param name="db"></param>
+		/// <param name="db">Database Connection</param>
 		/// <param name="type">Type representing the table to create</param>
 		public static void CreateTable(this IDbConnection db, Type type)
 		{
@@ -128,20 +134,81 @@ namespace MvcKickstart.Infrastructure.Data
 			db.Execute(text.ToString());
 		}
 
+		/// <summary>
+		/// Drops the specified table
+		/// </summary>
+		/// <typeparam name="T">Type representing the table to drop</typeparam>
+		/// <param name="db">Database Connection</param>
 		public static void DropTable<T>(this IDbConnection db)
 		{
 			db.DropTable(db.GetTableName<T>());
 		}
+		/// <summary>
+		/// Drops the specified table
+		/// </summary>
+		/// <param name="db">Database Connection</param>
+		/// <param name="name">Name fo the table to drop</param>
 		public static void DropTable(this IDbConnection db, string name)
 		{
 			db.Execute("IF EXISTS(SELECT 1 FROM sys.objects WHERE OBJECT_ID = OBJECT_ID(N'{0}') AND type = (N'U')) DROP TABLE [{0}]".Fmt(name));
 		}
+		/// <summary>
+		/// Rename the specified table
+		/// </summary>
+		/// <typeparam name="T">Type representing the new table name</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="oldTableName">Old table name</param>
+		public static void RenameTable<T>(this IDbConnection db, string oldTableName)
+		{
+			db.RenameTable(oldTableName, typeof(T));
+		}
+		/// <summary>
+		/// Rename the specified table
+		/// </summary>
+		/// <param name="db">Database connection</param>
+		/// <param name="oldTableName">Old table name</param>
+		/// <param name="tableType">Type representing the new table name</param>
+		public static void RenameTable(this IDbConnection db, string oldTableName, Type tableType)
+		{
+			db.RenameTable(oldTableName, db.GetTableName(tableType));
+		}
+		/// <summary>
+		/// Rename the specified table
+		/// </summary>
+		/// <param name="db">Database connection</param>
+		/// <param name="oldTableName">Old table name</param>
+		/// <param name="newTableName">New table name</param>
+		public static void RenameTable(this IDbConnection db, string oldTableName, string newTableName)
+		{
+			if (newTableName.Equals(oldTableName))
+				return;
+
+			db.Execute(@"
+IF EXISTS(select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME=@OldTableName)
+	EXEC SP_RENAME @OldTableName, @NewTableName", new
+				{
+					oldTableName,
+					newTableName
+				});
+		}
 
 		private static readonly ConcurrentDictionary<RuntimeTypeHandle, IList<Column>> Columns = new ConcurrentDictionary<RuntimeTypeHandle, IList<Column>>();
+		/// <summary>
+		/// Gets the column definitions for the specified table
+		/// </summary>
+		/// <typeparam name="T">Type representing the table</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <returns></returns>
 		public static IList<Column> GetColumns<T>(this IDbConnection db)
 		{
 			return db.GetColumns(typeof(T));
 		}
+		/// <summary>
+		/// Gets the column definitions for the specified table
+		/// </summary>
+		/// <param name="db">Database connection</param>
+		/// <param name="type">Type representing the table</param>
+		/// <returns></returns>
 		public static IList<Column> GetColumns(this IDbConnection db, Type type)
 		{
 			IList<Column> columns;
@@ -170,7 +237,7 @@ namespace MvcKickstart.Infrastructure.Data
 					var propertyType = isNullableType
 						? Nullable.GetUnderlyingType(property.PropertyType)
 						: property.PropertyType;
-					var sqlType = GetSqlType(propertyType);
+					var sqlType = GetSqlType(propertyType, property.FirstAttribute<StringLengthAttribute>(true));
 					var autoIncrement = isPrimary && property.FirstAttribute<AutoIncrementAttribute>() != null;
 					var defaultValueAttribute = property.FirstAttribute<DefaultAttribute>();
 					var defaultValue = defaultValueAttribute != null ? defaultValueAttribute.DefaultValue : null;
@@ -266,7 +333,7 @@ namespace MvcKickstart.Infrastructure.Data
 					column.ReferencedTableColumnName
 				);
 			}
-			sql += "END";
+			sql += " END";
 
 			db.Execute(sql);
 		}
@@ -290,8 +357,6 @@ namespace MvcKickstart.Infrastructure.Data
 					IF EXISTS(select * from sys.columns where Name = N'{1}' and Object_ID = Object_ID(N'{0}')) 
 					AND NOT EXISTS(select * from sys.columns where Name = N'{2}' and Object_ID = Object_ID(N'{0}'))
 						EXEC SP_RENAME '{0}.{1}', '{2}', 'COLUMN'", table, oldColumnName, newColumnName));
-
-			// TODO: Rename constraints?
 		}
 		/// <summary>
 		/// Generate and execute ALTER SQL needed to drop a column from a table
@@ -324,16 +389,116 @@ BEGIN
 	FETCH NEXT FROM cur_constraints INTO @constraint
 END
 
-IF EXISTS(select * from sys.columns where Name = N'{1}' and Object_ID = Object_ID(N'{0}'))
-	ALTER TABLE [{0}] DROP COLUMN [{1}]
+CLOSE cur_constraints
+DEALLOCATE cur_constraints
+
+-- For some reason, some default constraints need to be handled explicitly
+DECLARE cur_constraints CURSOR FOR
+	SELECT 	dc.Name 
+	FROM sys.tables t 
+	INNER JOIN sys.default_constraints dc ON t.object_id = dc.parent_object_id 
+	INNER JOIN sys.columns c ON dc.parent_object_id = c.object_id AND c.column_id = dc.parent_column_id
+	WHERE t.Name = '{0}' and c.Name = '{1}'
+
+OPEN cur_constraints
+
+FETCH NEXT FROM cur_constraints INTO @constraint
+WHILE (@@FETCH_STATUS = 0)
+BEGIN
+	SELECT @sql = N'ALTER TABLE [{0}] DROP CONSTRAINT '+@constraint
+	EXEC sp_executesql @sql
+	FETCH NEXT FROM cur_constraints INTO @constraint
+END
 
 CLOSE cur_constraints
 DEALLOCATE cur_constraints
+
+IF EXISTS(select * from sys.columns where Name = N'{1}' and Object_ID = Object_ID(N'{0}'))
+	ALTER TABLE [{0}] DROP COLUMN [{1}]
 
 COMMIT TRANSACTION;".Fmt(table, columnName);
 
 			db.Execute(sql);
 		}
+
+		/// <summary>
+		/// Generate and execute ALTER SQL needed to edit a column - FOREIGN KEYS NEED TO BE HANDLED SEPARATELY
+		/// </summary>
+		/// <typeparam name="TModel">Type to edit column in</typeparam>
+		/// <param name="db">Current db connection</param>
+		/// <param name="expression">Property of column to edit</param>
+		/// <param name="conversion">right side of equals for update statement (Use [COLUMNNAME-OLD] to reference old value i.e. for column "Test" use [Test-OLD])</param>
+		/// <param name="defaultValue">default value of field</param>
+		public static void EditColumn<TModel>(this IDbConnection db, Expression<Func<TModel, object>> expression, string conversion, object defaultValue)
+		{
+			var member = GetMemberInfo(expression);
+			if (member == null) return;
+			var tableName = db.GetTableName<TModel>();
+			var columnName = member.Member.Name;
+
+			// rename existing column to [columnName]-OLD
+			db.Execute(String.Format("EXEC SP_RENAME '{0}.{1}', '{2}', 'COLUMN'", tableName, columnName, columnName + "-OLD"));
+
+			// Drop all previous constraints
+			db.Execute(@"
+DECLARE @constraint sysname
+DECLARE @sql nvarchar(4000)
+
+BEGIN TRANSACTION; 
+
+DECLARE cur_constraints CURSOR FOR
+	SELECT 	Constraint_Name from [INFORMATION_SCHEMA].[CONSTRAINT_COLUMN_USAGE] where [Table_Name] = '{0}' AND [Column_Name] = '{1}'
+
+OPEN cur_constraints
+
+FETCH NEXT FROM cur_constraints INTO @constraint
+WHILE (@@FETCH_STATUS = 0)
+BEGIN
+	SELECT @sql = N'ALTER TABLE [{0}] DROP CONSTRAINT '+@constraint
+	EXEC sp_executesql @sql
+	FETCH NEXT FROM cur_constraints INTO @constraint
+END
+CLOSE cur_constraints
+DEALLOCATE cur_constraints
+
+-- For some reason, some default constraints need to be handled explicitly
+DECLARE cur_constraints CURSOR FOR
+	SELECT 	dc.Name 
+	FROM sys.tables t 
+	INNER JOIN sys.default_constraints dc ON t.object_id = dc.parent_object_id 
+	INNER JOIN sys.columns c ON dc.parent_object_id = c.object_id AND c.column_id = dc.parent_column_id
+	WHERE t.Name = '{0}' and c.Name = '{1}'
+
+OPEN cur_constraints
+
+FETCH NEXT FROM cur_constraints INTO @constraint
+WHILE (@@FETCH_STATUS = 0)
+BEGIN
+	SELECT @sql = N'ALTER TABLE [{0}] DROP CONSTRAINT '+@constraint
+	EXEC sp_executesql @sql
+	FETCH NEXT FROM cur_constraints INTO @constraint
+END
+
+CLOSE cur_constraints
+DEALLOCATE cur_constraints
+
+
+COMMIT TRANSACTION;"
+			.Fmt(
+				tableName,
+				columnName
+			));
+
+			// create new column 
+			db.AddColumn(expression, defaultValue: defaultValue);
+
+			// copy data over using conversion
+			db.Execute(String.Format("UPDATE [{0}] SET [{1}] = {2}", tableName, columnName, String.IsNullOrEmpty(conversion) ? "[" + columnName + "-OLD]" : conversion));
+
+			// drop old column ([columnName]-OLD)
+			DropColumn<TModel>(db, columnName + "-OLD");
+		}
+
 		#endregion
 
 		#region Foreign Keys
@@ -416,7 +581,7 @@ COMMIT TRANSACTION;".Fmt(table, columnName);
 		/// </summary>
 		/// <typeparam name="T">View to recreate</typeparam>
 		/// <param name="db">Current db connection</param>
-		public static void RecreateView<T>(this IDbConnection db) where T : ScriptedObject, new()
+		public static void RecreateView<T>(this IDbConnection db) where T : View, new()
 		{
 			db.RecreateScriptedObject<T>();
 		}
@@ -440,7 +605,7 @@ COMMIT TRANSACTION;".Fmt(table, columnName);
 
 		private static string GetForeignKeyName(string tableName, string columnName, string referencedTableName)
 		{
-			return "FK_{0}_{1}_{2}".Fmt(tableName, referencedTableName, columnName);
+			return "FK_{0}_{1}__{2}".Fmt(tableName, columnName, referencedTableName);
 		}
 
 		private static readonly IDictionary<Type, string> TypeToSqlType = new Dictionary<Type, string>
@@ -453,13 +618,12 @@ COMMIT TRANSACTION;".Fmt(table, columnName);
 				{ typeof(decimal), "decimal(18,2)" },
 				{ typeof(Guid), "uniqueidentifier" },
 				{ typeof(DateTime), "DATETIME2(7)" },
-				{ typeof(TimeSpan), "bigint" },
+				{ typeof(TimeSpan), "time" },
 				{ typeof(Enum), "int" },
 			};
-		private static string GetSqlType(Type type)
+		private static string GetSqlType(Type type, StringLengthAttribute stringLengthAttribute)
 		{
 			// Override any field type to map to an nvarchar field, if StringLength attribute is applied to the property
-			var stringLengthAttribute = type.FirstAttribute<StringLengthAttribute>(true);
 			if (stringLengthAttribute != null)
 			{
 				return TypeToSqlType[typeof(string)].Fmt(stringLengthAttribute.MaximumLength);

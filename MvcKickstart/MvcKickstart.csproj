@@ -206,7 +206,6 @@
     </Compile>
     <Compile Include="Infrastructure\Data\DataMigration.cs" />
     <Compile Include="Infrastructure\Data\DataMigrator.cs" />
-    <Compile Include="Infrastructure\Data\DbExtensions.cs" />
     <Compile Include="Infrastructure\Data\IMigration.cs" />
     <Compile Include="Infrastructure\Data\Migrations\InitializeDbMigration.cs" />
     <Compile Include="Infrastructure\Data\Schema\Attributes\AutoIncrementAttribute.cs" />
@@ -215,6 +214,7 @@
     <Compile Include="Infrastructure\Data\Schema\Attributes\PrimaryKeyAttribute.cs" />
     <Compile Include="Infrastructure\Data\Schema\Attributes\ReferencesAttribute.cs" />
     <Compile Include="Infrastructure\Data\Schema\Column.cs" />
+    <Compile Include="Infrastructure\Data\Schema\Extensions\DbExtensions.cs" />
     <Compile Include="Infrastructure\Data\Schema\ISchemaSection.cs" />
     <Compile Include="Infrastructure\Data\Schema\SchemaBuilder.cs" />
     <Compile Include="Infrastructure\Data\Schema\ScriptedObject.cs" />

@@ -8,9 +8,11 @@ using System.Web.Mvc;
 using Dapper;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models.Users;
+using MvcKickstart.Services;
 using MvcKickstart.ViewModels.Shared;
 using ServiceStack.Logging;
 using ServiceStack.Text;
+using StructureMap;
 
 namespace MvcKickstart.Infrastructure
 {
@@ -45,9 +47,17 @@ namespace MvcKickstart.Infrastructure
 			}
 
 			User user = null;
-			if (filterContext.HttpContext.User.Identity.IsAuthenticated && filterContext.HttpContext.User.Identity.AuthenticationType == "Forms")
+			if (filterContext.HttpContext.User != null && filterContext.HttpContext.User.Identity.IsAuthenticated && filterContext.HttpContext.User.Identity.AuthenticationType == "Forms")
 			{
 				user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@username".Fmt(Db.GetTableName<User>()), new { Username = filterContext.HttpContext.User.Identity.Name }).SingleOrDefault();
+				// Something happened to their account - log them out
+				if (user == null)
+				{
+					// Since this is a rarity, I'm not going to force very controller to inject the userservice in the constructor
+					var userService = ObjectFactory.GetInstance<IUserAuthenticationService>();
+					userService.Logout();
+					filterContext.HttpContext.User = null;
+				}
 			}
 			if (user == null)
 			{

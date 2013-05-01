@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Dapper;
+using MvcKickstart.Infrastructure.Data.Schema.Extensions;
 using MvcKickstart.Infrastructure.Data.Schema.Sections;
 
 namespace MvcKickstart.Infrastructure.Data.Schema

@@ -5,6 +5,7 @@ using System.Linq;
 using Dapper;
 using MvcKickstart.Infrastructure.Data.Migrations;
 using MvcKickstart.Infrastructure.Data.Schema;
+using MvcKickstart.Infrastructure.Data.Schema.Extensions;
 using MvcKickstart.Infrastructure.Extensions;
 using ServiceStack.Text;
 

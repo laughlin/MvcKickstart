@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +14,9 @@ using System.Web;
 using Dapper;
 using MvcKickstart.Infrastructure.Data;
 using MvcKickstart.Infrastructure.Data.Schema;
+using MvcKickstart.Infrastructure.Data.Schema.Extensions;
+using ServiceStack.Text;
+using StackExchange.Profiling.Data;
 
 namespace MvcKickstart.Infrastructure.Extensions
 {
@@ -71,8 +75,9 @@ namespace MvcKickstart.Infrastructure.Extensions
 		/// <typeparam name="T">Type of item to save</typeparam>
 		/// <param name="db"></param>
 		/// <param name="item">Item to save</param>
+		/// <param name="transaction">Db transaction</param>
 		/// <returns></returns>
-		public static T Save<T>(this IDbConnection db, T item) where T : class
+		public static T Save<T>(this IDbConnection db, T item, IDbTransaction transaction = null) where T : class
 		{
 			UpdateAuditFields(item);
 
@@ -84,15 +89,15 @@ namespace MvcKickstart.Infrastructure.Extensions
 			var isInsert = Equals(primary.GetValue(item), GetDefault(primary.Type));
 			if (isInsert)
 			{
-				db.Insert(item, columns, primary);
+				db.Insert(item, columns, primary, transaction);
 			}
 			else
 			{
-				db.Update(item, columns);
+				db.Update(item, columns, transaction);
 			}
 			return item;
 		}
-		private static void Insert<T>(this IDbConnection db, T item, IList<Column> allColumns, Column primary)
+		private static void Insert<T>(this IDbConnection db, T item, IList<Column> allColumns, Column primary, IDbTransaction transaction = null)
 		{
 			var sql = new StringBuilder();
 			sql.AppendFormat("insert into {0} (", db.GetTableName<T>());
@@ -101,7 +106,9 @@ namespace MvcKickstart.Infrastructure.Extensions
 			for (var i = 0; i < columns.Count; i++)
 			{
 				var column = columns.ElementAt(i);
+				sql.Append("[");
 				sql.Append(column.Name);
+				sql.Append("]");
 				if (i != columns.Count - 1)
 				{
 					sql.Append(",");
@@ -126,14 +133,14 @@ namespace MvcKickstart.Infrastructure.Extensions
 			sql.AppendLine(")");
 			if (primary.Type == typeof(Guid))
 			{
-				var id = db.Query<Guid>(sql.ToString(), item).Single();
+				var id = db.Query<Guid>(sql.ToString(), item, transaction).Single();
 				primary.SetValue(item, id);
 			}
 			else
 			{
 				sql.AppendLine("select cast(SCOPE_IDENTITY() as bigint)");
 
-				var id = db.Query<long>(sql.ToString(), item).Single();
+				var id = db.Query<long>(sql.ToString(), item, transaction).Single();
 				if (primary.Type == typeof(int))
 				{
 					primary.SetValue(item, (int) id);
@@ -145,7 +152,7 @@ namespace MvcKickstart.Infrastructure.Extensions
 
 			}
 		}
-		private static void Update<T>(this IDbConnection db, T item, IList<Column> columns)
+		private static void Update<T>(this IDbConnection db, T item, IList<Column> columns, IDbTransaction transaction = null)
 		{
 			var sql = new StringBuilder();
 			sql.AppendFormat("update [{0}] set ", db.GetTableName<T>());
@@ -153,75 +160,192 @@ namespace MvcKickstart.Infrastructure.Extensions
 			for (var i = 0; i < columnsWithoutPrimary.Count; i++)
 			{
 				var column = columnsWithoutPrimary.ElementAt(i);
-				sql.AppendFormat("{0}=@{0}", column.Name);
+				sql.AppendFormat("[{0}]=@{0}", column.Name);
 				if (i != columnsWithoutPrimary.Count - 1)
 				{
 					sql.Append(",");
 				}
 			}
-			sql.AppendFormat(" where {0}=@{0}", columns.First(x => x.IsPrimary).Name);
-			db.Execute(sql.ToString(), item);
+			sql.AppendFormat(" where [{0}]=@{0}", columns.First(x => x.IsPrimary).Name);
+			db.Execute(sql.ToString(), item, transaction);
 		}
 
 		/// <summary>
-		/// Get a list of items using sql paging to limit the result set
+		/// Deletes the specified item
 		/// </summary>
-		/// <typeparam name="T">Type of object to query and return</typeparam>
+		/// <typeparam name="T">Type of item to delete</typeparam>
 		/// <param name="db">Database connection</param>
-		/// <param name="page">Zero based index of the page to retrieve</param>
-		/// <param name="pageSize">Total number of items to return per page</param>
-		/// <param name="where">Where statement to limit results</param>
-		/// <param name="orderBy">Order statement to order the results before paging</param>
-		/// <param name="param">Parameters to pass to the sql query</param>
+		/// <param name="item">Item to delete</param>
+		/// <param name="transaction">Database transaction</param>
 		/// <returns></returns>
-		public static IList<T> PagedList<T>(this IDbConnection db, int page, int pageSize, string where = null, string orderBy = null, object param = null)
+		public static int Delete<T>(this IDbConnection db, T item, IDbTransaction transaction = null) where T : class
+		{
+			var type = item.GetType();
+			var columns = db.GetColumns(type);
+			var primary = columns.SingleOrDefault(x => x.IsPrimary);
+			if (primary == null)
+				throw new Exception("Unable to find Id field for type: " + type);
+			return db.Execute("delete from [{0}] where {1}=@Id".Fmt(db.GetTableName(type), primary.Name), new
+				{
+					Id = primary.GetValue(item)
+				}, transaction);
+		}
+		/// <summary>
+		/// Deletes items from the database that match the specified item representing the where restrictions
+		/// </summary>
+		/// <typeparam name="T">Type of item to delete</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="where">Anonymous object representing where clause</param>
+		/// <param name="transaction">Database transaction</param>
+		/// <returns></returns>
+		public static int Delete<T>(this IDbConnection db, object where, IDbTransaction transaction = null)
+		{
+			if (where is string)
+				throw new Exception("Please use db.Execute() instead");
+
+			var sql = "delete from [{0}]".Fmt(db.GetTableName<T>());
+			sql += BuildWhereClauseFromAnonymousObject(where);
+
+			return db.Execute(sql, where, transaction);
+		}
+		/// <summary>
+		/// Deletes an item from the database with the specified id
+		/// </summary>
+		/// <typeparam name="T">Type of object to delete</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="id">Id of the object to delete</param>
+		/// <param name="transaction">Database transaction</param>
+		/// <returns></returns>
+		public static int DeleteById<T>(this IDbConnection db, object id, IDbTransaction transaction = null)
+		{
+			var type = typeof(T);
+			var columns = db.GetColumns(type);
+			var primary = columns.SingleOrDefault(x => x.IsPrimary);
+			if (primary == null)
+				throw new Exception("Unable to find Id field for type: " + type);
+			return db.Execute("delete from [{0}] where {1}=@Id".Fmt(db.GetTableName(type), primary.Name), new
+				{
+					id
+				}, transaction);
+		}
+		/// <summary>
+		/// Deletes items from the database with the specified ids
+		/// </summary>
+		/// <typeparam name="T">Type of object to delete</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="ids">Ids of the objects to delete</param>
+		/// <param name="transaction">Database transaction</param>
+		/// <returns></returns>
+		public static int DeleteByIds<T>(this IDbConnection db, IEnumerable ids, IDbTransaction transaction = null)
+		{
+			var type = typeof(T);
+			var columns = db.GetColumns(type);
+			var primary = columns.SingleOrDefault(x => x.IsPrimary);
+			if (primary == null)
+				throw new Exception("Unable to find Id field for type: " + type);
+			var sql = "delete from [{0}] where [{1}] in @Ids".Fmt(db.GetTableName(type), primary.Name);
+			return db.Execute(sql, new
+				{
+					Ids = ids.Cast<object>()
+				}, transaction);
+		}
+		/// <summary>
+		/// Gets the item represented by the item representing the where condition
+		/// </summary>
+		/// <typeparam name="T">Type of object to retrieve</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="where">Anonymous object representing where clause</param>
+		/// <param name="transaction">Database transaction</param>
+		/// <returns></returns>
+		public static T SingleOrDefault<T>(this IDbConnection db, object where, IDbTransaction transaction = null)
+		{
+			if (where is string)
+				throw new Exception("Please use db.Query<T>() instead");
+			var sql = "select top 1 * from [{0}]".Fmt(db.GetTableName<T>());
+			sql += BuildWhereClauseFromAnonymousObject(where);
+			return db.Query<T>(sql, where, transaction).SingleOrDefault();
+		}
+		/// <summary>
+		/// Get a list of objects based on the anonymous object representing the sql where clause
+		/// </summary>
+		/// <typeparam name="T">Type of object to query</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="where">Anonymous object representing where clause</param>
+		/// <param name="transaction">Db transaction</param>
+		/// <returns></returns>
+		public static IList<T> Query<T>(this IDbConnection db, object where, IDbTransaction transaction = null)
+		{
+			if (where is string)
+				throw new Exception("Please use db.Query<T>() instead");
+			var sql = "select * from [{0}]".Fmt(db.GetTableName<T>());
+			sql += BuildWhereClauseFromAnonymousObject(where);
+			return db.Query<T>(sql, where, transaction).ToList();
+		}
+		public static T GetByIdOrDefault<T>(this IDbConnection db, object id, IDbTransaction transaction = null)
+		{
+			return db.SingleOrDefault<T>(new { id }, transaction);
+		}
+		/// <summary>
+		/// Gets paged list of items from sql
+		/// </summary>
+		/// <typeparam name="T">Type of object to retrieve</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="page">Page to retrieve - starts at 1</param>
+		/// <param name="pageSize">Number of items to include per page</param>
+		/// <param name="where">string representing where clause</param>
+		/// <param name="orderBy">Order by column(s)</param>
+		/// <returns></returns>
+		public static string PagedListSql<T>(this IDbConnection db, int page, int pageSize, string where = null, string orderBy = null)
 		{
 			var tableName = db.GetTableName<T>();
 
-			var startRow = page * pageSize;
-			var maxRow = page * pageSize + pageSize;
+			var startRow = ((page - 1) * pageSize) + 1;
+			var maxRow = (long) startRow + pageSize;
 			var sql = new StringBuilder();
-			sql.AppendLine("DECLARE @Temp" + tableName + " TABLE");
-			sql.AppendLine("(");
-			sql.AppendLine("Id int IDENTITY,");
-			sql.AppendLine("FKId int");
-			sql.AppendLine(")");
-
-			sql.AppendLine("DECLARE @maxRow int");
-
-			sql.AppendLine("SET @maxRow = " + maxRow);
-
-			sql.AppendLine("SET ROWCOUNT @maxRow");
-
-			sql.AppendLine("INSERT INTO @Temp" + tableName + " (FKId)");
-			sql.AppendLine("SELECT Id");
-			sql.AppendLine("FROM " + tableName);
-			if (!string.IsNullOrWhiteSpace(where))
+			sql.Append(@"select * from (select *, ROW_NUMBER() OVER (order by ");
+			if (string.IsNullOrEmpty(orderBy))
 			{
-				sql.Append("WHERE ");
-				sql.AppendLine(where);
-			}
-			if (!string.IsNullOrWhiteSpace(orderBy))
-			{
-				sql.Append("ORDER BY ");
-				sql.AppendLine(orderBy);
+				var columns = db.GetColumns<T>();
+				var primary = columns.FirstOrDefault(x => x.IsPrimary);
+				if (primary == null)
+					throw new Exception("Unable to find Id field for type: " + typeof(T));
+				sql.Append("[");
+				sql.Append(primary.Name);
+				sql.Append("]");
 			}
 			else
 			{
-				sql.AppendLine("ORDER BY Id ASC");
+				sql.Append(orderBy);
 			}
+			sql.Append(") AS RowNumber FROM [{0}]".Fmt(tableName));
+			if (where != null)
+			{
+				sql.Append(" where ");
+				sql.Append(where);
+			}
+			sql.AppendFormat(") q where q.RowNumber between {0} and {1} order by q.RowNumber", startRow, maxRow);
+			return sql.ToString();
+		}
 
-			sql.AppendLine("SET ROWCOUNT " + pageSize);
-
-			sql.AppendLine("SELECT s.*");
-			sql.AppendLine("FROM @Temp" + tableName + " t");
-			sql.AppendLine(" INNER JOIN " + tableName + " s ON");
-			sql.AppendLine(" s.Id = t.FKId");
-			sql.AppendLine("WHERE t.ID > " + startRow);
-
-			sql.AppendLine("SET ROWCOUNT 0");
-
-			return db.Query<T>(sql.ToString(), param).ToList();
+		/// <summary>
+		/// Execute a stored procedure with the passed in parameters
+		/// </summary>
+		/// <typeparam name="T">Stored Procedure to execute</typeparam>
+		/// <param name="db">Database connection</param>
+		/// <param name="param">Anonymous object representing parameters to pass into procedure</param>
+		public static void ExecuteProcedure<T>(this IDbConnection db, object param) where T : StoredProcedure, new()
+		{
+			var paramNames = GetPropertyNamesByType(param.GetType());
+			var sql = "exec {0}".Fmt(new T().Name);
+			var isFirst = true;
+			foreach (var paramName in paramNames)
+			{
+				if (!isFirst)
+					sql += ",";
+				sql += " @" + paramName;
+				isFirst = false;
+			}
+			db.Execute(sql, param);
 		}
 
 		/// <summary>
@@ -235,7 +359,15 @@ namespace MvcKickstart.Infrastructure.Extensions
 		public static int BulkInsert<T>(this IDbConnection db, IEnumerable<T> items, SqlTransaction transaction = null) where T : class
 		{
 			var totalCount = 0;
-			using (var bulkInsert = new SqlBulkCopy((SqlConnection) db, SqlBulkCopyOptions.Default, transaction))
+			var connection = db as SqlConnection;
+			var profiledDbConnection = db as ProfiledDbConnection;
+			if (profiledDbConnection != null)
+			{
+				connection = profiledDbConnection.InnerConnection as SqlConnection;
+			}
+			if (connection == null)
+				throw new Exception("Unable to find SqlConnection from IDbConnection");
+			using (var bulkInsert = new SqlBulkCopy(connection, SqlBulkCopyOptions.Default, transaction))
 			{
 				bulkInsert.DestinationTableName = db.GetTableName<T>();
 				var count = 0;
@@ -277,6 +409,41 @@ namespace MvcKickstart.Infrastructure.Extensions
 				}
 			}
 			return totalCount;
+		}
+
+		private static string BuildWhereClauseFromAnonymousObject(object where)
+		{
+			var properties = GetPropertyNamesByType(where.GetType());
+
+			var sql = new StringBuilder();
+			var isFirst = true;
+			foreach (var property in properties)
+			{
+				if (!isFirst)
+					sql.Append(" and ");
+				sql.Append("[");
+				sql.Append(property);
+				sql.Append("]=");
+				sql.Append("@");
+				sql.Append(property);
+				isFirst = false;
+			}
+			if (!isFirst)
+			{
+				sql.Insert(0, " where ");
+			}
+			return sql.ToString();
+		}
+		private static readonly ConcurrentDictionary<RuntimeTypeHandle, IList<string>> PropertyNamesByType = new ConcurrentDictionary<RuntimeTypeHandle, IList<string>>();
+		private static IList<String> GetPropertyNamesByType(Type type)
+		{
+			IList<string> names;
+			if (!PropertyNamesByType.TryGetValue(type.TypeHandle, out names))
+			{
+				names = type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Select(prop => prop.Name).ToList();
+				PropertyNamesByType.TryAdd(type.TypeHandle, names);
+			}
+			return names;
 		}
 		private static object GetDefault(Type type)
 		{
