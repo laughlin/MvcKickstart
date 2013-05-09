@@ -1,7 +1,8 @@
 ﻿using System;
 using MvcKickstart.Models.Users;
+using Spruce.Schema;
 
-namespace MvcKickstart.Infrastructure.Data.Schema.Sections
+namespace MvcKickstart.Infrastructure.Data.Schema
 {
 	public class UserSection : ISchemaSection
 	{

@@ -13,6 +13,7 @@ using MvcKickstart.Models.Users;
 using MvcKickstart.ViewModels.Shared;
 using ServiceStack.CacheAccess;
 using ServiceStack.Text;
+using Spruce;
 using StructureMap;
 
 namespace MvcKickstart.Infrastructure.Attributes

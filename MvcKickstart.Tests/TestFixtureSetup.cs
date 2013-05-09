@@ -1,14 +1,14 @@
 ﻿using System.Data;
 using System.Web.Routing;
 using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Data.Schema;
+using MvcKickstart.Infrastructure.Data;
 using NUnit.Framework;
 using StructureMap;
 
 namespace MvcKickstart.Tests
 {
 	[SetUpFixture]
-	public class SqlSetup
+	public class TestFixtureSetup
 	{
 		[SetUp]
 		public void Setup()
@@ -18,7 +18,10 @@ namespace MvcKickstart.Tests
 
 			ObjectFactory.Initialize(x => x.AddRegistry(new IocRegistry()));
 
+			DbConfig.Setup();
+
 			var db = ObjectFactory.GetInstance<IDbConnection>();
+
 			new SchemaBuilder(db).GenerateSchema(true);
 
 			AutomapperConfig.CreateMappings();

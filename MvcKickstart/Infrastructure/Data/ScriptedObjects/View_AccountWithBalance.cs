@@ -1,6 +1,7 @@
 ﻿using ServiceStack.Text;
+using Spruce.Schema;
 
-namespace MvcKickstart.Infrastructure.Data.Schema.ScriptedObjects
+namespace MvcKickstart.Infrastructure.Data.ScriptedObjects
 {
 	public class View_AccountWithBalance : View
 	{

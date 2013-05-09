@@ -120,6 +120,10 @@
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.9.21\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
+    <Reference Include="Spruce, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Spruce.1.0.2\lib\net45\Spruce.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
@@ -204,29 +208,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Data\DataMigration.cs" />
     <Compile Include="Infrastructure\Data\DataMigrator.cs" />
-    <Compile Include="Infrastructure\Data\IMigration.cs" />
     <Compile Include="Infrastructure\Data\Migrations\InitializeDbMigration.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Attributes\AutoIncrementAttribute.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Attributes\DefaultAttribute.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Attributes\IgnoreAttribute.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Attributes\PrimaryKeyAttribute.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Attributes\ReferencesAttribute.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Column.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Extensions\DbExtensions.cs" />
-    <Compile Include="Infrastructure\Data\Schema\ISchemaSection.cs" />
-    <Compile Include="Infrastructure\Data\Schema\SchemaBuilder.cs" />
-    <Compile Include="Infrastructure\Data\Schema\ScriptedObject.cs" />
-    <Compile Include="Infrastructure\Data\Schema\ScriptedObjects\View_AccountWithBalance.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Sections\GlobalSection.cs" />
-    <Compile Include="Infrastructure\Data\Schema\Sections\UserSection.cs" />
-    <Compile Include="Infrastructure\Data\Schema\StoredProcedure.cs" />
-    <Compile Include="Infrastructure\Data\Schema\UserDefinedFunction.cs" />
-    <Compile Include="Infrastructure\Data\Schema\View.cs" />
+    <Compile Include="Infrastructure\Data\SchemaBuilder.cs" />
+    <Compile Include="Infrastructure\Data\Schema\GlobalSection.cs" />
+    <Compile Include="Infrastructure\Data\Schema\UserSection.cs" />
+    <Compile Include="Infrastructure\Data\ScriptedObjects\View_AccountWithBalance.cs" />
     <Compile Include="Infrastructure\ExpressionHelper.cs" />
     <Compile Include="Infrastructure\Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Infrastructure\Extensions\DbConnectionExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\ModelStateExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\UrlHelperAdminUrls.cs" />

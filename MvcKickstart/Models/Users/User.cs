@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using MvcKickstart.Infrastructure.Data.Schema.Attributes;
+using Spruce.Schema.Attributes;
 
 namespace MvcKickstart.Models.Users
 {

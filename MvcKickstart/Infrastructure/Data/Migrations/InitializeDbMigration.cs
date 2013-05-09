@@ -2,6 +2,8 @@
 using System.Data;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models.Users;
+using Spruce;
+using Spruce.Migrations;
 
 namespace MvcKickstart.Infrastructure.Data.Migrations
 {

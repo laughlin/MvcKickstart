@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading;
 using System.Web.Mvc;
 using Dapper;
-using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models.Users;
 using MvcKickstart.Services;
 using MvcKickstart.ViewModels.Shared;
 using ServiceStack.Logging;
 using ServiceStack.Text;
+using Spruce;
 using StructureMap;
 
 namespace MvcKickstart.Infrastructure

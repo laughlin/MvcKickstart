@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using System.Linq;
 using Dapper;
-using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models.Users;
+using Spruce;
 
 namespace MvcKickstart.Tests.Utilities
 {

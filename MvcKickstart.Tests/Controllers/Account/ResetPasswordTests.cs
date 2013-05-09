@@ -12,6 +12,7 @@ using NUnit.Framework;
 using ServiceStack.Text;
 using Should.Fluent;
 using MvcKickstart.ViewModels.Account;
+using Spruce;
 
 namespace MvcKickstart.Tests.Controllers.Account
 {

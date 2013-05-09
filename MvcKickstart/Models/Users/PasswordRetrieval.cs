@@ -1,5 +1,5 @@
 ﻿using System;
-using MvcKickstart.Infrastructure.Data.Schema.Attributes;
+using Spruce.Schema.Attributes;
 
 namespace MvcKickstart.Models.Users
 {

@@ -12,6 +12,7 @@ using MvcKickstart.Models.Users;
 using MvcKickstart.Services;
 using MvcKickstart.ViewModels.Account;
 using ServiceStack.Text;
+using Spruce;
 
 namespace MvcKickstart.Controllers
 {
