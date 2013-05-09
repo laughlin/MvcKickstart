@@ -1,7 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace MvcKickstart.Infrastructure.Extensions
 {
@@ -49,15 +47,6 @@ namespace MvcKickstart.Infrastructure.Extensions
 				newText.Append(text[i]);
 			}
 			return newText.ToString();
-		}
-
-		public static string ToJson<T>(this T obj)
-		{
-			var settings = new JsonSerializerSettings
-				               {
-					               ContractResolver = new CamelCasePropertyNamesContractResolver()
-				               };
-			return JsonConvert.SerializeObject(obj, Formatting.Indented, settings);
 		}
 	}
 }
