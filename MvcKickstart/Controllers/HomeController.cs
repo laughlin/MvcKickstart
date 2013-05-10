@@ -1,8 +1,11 @@
 ﻿using System.Data;
+using System.IO;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using AttributeRouting.Web.Mvc;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
+using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.ViewModels.Home;
 using StackExchange.Profiling;
 
@@ -20,6 +23,29 @@ namespace MvcKickstart.Controllers
 		{
 			var model = new Index();
 			return View(model);
+		}
+
+		[GET("sitemap.xml")]
+		public FileResult SiteMap()
+		{
+			var doc = new XDocument();
+			XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+			var urlset = new XElement(ns + "urlset");
+
+			urlset.Add(new XElement(ns + "url",
+						new XElement(ns + "loc", Url.Absolute(Url.Home().Index())),
+						new XElement(ns + "priority", "1.0")));
+
+			// TODO: Add in additional urls as needed
+
+			doc.Add(urlset);
+
+			using (var ms = new MemoryStream())
+			{
+				doc.Save(ms);
+
+				return File(ms.ToArray(), "text/xml");
+			}
 		}
 
 		#region Partials

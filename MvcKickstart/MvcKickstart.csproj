@@ -123,9 +123,9 @@
     <Reference Include="Sigil">
       <HintPath>..\packages\Sigil.2.2.1\lib\net45\Sigil.dll</HintPath>
     </Reference>
-    <Reference Include="Spruce, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Spruce, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Spruce.1.0.2\lib\net45\Spruce.dll</HintPath>
+      <HintPath>..\packages\Spruce.1.0.4\lib\net45\Spruce.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
@@ -216,7 +216,6 @@
     <Compile Include="Infrastructure\Data\SchemaBuilder.cs" />
     <Compile Include="Infrastructure\Data\Schema\GlobalSection.cs" />
     <Compile Include="Infrastructure\Data\Schema\UserSection.cs" />
-    <Compile Include="Infrastructure\Data\ScriptedObjects\View_AccountWithBalance.cs" />
     <Compile Include="Infrastructure\ExpressionHelper.cs" />
     <Compile Include="Infrastructure\Extensions\DateTimeExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
@@ -319,6 +318,7 @@
     <Folder Include="Content\css\_lib\" />
     <Folder Include="Content\js\Admin\" />
     <Folder Include="Content\less\Admin\" />
+    <Folder Include="Infrastructure\Data\ScriptedObjects\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
