@@ -7,13 +7,14 @@ using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.ViewModels.Home;
+using ServiceStack.CacheAccess;
 using StackExchange.Profiling;
 
 namespace MvcKickstart.Controllers
 {
 	public class HomeController : BaseController
 	{
-		public HomeController(IDbConnection db, IMetricTracker metrics) : base(db, metrics)
+		public HomeController(IDbConnection db, IMetricTracker metrics, ICacheClient cache) : base(db, metrics, cache)
 		{
 		}
 

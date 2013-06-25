@@ -4,12 +4,13 @@ using AttributeRouting.Web.Mvc;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.ViewModels.Mail;
+using ServiceStack.CacheAccess;
 
 namespace MvcKickstart.Controllers
 {
 	public class EmailController : BaseController
 	{
-		public EmailController(IDbConnection db, IMetricTracker metrics) : base(db, metrics)
+		public EmailController(IDbConnection db, IMetricTracker metrics, ICacheClient cache) : base(db, metrics, cache)
 		{
 		}
 

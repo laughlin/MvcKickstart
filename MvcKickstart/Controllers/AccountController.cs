@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AttributeRouting.Web.Mvc;
 using AutoMapper;
+using CacheStack;
 using Dapper;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
@@ -11,6 +12,7 @@ using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models.Users;
 using MvcKickstart.Services;
 using MvcKickstart.ViewModels.Account;
+using ServiceStack.CacheAccess;
 using ServiceStack.Text;
 using Spruce;
 
@@ -21,7 +23,7 @@ namespace MvcKickstart.Controllers
 		private readonly IMailController _mailController;
 	    private readonly IUserAuthenticationService _authenticationService;
 
-		public AccountController(IDbConnection db, IMetricTracker metrics, IMailController mailController, IUserAuthenticationService authenticationService) : base (db, metrics)
+		public AccountController(IDbConnection db, IMetricTracker metrics, ICacheClient cache, IMailController mailController, IUserAuthenticationService authenticationService) : base (db, metrics, cache)
 		{
 			_mailController = mailController;
 			_authenticationService = authenticationService;
@@ -52,12 +54,7 @@ namespace MvcKickstart.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@Username AND Password=@Password".Fmt(Db.GetTableName<User>()), new
-					{
-						model.Username,
-						Password = model.Password.ToSHAHash()
-					}
-				).SingleOrDefault();
+				var user = Db.SingleOrDefault<User>(new { model.Username, Password = model.Password.ToSHAHash(), IsDeleted = false });
 				if (user != null)
 				{
 					_authenticationService.SetLoginCookie(user, model.RememberMe);
@@ -112,7 +109,7 @@ namespace MvcKickstart.Controllers
 				}
 				else
 				{
-					var user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND (Username=@Username OR Email=@Email)".Fmt(Db.GetTableName<User>()), new
+					var user = Db.Query<User>("select top 1 * from [{0}] where IsDeleted=0 AND (Username=@Username OR Email=@Email)".Fmt(Db.GetTableName<User>()), new
 						{
 							model.Username,
 							model.Email
@@ -139,6 +136,7 @@ namespace MvcKickstart.Controllers
 				newUser.Password = model.Password.ToSHAHash();
 
 				Db.Save(newUser);
+				Cache.Trigger(TriggerFor.Id<User>(newUser.Id));
 				Metrics.Increment(Metric.Users_Register);
 
 				_mailController.Welcome(new ViewModels.Mail.Welcome
@@ -161,13 +159,13 @@ namespace MvcKickstart.Controllers
 			if (_authenticationService.ReservedUsernames.Any(x => username.Equals(x, StringComparison.OrdinalIgnoreCase)))
 				return Json(false);
 
-			var user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@Username".Fmt(Db.GetTableName<User>()), new
+			var userExists = Db.Query<int>("select count(*) from [{0}] where IsDeleted=0 AND Username=@Username".Fmt(Db.GetTableName<User>()), new
 				{
 					username
 				}
-			).SingleOrDefault();
+			).Single() > 0;
 
-			return Json(user == null);
+			return Json(userExists);
 		}
 		#endregion
 
@@ -185,11 +183,7 @@ namespace MvcKickstart.Controllers
 			if (ModelState.IsValid)
 			{
 				//get user by email address
-				var user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND Email=@Email".Fmt(Db.GetTableName<User>()), new
-					{
-						model.Email
-					}
-				).SingleOrDefault();
+				var user = Db.SingleOrDefault<User>(new { model.Email, IsDeleted = false });
 				
 				//if no matching user, error
 				if (user == null)
@@ -233,10 +227,7 @@ namespace MvcKickstart.Controllers
 			var model = new ResetPassword
 				{
 					Token = guidToken, 
-					Data = Db.Query<PasswordRetrieval>("select * from [{0}] where Token=@Token".Fmt(Db.GetTableName<PasswordRetrieval>()), new
-						{
-							Token = guidToken
-						}).SingleOrDefault()
+					Data = Db.SingleOrDefault<PasswordRetrieval>(new { Token = guidToken })
 				};
 
 			if (model.Data == null)
@@ -258,10 +249,7 @@ namespace MvcKickstart.Controllers
 			}
 			if (ModelState.IsValid)
 			{
-				model.Data = Db.Query<PasswordRetrieval>("select * from [{0}] where Token=@Token".Fmt(Db.GetTableName<PasswordRetrieval>()), new
-						{
-							model.Token
-						}).SingleOrDefault();
+				model.Data = Db.SingleOrDefault<PasswordRetrieval>(new { model.Token });
 
 				if (model.Data == null)
 				{
@@ -279,7 +267,7 @@ namespace MvcKickstart.Controllers
 							Password = model.Password.ToSHAHash(),
 							model.Data.UserId
 						}).SingleOrDefault();
-				
+				Cache.Trigger(TriggerFor.Id<User>(user.Id));
 				_authenticationService.SetLoginCookie(user, true);
 
 				Metrics.Increment(Metric.Users_ResetPassword);

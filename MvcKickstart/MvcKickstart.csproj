@@ -65,6 +65,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="CacheStack">
+      <HintPath>..\packages\CacheStack.1.0.5\lib\net45\CacheStack.dll</HintPath>
+    </Reference>
     <Reference Include="Cassette">
       <HintPath>..\packages\Cassette.2.1.0-alpha2\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
@@ -188,6 +191,7 @@
     <Compile Include="App_Start\AutomapperConfig.cs" />
     <Compile Include="App_Start\DbConfig.cs" />
     <Compile Include="App_Start\IocConfig.cs" />
+    <Compile Include="App_Start\JsonConfig.cs" />
     <Compile Include="App_Start\LoggingConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -207,6 +211,7 @@
     <Compile Include="Infrastructure\Attributes\TimingMetricAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\TrackAuthenticationMetricsAttribute.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
+    <Compile Include="Infrastructure\CacheKeys.cs" />
     <Compile Include="Infrastructure\CassetteConfiguration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -242,10 +247,13 @@
     <Compile Include="Infrastructure\UserPrincipal.cs" />
     <Compile Include="Infrastructure\VaryByCustom.cs" />
     <Compile Include="Infrastructure\ViewDataConstants.cs" />
+    <Compile Include="Models\SiteSettings.cs" />
     <Compile Include="Models\Users\PasswordRetrieval.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SiteSettingsService.cs" />
     <Compile Include="Services\UserAuthenticationService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\Account\ResetPassword.cs" />
     <Compile Include="ViewModels\Account\ForgotPassword.cs" />
     <Compile Include="ViewModels\Account\Login.cs" />
@@ -262,6 +270,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\images\Blank.gif" />
     <Content Include="Content\js\Shared\angular.js" />
     <Content Include="Content\js\Shared\bundle.txt" />
     <Content Include="Content\js\Shared\global.js" />

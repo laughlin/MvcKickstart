@@ -5,12 +5,13 @@ using System.Web.Mvc;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
 using MvcKickstart.ViewModels.Error;
+using ServiceStack.CacheAccess;
 
 namespace MvcKickstart.Controllers
 {
 	public class ErrorController : BaseController
 	{
-		public ErrorController(IDbConnection db, IMetricTracker metrics) : base (db, metrics){}
+		public ErrorController(IDbConnection db, IMetricTracker metrics, ICacheClient cache) : base (db, metrics, cache){}
 
 		[GetOrPost("Error", RouteName = "Error_Index")]
 		[ConfiguredOutputCache]
