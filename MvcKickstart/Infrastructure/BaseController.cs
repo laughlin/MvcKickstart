@@ -1,28 +1,29 @@
 ﻿using System.Data;
-using System.Linq;
 using System.Net;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Web.Mvc;
-using Dapper;
+using CacheStack;
 using MvcKickstart.Models.Users;
 using MvcKickstart.Services;
 using MvcKickstart.ViewModels.Shared;
 using ServiceStack.CacheAccess;
 using ServiceStack.Logging;
-using ServiceStack.Text;
-using Spruce;
 using StructureMap;
 
 namespace MvcKickstart.Infrastructure
 {
-	public abstract class BaseController : Controller
+	public abstract class BaseController : Controller, IWithCacheContext
 	{
 		protected IDbConnection Db { get; private set; }
 		protected IMetricTracker Metrics { get; private set; }
 		protected ILog Log { get; private set; }
 		protected ICacheClient Cache { get; private set; }
+		/// <summary>
+		/// Used to set the cache context for donut cached actions
+		/// </summary>
+		public ICacheContext CacheContext { get; private set; }
 
 		public new UserPrincipal User
 		{
