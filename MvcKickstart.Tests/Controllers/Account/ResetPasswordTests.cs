@@ -130,10 +130,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 			var result = Controller.ResetPassword(model) as ViewResult;
 			result.Should().Not.Be.Null();
 			
-			var previousObject = Db.Query<PasswordRetrieval>("select * from [{0}] where Id=@Id".Fmt(Db.GetTableName<PasswordRetrieval>()), new
-				{
-					expectedObject.Id
-				}).SingleOrDefault();
+			var previousObject = Db.SingleOrDefault<PasswordRetrieval>(new { expectedObject.Id });
 			previousObject.Should().Be.Null();
 		}
 		[Test]
@@ -154,11 +151,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 			model.PasswordConfirm = model.Password;
 			Controller.ResetPassword(model);
 
-			var user = Db.Query<User>("select * from [{0}] where Id=@Id".Fmt(Db.GetTableName<User>()), new
-				{
-					User.Id
-				}).SingleOrDefault();
-
+			var user = Db.SingleOrDefault<User>(new { User.Id });
 			user.Password.Should().Equal(model.PasswordConfirm.ToSHAHash());
 		}
 		[Test]

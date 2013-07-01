@@ -33,12 +33,13 @@ namespace MvcKickstart
 
 			AreaRegistration.RegisterAllAreas();
 
-			LoggingConfig.Bootstrap();
-			IocConfig.Bootstrap();
+			LoggingConfig.Initialize();
+			IocConfig.Initialize();
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			AutomapperConfig.CreateMappings();
-			DbConfig.Bootstrap();
+			DbConfig.Initialize();
+			CacheConfig.Initialize();
 		}
 
 		public override string GetVaryByCustomString(HttpContext context, string custom)

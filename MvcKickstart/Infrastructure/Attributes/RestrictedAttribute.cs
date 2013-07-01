@@ -10,6 +10,7 @@ using System.Web.Security;
 using Dapper;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models.Users;
+using MvcKickstart.Services;
 using MvcKickstart.ViewModels.Shared;
 using ServiceStack.CacheAccess;
 using ServiceStack.Text;
@@ -61,9 +62,10 @@ namespace MvcKickstart.Infrastructure.Attributes
 					using (var db = ObjectFactory.GetInstance<SqlConnection>())
 					{
 						db.Open();
-						user = db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@username".Fmt(db.GetTableName<User>()), new { Username = httpContext.User.Identity.Name }).SingleOrDefault();
+						var userService = new UserService(db, Cache);
+						user = userService.GetByUsername(httpContext.User.Identity.Name);
 					}
-					if (user == null)
+					if (user == null || user.IsDeleted)
 						return false;
 				}
 				else

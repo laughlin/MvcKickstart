@@ -3,22 +3,24 @@ using System.IO;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using AttributeRouting.Web.Mvc;
+using CacheStack.DonutCaching;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.ViewModels.Home;
+using ServiceStack.CacheAccess;
 using StackExchange.Profiling;
 
 namespace MvcKickstart.Controllers
 {
 	public class HomeController : BaseController
 	{
-		public HomeController(IDbConnection db, IMetricTracker metrics) : base(db, metrics)
+		public HomeController(IDbConnection db, IMetricTracker metrics, ICacheClient cache) : base(db, metrics, cache)
 		{
 		}
 
 		[GET("", RouteName = "Home_Index")]
-		[ConfiguredOutputCache]
+		[DonutOutputCache]
 		public ActionResult Index()
 		{
 			var model = new Index();
@@ -67,7 +69,7 @@ namespace MvcKickstart.Controllers
 		}
 
 		[Route("__partial__Home_UsernameOrLogin")]
-		[ConfiguredOutputCache(VaryByCustom = VaryByCustom.User)]
+		[DonutOutputCache(VaryByCustom = VaryByCustom.User)]
 		public ActionResult UsernameOrLogin()
 		{
 			// This route could probably also go in a UsersController if it exists

@@ -34,6 +34,33 @@ namespace MvcKickstart.Infrastructure.Extensions
 			{
 				return Url.RouteUrl("Admin_Home_Index");
 			}
+
+			public string AuthResponse()
+			{
+				return Url.RouteUrl("Admin_Home_AuthResponse");
+			}
+		}
+
+		#endregion
+
+		#region Widgets
+
+		public WidgetsUrls Widgets()
+		{
+			return new WidgetsUrls(Url);
+		}
+		public class WidgetsUrls
+		{
+			public UrlHelper Url { get; set; }
+			public WidgetsUrls(UrlHelper url)
+			{
+				Url = url;
+			}
+
+			public string Analytics()
+			{
+				return Url.RouteUrl("Admin_Widgets_Analytics");
+			}
 		}
 
 		#endregion

@@ -8,7 +8,7 @@ namespace MvcKickstart
 {
 	public class IocConfig
 	{
-		public static void Bootstrap()
+		public static void Initialize()
 		{
 			ObjectFactory.Initialize(x => x.AddRegistry(new IocRegistry()));
 

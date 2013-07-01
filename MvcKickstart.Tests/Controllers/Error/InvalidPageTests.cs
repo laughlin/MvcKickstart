@@ -17,7 +17,7 @@ namespace MvcKickstart.Tests.Controllers.Error
 		[Test]
 		public void GivenRequest_ReturnsInvalidPageView()
 		{
-			var controller = new ErrorController(Db, Metrics);
+			var controller = new ErrorController(Db, Metrics, Cache);
 			ControllerUtilities.SetupControllerContext(controller);
 
 			var result = controller.InvalidPage() as ViewResult;
@@ -26,7 +26,7 @@ namespace MvcKickstart.Tests.Controllers.Error
 		[Test]
 		public void GivenRequest_Returns404HttpStatus()
 		{
-			var controller = new ErrorController(Db, Metrics);
+			var controller = new ErrorController(Db, Metrics, Cache);
 
 			var request = new HttpRequest(string.Empty, "http://example.com/", string.Empty);
 			var response = new HttpResponse(TextWriter.Null);
@@ -40,7 +40,7 @@ namespace MvcKickstart.Tests.Controllers.Error
 		[Test]
 		public void GivenRequestWithQueryString_TracksMetric()
 		{
-			var controller = new ErrorController(Db, Metrics);
+			var controller = new ErrorController(Db, Metrics, Cache);
 
 			var request = new HttpRequest(string.Empty, "http://example.com/", "404;http://example.com");
 			var response = new HttpResponse(TextWriter.Null);
@@ -54,7 +54,7 @@ namespace MvcKickstart.Tests.Controllers.Error
 		[Test]
 		public void GivenRequestWithoutQueryString_DoesNotTrackMetric()
 		{
-			var controller = new ErrorController(Db, Metrics);
+			var controller = new ErrorController(Db, Metrics, Cache);
 
 			var request = new HttpRequest(string.Empty, "http://example.com/", string.Empty);
 			var response = new HttpResponse(TextWriter.Null);

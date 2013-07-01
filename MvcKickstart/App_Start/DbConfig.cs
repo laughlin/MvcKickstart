@@ -49,7 +49,7 @@ namespace MvcKickstart
 						modifiedOn.SetValue(item, DateTime.UtcNow);
 				};
 		}
-		public static void Bootstrap()
+		public static void Initialize()
 		{
 			Setup();
 

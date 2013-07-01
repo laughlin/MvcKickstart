@@ -2,25 +2,27 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using CacheStack.DonutCaching;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
 using MvcKickstart.ViewModels.Error;
+using ServiceStack.CacheAccess;
 
 namespace MvcKickstart.Controllers
 {
 	public class ErrorController : BaseController
 	{
-		public ErrorController(IDbConnection db, IMetricTracker metrics) : base (db, metrics){}
+		public ErrorController(IDbConnection db, IMetricTracker metrics, ICacheClient cache) : base (db, metrics, cache){}
 
 		[GetOrPost("Error", RouteName = "Error_Index")]
-		[ConfiguredOutputCache]
+		[DonutOutputCache]
 		public ActionResult Index()
 		{
 			return View("Error");
 		}
 
 		[GetOrPost("Invalid-Page", RouteName = "Error_InvalidPage")]
-		[ConfiguredOutputCache]
+		[DonutOutputCache]
 		public ActionResult InvalidPage()
 		{
 			var model = new InvalidPage();
@@ -46,7 +48,7 @@ namespace MvcKickstart.Controllers
 		}
 
 		[GetOrPost("No-Permission", RouteName = "Error_NoPermission")]
-		[ConfiguredOutputCache]
+		[DonutOutputCache]
 		public ActionResult NoPermission()
 		{
 			return View();

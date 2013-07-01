@@ -1,26 +1,29 @@
 ﻿using System.Data;
-using System.Linq;
 using System.Net;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Web.Mvc;
-using Dapper;
+using CacheStack;
 using MvcKickstart.Models.Users;
 using MvcKickstart.Services;
 using MvcKickstart.ViewModels.Shared;
+using ServiceStack.CacheAccess;
 using ServiceStack.Logging;
-using ServiceStack.Text;
-using Spruce;
 using StructureMap;
 
 namespace MvcKickstart.Infrastructure
 {
-	public abstract class BaseController : Controller
+	public abstract class BaseController : Controller, IWithCacheContext
 	{
 		protected IDbConnection Db { get; private set; }
 		protected IMetricTracker Metrics { get; private set; }
 		protected ILog Log { get; private set; }
+		protected ICacheClient Cache { get; private set; }
+		/// <summary>
+		/// Used to set the cache context for donut cached actions
+		/// </summary>
+		public ICacheContext CacheContext { get; private set; }
 
 		public new UserPrincipal User
 		{
@@ -30,11 +33,13 @@ namespace MvcKickstart.Infrastructure
 			}
 		}
 
-		protected BaseController(IDbConnection db, IMetricTracker metrics)
+		protected BaseController(IDbConnection db, IMetricTracker metrics, ICacheClient cache)
 		{
 			Db = db;
 			Metrics = metrics;
 			Log = LogManager.GetLogger(GetType());
+			Cache = cache;
+			CacheContext = new CacheContext(Cache);
 		}
 
 		protected override void OnAuthorization(AuthorizationContext filterContext)
@@ -49,13 +54,14 @@ namespace MvcKickstart.Infrastructure
 			User user = null;
 			if (filterContext.HttpContext.User != null && filterContext.HttpContext.User.Identity.IsAuthenticated && filterContext.HttpContext.User.Identity.AuthenticationType == "Forms")
 			{
-				user = Db.Query<User>("select * from [{0}] where IsDeleted=0 AND Username=@username".Fmt(Db.GetTableName<User>()), new { Username = filterContext.HttpContext.User.Identity.Name }).SingleOrDefault();
+				var userService = ObjectFactory.GetInstance<IUserService>();
+				user = userService.GetByUsername(filterContext.HttpContext.User.Identity.Name);
 				// Something happened to their account - log them out
-				if (user == null)
+				if (user == null || user.IsDeleted)
 				{
 					// Since this is a rarity, I'm not going to force very controller to inject the userservice in the constructor
-					var userService = ObjectFactory.GetInstance<IUserAuthenticationService>();
-					userService.Logout();
+					var authService = ObjectFactory.GetInstance<IUserAuthenticationService>();
+					authService.Logout();
 					filterContext.HttpContext.User = null;
 				}
 			}
