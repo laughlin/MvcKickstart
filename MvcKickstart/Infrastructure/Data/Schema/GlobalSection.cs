@@ -1,4 +1,5 @@
 ﻿using System;
+using MvcKickstart.Models;
 using Spruce.Migrations;
 using Spruce.Schema;
 
@@ -16,6 +17,7 @@ namespace MvcKickstart.Infrastructure.Data.Schema
 				return new []
 				{
 					typeof(DataMigration),
+					typeof(SiteSettings)
 				};
 			}
 		}

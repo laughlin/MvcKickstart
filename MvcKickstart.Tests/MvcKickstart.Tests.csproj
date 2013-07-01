@@ -42,8 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="CacheStack">
-      <HintPath>..\packages\CacheStack.1.0.5\lib\net45\CacheStack.dll</HintPath>
+    <Reference Include="CacheStack, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CacheStack.1.0.6\lib\net45\CacheStack.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=1.12.1.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -72,31 +73,32 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net, Version=2.0.0.621, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+    <Reference Include="protobuf-net, Version=2.0.0.640, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\protobuf-net.2.0.0.621\lib\net40\protobuf-net.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.2.0.0.640\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
-    <Reference Include="PublicBroadcasting, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PublicBroadcasting, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PublicBroadcasting.1.0.7\lib\net45\PublicBroadcasting.dll</HintPath>
+      <HintPath>..\packages\PublicBroadcasting.1.0.8\lib\net45\PublicBroadcasting.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common, Version=3.9.44.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Common, Version=3.9.54.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Common.3.9.54\lib\net35\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=3.9.44.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Interfaces, Version=3.9.54.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Common.3.9.54\lib\net35\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Logging.Log4Net, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ServiceStack.Logging.Log4Net.1.0.9.0\lib\net35\ServiceStack.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Text.3.9.44\lib\net35\ServiceStack.Text.dll</HintPath>
+    <Reference Include="ServiceStack.Text, Version=3.9.54.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.3.9.54\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="Should, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -106,8 +108,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ShouldFluent.1.1.19\lib\Should.Fluent.dll</HintPath>
     </Reference>
-    <Reference Include="Sigil">
-      <HintPath>..\packages\Sigil.2.2.1\lib\net45\Sigil.dll</HintPath>
+    <Reference Include="Sigil, Version=3.0.0.0, Culture=neutral, PublicKeyToken=2d06c3494341c8ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sigil.3.0.0\lib\net45\Sigil.dll</HintPath>
     </Reference>
     <Reference Include="Spruce, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
