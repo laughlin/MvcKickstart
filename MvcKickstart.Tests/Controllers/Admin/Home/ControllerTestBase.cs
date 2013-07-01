@@ -1,5 +1,7 @@
-﻿using MvcKickstart.Areas.Admin.Controllers;
+﻿using Moq;
+using MvcKickstart.Areas.Admin.Controllers;
 using MvcKickstart.Models.Users;
+using MvcKickstart.Services;
 using MvcKickstart.Tests.Utilities;
 
 namespace MvcKickstart.Tests.Controllers.Admin.Home
@@ -8,6 +10,7 @@ namespace MvcKickstart.Tests.Controllers.Admin.Home
 	{
 		protected User User { get; private set; }
 		protected HomeController Controller { get; set; }
+		protected Mock<SiteSettingsService> SiteSettingsServiceMock { get; set; }
 
 		public override void Setup()
 		{
@@ -18,8 +21,9 @@ namespace MvcKickstart.Tests.Controllers.Admin.Home
 					x.Username = "admin";
 					x.IsAdmin = true;
 				});
+			SiteSettingsServiceMock = new Mock<SiteSettingsService>(Db, Cache);
 
-			Controller = new HomeController(Db, Metrics);
+			Controller = new HomeController(Db, Metrics, Cache, SiteSettingsServiceMock.Object);
 			ControllerUtilities.SetupControllerContext(Controller, User);
 		}
 	}

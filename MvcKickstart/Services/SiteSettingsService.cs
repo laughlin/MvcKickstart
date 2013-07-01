@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Linq;
 using CacheStack;
+using Dapper;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Models;
 using ServiceStack.CacheAccess;

@@ -47,7 +47,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 		}
 
 		[Test]
-		public void GivenExistingUsername_IgnoresUsernameCase()
+		public void GivenExistingUsername_IgnoresUsernameCase_ReturnsFalse()
 		{
 			var result = Controller.ValidateUsername("testuser") as ServiceStackJsonResult;
 			result.Should().Not.Be.Null();
@@ -55,11 +55,11 @@ namespace MvcKickstart.Tests.Controllers.Account
 		}
 
 		[Test]
-		public void GivenExistingDeletedUsername_ReturnsTrue()
+		public void GivenExistingDeletedUsername_ReturnsFalse()
 		{
 			var result = Controller.ValidateUsername("TestUserDeleted") as ServiceStackJsonResult;
 			result.Should().Not.Be.Null();
-			((bool) result.Data).Should().Be.True();
+			((bool) result.Data).Should().Be.False();
 		}
 
 		[Test]

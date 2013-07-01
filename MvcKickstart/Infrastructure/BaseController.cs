@@ -39,6 +39,7 @@ namespace MvcKickstart.Infrastructure
 			Metrics = metrics;
 			Log = LogManager.GetLogger(GetType());
 			Cache = cache;
+			CacheContext = new CacheContext(Cache);
 		}
 
 		protected override void OnAuthorization(AuthorizationContext filterContext)

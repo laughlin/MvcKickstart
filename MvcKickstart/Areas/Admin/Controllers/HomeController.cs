@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using AttributeRouting;
 using AttributeRouting.Web.Mvc;
 using CacheStack;
+using Google.GData.Client;
 using MvcKickstart.Areas.Admin.ViewModels.Home;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
@@ -17,7 +18,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 	[RouteArea("admin")]
 	public class HomeController : BaseController
     {
-		private ISiteSettingsService _siteSettingsService;
+		private readonly ISiteSettingsService _siteSettingsService;
 		public HomeController(IDbConnection db, IMetricTracker metrics, ICacheClient cache, ISiteSettingsService siteSettingsService) : base(db, metrics, cache)
 		{
 			_siteSettingsService = siteSettingsService;
@@ -27,7 +28,11 @@ namespace MvcKickstart.Areas.Admin.Controllers
 		[Restricted(RequireAdmin = true)]
 		public ActionResult Index()
 		{
-			var model = new Index();
+			var settings = _siteSettingsService.GetSettings();
+			var model = new Index
+				{
+					HasAnalyticsConfigured = !string.IsNullOrEmpty(settings.AnalyticsToken)
+				};
 			return View(model);
 		}
 
@@ -36,7 +41,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 		public ActionResult Auth()
 		{
 			const string scope = "https://www.google.com/analytics/feeds/";
-			var next = Url.Absolute(Url.Admin().AuthResponse());
+			var next = Url.Absolute(Url.Admin().Home().AuthResponse());
 			var url = AuthSubUtil.getRequestUrl(next, scope, false, true);
 			return Redirect(url);
 		}
@@ -52,7 +57,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			Db.Save(settings);
 			Cache.Trigger(TriggerFor.Id<SiteSettings>(settings.Id));
 
-			return RedirectToAction("Config");
+			return RedirectToAction("Index");
 		}
 
 		#region Partials

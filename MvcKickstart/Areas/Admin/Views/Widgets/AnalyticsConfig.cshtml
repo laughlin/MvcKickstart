@@ -1,0 +1,13 @@
+﻿@model AnalyticsConfig
+
+@using (Html.BeginRouteForm("Admin_Widgets_AnalyticsConfig")) {
+	<div class="control-group">
+		@Html.LabelFor(x => x.Site, new { @class = "control-label" })
+		@Html.TextBoxWithMaxLengthFor(x => x.Site, new { @class = "controls" }) <small>(eg. ga:3045909)</small>
+	</div>
+	<div class="control-group">
+		@Html.LabelFor(x => x.Application, new { @class = "control-label" })
+		@Html.TextBoxWithMaxLengthFor(x => x.Application, new { @class = "controls" }) <small>(eg. laughlin.com)</small>
+	</div>
+	<button type="submit" class="btn">Submit</button>
+}

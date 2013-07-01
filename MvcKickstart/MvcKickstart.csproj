@@ -68,26 +68,46 @@
     <Reference Include="CacheStack">
       <HintPath>..\packages\CacheStack.1.0.5\lib\net45\CacheStack.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette">
-      <HintPath>..\packages\Cassette.2.1.0-alpha2\lib\net40-client\Cassette.dll</HintPath>
+    <Reference Include="Cassette, Version=2.1.0.17228, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cassette.2.1.0\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Aspnet">
-      <HintPath>..\packages\Cassette.Aspnet.2.1.0-alpha2\lib\net40\Cassette.Aspnet.dll</HintPath>
+    <Reference Include="Cassette.Aspnet, Version=2.1.0.17229, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cassette.Aspnet.2.1.0\lib\net40\Cassette.Aspnet.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Less">
-      <HintPath>..\packages\Cassette.Less.2.1.0-alpha2\lib\net40-client\Cassette.Less.dll</HintPath>
+    <Reference Include="Cassette.Less, Version=2.1.0.17228, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cassette.Less.2.1.0\lib\net40-client\Cassette.Less.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Views">
-      <HintPath>..\packages\Cassette.Views.2.1.0-alpha2\lib\net40\Cassette.Views.dll</HintPath>
+    <Reference Include="Cassette.Views, Version=2.1.0.17228, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cassette.Views.2.1.0\lib\net40\Cassette.Views.dll</HintPath>
     </Reference>
-    <Reference Include="Dapper">
-      <HintPath>..\packages\Dapper.1.12.1\lib\net40\Dapper.dll</HintPath>
-    </Reference>
-    <Reference Include="DevTrends.MvcDonutCaching">
-      <HintPath>..\packages\MvcDonutCaching.1.2.1\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
+    <Reference Include="Dapper, Version=1.12.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Dapper.1.13\lib\net45\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="dotless.ClientOnly">
       <HintPath>..\packages\DotlessClientOnly.1.3.1.0\lib\dotless.ClientOnly.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth">
+      <HintPath>..\packages\Google.Apis.1.2.4737.25317\lib\DotNetOpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis">
+      <HintPath>..\packages\Google.Apis.1.2.4737.25317\lib\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Authentication.OAuth2">
+      <HintPath>..\packages\Google.Apis.1.2.4737.25317\lib\Google.Apis.Authentication.OAuth2.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Analytics">
+      <HintPath>..\packages\Google.GData.Analytics.2.2.0.0\lib\Google.GData.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client">
+      <HintPath>..\packages\Google.GData.Client.2.2.0.0\lib\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions">
+      <HintPath>..\packages\Google.GData.Extensions.2.2.0.0\lib\Google.GData.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,6 +120,9 @@
     <Reference Include="MiniProfiler, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MiniProfiler.2.1.0\lib\net40\MiniProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
       <HintPath>..\packages\protobuf-net.2.0.0.621\lib\net40\protobuf-net.dll</HintPath>
@@ -126,9 +149,9 @@
     <Reference Include="Sigil">
       <HintPath>..\packages\Sigil.2.2.1\lib\net45\Sigil.dll</HintPath>
     </Reference>
-    <Reference Include="Spruce, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Spruce, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Spruce.1.0.4\lib\net45\Spruce.dll</HintPath>
+      <HintPath>..\packages\Spruce.1.0.6\lib\net45\Spruce.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
@@ -195,7 +218,11 @@
     <Compile Include="App_Start\LoggingConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WidgetsController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\Index.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Widgets\Analytics.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Widgets\AnalyticsConfig.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Widgets\AnalyticsAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -205,7 +232,6 @@
     <Compile Include="Infrastructure\Attributes\PasswordStrengthAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\ProfileActionAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\GetOrPostAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\ConfiguredOutputCacheAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\GaugeMetricAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\RestrictedAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\TimingMetricAttribute.cs" />
@@ -271,6 +297,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\images\Blank.gif" />
+    <Content Include="Content\js\Account\Register.js" />
+    <Content Include="Content\js\Admin\Home\Index.js" />
     <Content Include="Content\js\Shared\angular.js" />
     <Content Include="Content\js\Shared\bundle.txt" />
     <Content Include="Content\js\Shared\global.js" />
@@ -296,10 +324,14 @@
     <Content Include="Content\js\_lib\foolproof\mvcfoolproof.unobtrusive.js" />
     <Content Include="Content\js\_lib\foolproof\MvcFoolproofJQueryValidation.js" />
     <Content Include="Content\js\_lib\foolproof\MvcFoolproofValidation.js" />
+    <Content Include="Content\js\_lib\jquery.flot\bundle.txt" />
+    <Content Include="Content\js\_lib\jquery.flot\jquery.flot.js" />
     <Content Include="Content\js\_lib\jquery.form\bundle.txt" />
     <Content Include="Content\js\_lib\jquery.form\jquery.form.js" />
     <Content Include="Content\js\_lib\jquery.maskedinput\bundle.txt" />
     <Content Include="Content\js\_lib\jquery.maskedinput\jquery.maskedinput-1.3.js" />
+    <Content Include="Content\js\_lib\jquery.typewatch\bundle.txt" />
+    <Content Include="Content\js\_lib\jquery.typewatch\jquery.typewatch.js" />
     <Content Include="Content\js\_lib\jquery.validate\bundle.txt" />
     <Content Include="Content\js\_lib\jquery.validate\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\js\_lib\jquery.validate\jquery.validate.js" />
@@ -325,8 +357,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\_lib\" />
-    <Folder Include="Content\js\Admin\" />
-    <Folder Include="Content\less\Admin\" />
     <Folder Include="Infrastructure\Data\ScriptedObjects\" />
   </ItemGroup>
   <ItemGroup>
@@ -450,6 +480,24 @@
     <Content Include="Views\Mail\Welcome.txt.cshtml" />
     <Content Include="Views\Mail\_Layout.html.cshtml" />
     <Content Include="Views\Mail\_Layout.txt.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Widgets\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Widgets\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Widgets\Analytics.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\Admin\Home\Index.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Widgets\AnalyticsConfig.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Widgets\AnalyticsAuthorize.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

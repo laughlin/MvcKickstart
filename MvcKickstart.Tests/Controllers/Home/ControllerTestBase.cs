@@ -12,7 +12,7 @@ namespace MvcKickstart.Tests.Controllers.Home
 		{
 			base.Setup();
 
-			Controller = new HomeController(Db, Metrics);
+			Controller = new HomeController(Db, Metrics, Cache);
 			ControllerUtilities.SetupControllerContext(Controller);
 		}
 	}

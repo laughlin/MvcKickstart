@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using AttributeRouting.Web.Mvc;
 using AutoMapper;
 using CacheStack;
+using CacheStack.DonutCaching;
 using Dapper;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Attributes;
@@ -30,14 +31,14 @@ namespace MvcKickstart.Controllers
 		}
 
 		[GET("account", RouteName = "Account_Index")]
-		[ConfiguredOutputCache]
+		[DonutOutputCache]
 		public ActionResult Index()
 		{
 			return Redirect(Url.Home().Index());
 		}
 
 		[GET("account/login", RouteName = "Account_Login")]
-		[ConfiguredOutputCache(VaryByParam = "returnUrl", VaryByCustom = VaryByCustom.UserIsAuthenticated)]
+		[DonutOutputCache(VaryByParam = "returnUrl", VaryByCustom = VaryByCustom.UserIsAuthenticated)]
 		public ActionResult Login(string returnUrl)
 		{
 			if (User.Identity.IsAuthenticated)
@@ -87,7 +88,7 @@ namespace MvcKickstart.Controllers
 		#region Register
 
 		[GET("account/register", RouteName = "Account_Register")]
-		[ConfiguredOutputCache(VaryByParam = "returnUrl", VaryByCustom = VaryByCustom.UserIsAuthenticated)]
+		[DonutOutputCache(VaryByParam = "returnUrl", VaryByCustom = VaryByCustom.UserIsAuthenticated)]
 		public ActionResult Register(string returnUrl)
 		{
 			if (User.Identity.IsAuthenticated)
@@ -152,26 +153,26 @@ namespace MvcKickstart.Controllers
 			return View(model);
 		}
 
-		[POST("account/validate-username/{username}", RouteName = "Account_ValidateUsername")]
-		[ConfiguredOutputCache(VaryByParam = "username")]
+		[POST("account/validate-username", RouteName = "Account_ValidateUsername")]
+		[DonutOutputCache(VaryByParam = "username")]
 		public JsonResult ValidateUsername(string username)
 		{
 			if (_authenticationService.ReservedUsernames.Any(x => username.Equals(x, StringComparison.OrdinalIgnoreCase)))
 				return Json(false);
 
-			var userExists = Db.Query<int>("select count(*) from [{0}] where IsDeleted=0 AND Username=@Username".Fmt(Db.GetTableName<User>()), new
+			var isValid = Db.Query<int>("select count(*) from [{0}] where Username=@Username".Fmt(Db.GetTableName<User>()), new
 				{
 					username
 				}
-			).Single() > 0;
+			).Single() == 0;
 
-			return Json(userExists);
+			return Json(isValid);
 		}
 		#endregion
 
 		#region Forgot Password
 		[GET("account/forgot-password", RouteName = "Account_ForgotPassword")]
-		[ConfiguredOutputCache]
+		[DonutOutputCache]
 		public ActionResult ForgotPassword()
 		{
 			return View();

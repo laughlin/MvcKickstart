@@ -35,7 +35,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 			AuthenticationService = new Mock<IUserAuthenticationService>();
 			AuthenticationService.Setup(x => x.ReservedUsernames).Returns(new[] { "admin" });
 
-			Controller = new AccountController(Db, Metrics, MailController.Object, AuthenticationService.Object);
+			Controller = new AccountController(Db, Metrics, Cache, MailController.Object, AuthenticationService.Object);
 			ControllerUtilities.SetupControllerContext(Controller);
 		}
 	}

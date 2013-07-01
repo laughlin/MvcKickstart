@@ -153,7 +153,10 @@ namespace MvcKickstart.Infrastructure.Extensions
 			{
 				return Url.RouteUrl("Account_ResetPassword", new { token });
 			}
-
+			public string ValidateUsername()
+			{
+				return Url.RouteUrl("Account_ValidateUsername");
+			}
 		}
 
 		#endregion
