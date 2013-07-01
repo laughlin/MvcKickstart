@@ -36,16 +36,6 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			return View(model);
 		}
 
-		[GET("auth", RouteName = "Admin_Home_Auth")]
-		[Restricted(RequireAdmin = true)]
-		public ActionResult Auth()
-		{
-			const string scope = "https://www.google.com/analytics/feeds/";
-			var next = Url.Absolute(Url.Admin().Home().AuthResponse());
-			var url = AuthSubUtil.getRequestUrl(next, scope, false, true);
-			return Redirect(url);
-		}
-
 		[GET("authResponse", RouteName = "Admin_Home_AuthResponse")]
 		[Restricted(RequireAdmin = true)]
 		public ActionResult AuthResponse(string token)

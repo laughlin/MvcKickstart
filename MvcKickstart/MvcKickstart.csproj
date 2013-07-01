@@ -206,6 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutomapperConfig.cs" />
+    <Compile Include="App_Start\CacheConfig.cs" />
     <Compile Include="App_Start\DbConfig.cs" />
     <Compile Include="App_Start\IocConfig.cs" />
     <Compile Include="App_Start\JsonConfig.cs" />

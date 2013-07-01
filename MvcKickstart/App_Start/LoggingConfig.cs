@@ -7,7 +7,7 @@ namespace MvcKickstart
 {
 	public class LoggingConfig
 	{
-		public static void Bootstrap()
+		public static void Initialize()
 		{
 			LogManager.LogFactory = new Log4NetFactory(true);
 		}
