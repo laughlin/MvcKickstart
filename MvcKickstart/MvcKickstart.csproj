@@ -296,6 +296,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\images\Blank.gif" />
+    <Content Include="Content\images\loading.gif" />
     <Content Include="Content\js\Account\Register.js" />
     <Content Include="Content\js\Admin\Home\Index.js" />
     <Content Include="Content\js\Shared\angular.js" />

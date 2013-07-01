@@ -1,10 +1,18 @@
 ﻿@model Analytics
 <script>
-	var analyticsLabel = [@for (var i = 1; i <= Model.Visits.Count(); i++) {if (i > 1 && i % 4 == 0) {var item = Model.Visits.ElementAt(i);if (i > 4) {<text>,</text>}<text>[@i,"@item.Key.ToString("MMM d")"]</text>}}];
+	var analyticsLabel = [@for (var i = 1; i <= Model.Visits.Count(); i++) {if (i > 1 && i % 4 == 0) {var item = Model.Visits.ElementAt(i - 1);if (i > 4) {<text>,</text>}<text>[@i,"@item.Key.ToString("MMM d")"]</text>}}];
 	var analyticsData = [@for (var i = 0; i < Model.Visits.Count(); i++) {var item = Model.Visits.ElementAt(i);if (i > 0) {<text>,</text>}<text>[@(i + 1),@item.Value]</text>}];
 	var analyticsDataLabels = [@for (var i = 0; i < Model.Visits.Count(); i++) {var item = Model.Visits.ElementAt(i);if (i > 0) {<text>,</text>}<text>"@item.Key.ToString("dddd, MMM d, yyyy")"</text>}];
 </script>
 <div id="AnalyticsSummaryWidgetContent">
+	<div>
+		@Html.DropDownListFor(x => x.Duration, new [] {
+			new SelectListItem { Text = "Past 30 days", Value = "30" },
+			new SelectListItem { Text = "Past 60 days", Value = "60" },
+			new SelectListItem { Text = "Yesterday", Value = "1" }
+		})
+		<img id="AnalyticsLoading" src="@Url.Image("loading.gif")" alt="..." class="hide" />
+	</div>
 	<div id="AnalyticsGraph"></div>
 
 	<h6>Site Usage</h6>

@@ -40,19 +40,20 @@
  })();
 
  $(function() {
-	 getAnalytics();
+	getAnalytics();
 	 
-	 function getAnalytics() {
-		 $.post(Url.widgetsAnalytics, {
-			start: $("#AnalyticsStart").val(),
-			end: $("#AnalyticsEnd").val() 
-		 }).done(function(result) {
+	function getAnalytics() {
+		$("#AnalyticsLoading").show();
+		
+		$.post(Url.widgetsAnalytics, {
+			duration: $("#Duration").val()
+		}).done(function(result) {
 			 
-			 $("#AnalyticsSummaryWidget .content").html(result);
+			$("#AnalyticsSummaryWidget .content").html(result);
 
-			 var graph = $("#AnalyticsGraph");
+			var graph = $("#AnalyticsGraph");
 
-			 var options = {
+			var options = {
 				grid: {
 					show: true,
 					aboveData: true,
@@ -96,7 +97,7 @@
 				tooltip: false, //activate tooltip
 			};
 
-			 $.plot(graph, [{
+			$.plot(graph, [{
 				label: 'Visits',
 				data: analyticsData, // injected to the page from Analytics ajax
 				lines: {
@@ -105,12 +106,17 @@
 				}], options);
 			 
 			graph.UseTooltip();
+			
 			$("#AnalyticsSummaryWidgetContent [rel='tooltip']").tooltip();
 		 	// Show the tooltip when moused over the data cell too
 			$("#AnalyticsSummaryWidgetContent table").on('mouseover', 'td', function () {
 				$(this).prev().tooltip('show');
 			}).on('mouseout', 'td', function () {
 				$(this).prev().tooltip('hide');
+			});
+			// Hookup ajax update based on duration dropdown changing
+			$("#Duration").on('change', function() {
+				getAnalytics();
 			});
 		 }).fail(function() {
 			alert("Problem getting analytics information."); 

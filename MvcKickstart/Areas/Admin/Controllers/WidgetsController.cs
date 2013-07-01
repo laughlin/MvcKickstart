@@ -37,7 +37,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 
 		[POST("widgets/analytics", RouteName = "Admin_Widgets_Analytics")]
 		[DonutOutputCache]
-		public ActionResult Analytics(DateTime? start, DateTime? end)
+		public ActionResult Analytics(int? duration)
 		{
 			CacheContext.InvalidateOn(TriggerFrom.Any<SiteSettings>());
 
@@ -61,11 +61,13 @@ namespace MvcKickstart.Areas.Admin.Controllers
 				return View("AnalyticsConfig", config);
 			}
 
+			duration = duration ?? 30;
 			var model = new Analytics
 			            	{
-								Start = start ?? DateTime.Today.AddDays(-30),
-								End = start ?? DateTime.Now,
-			            		Visits = new Dictionary<DateTime, int>(),
+								Duration = duration.Value,
+								Start = DateTime.Today.AddDays(-1 * duration.Value),
+								End = DateTime.Now,
+						 		Visits = new Dictionary<DateTime, int>(),
 								PageViews = new Dictionary<string, int>(),
 								PageTitles = new Dictionary<string, string>(),
 								TopReferrers = new Dictionary<string, int>(),

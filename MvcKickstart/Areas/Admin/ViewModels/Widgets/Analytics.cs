@@ -5,6 +5,7 @@ namespace MvcKickstart.Areas.Admin.ViewModels.Widgets
 {
 	public class Analytics
 	{
+		public int Duration { get; set; }
 		public TimeSpan AveragePageLoadTime { get; set; }
 		public IDictionary<string, int> TopSearches { get; set; }
 		public IDictionary<string, int> TopReferrers { get; set; }
