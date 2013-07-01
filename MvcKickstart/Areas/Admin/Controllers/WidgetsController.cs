@@ -7,15 +7,15 @@ using AttributeRouting;
 using AttributeRouting.Web.Mvc;
 using CacheStack;
 using CacheStack.DonutCaching;
-using DotNetOpenAuth.OAuth2;
-using Google.Apis.Authentication.OAuth2;
 using Google.GData.Analytics;
 using Google.GData.Client;
 using MvcKickstart.Areas.Admin.ViewModels.Widgets;
+using MvcKickstart.Areas.Admin.ViewModels.Widgets.GoogleAnalytics;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models;
 using MvcKickstart.Services;
+using RestSharp;
 using ServiceStack.CacheAccess;
 using Spruce;
 
@@ -54,9 +54,10 @@ namespace MvcKickstart.Areas.Admin.Controllers
 				return View("AnalyticsAuthorize", auth);
 			}
 
-			if (string.IsNullOrEmpty(settings.AnalyticsApp))
+			if (string.IsNullOrEmpty(settings.AnalyticsProfileId))
 			{
-				var config = new AnalyticsConfig();
+				var config = GetAccountsAndProfiles(settings);
+
 				return View("AnalyticsConfig", config);
 			}
 
@@ -77,15 +78,17 @@ namespace MvcKickstart.Areas.Admin.Controllers
 				model.End = tempDate;
 			}
 
-			var authFactory = new GAuthSubRequestFactory("analytics", settings.AnalyticsApp)
+			var authFactory = new GAuthSubRequestFactory("analytics", "MvcKickstart")
 								{
 									Token = settings.AnalyticsToken
 								};
 								
 			var analytics = new AnalyticsService(authFactory.ApplicationName) { RequestFactory = authFactory };
 
+			var profileId = "ga:" + settings.AnalyticsProfileId;
+
 			// Get from All Visits
-			var visits = new DataQuery(settings.AnalyticsSiteId, model.Start, model.End)
+			var visits = new DataQuery(profileId, model.Start, model.End)
 							{
 								Metrics = "ga:visits",
 								Dimensions = "ga:date",
@@ -100,7 +103,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			}
 
 			// Get Site Usage
-			var siteUsage = new DataQuery(settings.AnalyticsSiteId, model.Start, model.End)
+			var siteUsage = new DataQuery(profileId, model.Start, model.End)
 							{
 								Metrics = "ga:visits,ga:pageviews,ga:percentNewVisits,ga:avgTimeOnSite,ga:entranceBounceRate,ga:exitRate,ga:pageviewsPerVisit,ga:avgPageLoadTime"
 							};
@@ -140,7 +143,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			}
 
 			// Get Top Pages
-			var topPages = new DataQuery(settings.AnalyticsSiteId, model.Start, model.End)
+			var topPages = new DataQuery(profileId, model.Start, model.End)
 							{
 								Metrics = "ga:pageviews",
 								Dimensions = "ga:pagePath,ga:pageTitle",
@@ -162,7 +165,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			}
 
 			// Get Top Referrers
-			var topReferrers = new DataQuery(settings.AnalyticsSiteId, model.Start, model.End)
+			var topReferrers = new DataQuery(profileId, model.Start, model.End)
 							{
 								Metrics = "ga:visits",
 								Dimensions = "ga:source,ga:medium",
@@ -179,7 +182,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			}
 
 			// Get Top Searches
-			var topSearches = new DataQuery(settings.AnalyticsSiteId, model.Start, model.End)
+			var topSearches = new DataQuery(profileId, model.Start, model.End)
 							{
 								Metrics = "ga:visits",
 								Dimensions = "ga:keyword",
@@ -198,12 +201,42 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			return View(model);
 		}
 
+		private AnalyticsConfig GetAccountsAndProfiles(SiteSettings settings)
+		{
+			// Using RestSharp because I could not figure out how to access the analytics management api with the analytics nuget
+			var client = new RestClient();
+			client.AddHandler("application/json", new RestSharpJsonSerializer());
+			var accountsRequest = new RestRequest("https://www.googleapis.com/analytics/v3/management/accounts?access_token=" + Server.UrlEncode(settings.AnalyticsToken), Method.GET)
+				{
+					RequestFormat = DataFormat.Json,
+					JsonSerializer = new RestSharpJsonSerializer()
+				};
+			var profilesRequest = new RestRequest("https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?access_token=" + Server.UrlEncode(settings.AnalyticsToken), Method.GET)
+				{
+					RequestFormat = DataFormat.Json,
+					JsonSerializer = new RestSharpJsonSerializer()
+				};
+			var accountsResult = client.Execute<ListResponse<Account>>(accountsRequest);
+			var profilesResult = client.Execute<ListResponse<Profile>>(profilesRequest);
+			var config = new AnalyticsConfig
+				{
+					Accounts = accountsResult.Data.Items,
+					Profiles = profilesResult.Data.Items
+				};
+			return config;
+		}
+
 		[POST("widgets/analytics/config", RouteName = "Admin_Widgets_AnalyticsConfig")]
 		public ActionResult AnalyticsConfig(AnalyticsConfig model)
 		{
 			var settings = _siteSettingsService.GetSettings();
-			settings.AnalyticsSiteId = model.Site;
-			settings.AnalyticsApp = model.Application;
+			var config = GetAccountsAndProfiles(settings);
+			
+			var profile = config.Profiles.SingleOrDefault(x => x.Id == model.ProfileId);
+			if (profile == null)
+				throw new Exception("Unable to find the specified analytics profile: " + model.ProfileId);
+
+			settings.AnalyticsProfileId = profile.Id;
 			Db.Save(settings);
 			Cache.Trigger(TriggerFor.Id<SiteSettings>(settings.Id));
 

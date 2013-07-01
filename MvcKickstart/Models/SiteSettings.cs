@@ -11,8 +11,6 @@ namespace MvcKickstart.Models
 		[StringLength(100)]
 		public string AnalyticsToken { get; set; }
 		[StringLength(50)]
-		public string AnalyticsSiteId { get; set; }
-		[StringLength(50)]
-		public string AnalyticsApp { get; set; }
+		public string AnalyticsProfileId { get; set; }
 	}
 }
