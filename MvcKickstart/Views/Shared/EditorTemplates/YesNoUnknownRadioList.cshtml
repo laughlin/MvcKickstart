@@ -1,0 +1,25 @@
+﻿@model bool?
+@{
+    var yesAttrs = new Dictionary<string, object>(); 
+    var noAttrs = new Dictionary<string, object>(); 
+    var nullAttrs = new Dictionary<string, object>(); 
+
+    yesAttrs.Add("id", ViewData.TemplateInfo.GetFullHtmlFieldId("") + "Yes");
+    noAttrs.Add("id", ViewData.TemplateInfo.GetFullHtmlFieldId("") + "No");
+    nullAttrs.Add("id", ViewData.TemplateInfo.GetFullHtmlFieldId("") + "NA");
+
+    if (Model.HasValue && Model.Value)
+    {
+        yesAttrs.Add("checked", "checked");
+    }
+    else if (Model.HasValue && !Model.Value)
+    {
+        noAttrs.Add("checked", "checked");
+    }
+    else
+    {
+        nullAttrs.Add("checked", "checked");
+    }
+}
+
+<label class="radio inline">@Html.RadioButton("", true, yesAttrs) Yes</label> <label class="radio inline">@Html.RadioButton("", false, noAttrs) No</label> <label class="radio inline">@Html.RadioButton("", "", nullAttrs) N/A</label>

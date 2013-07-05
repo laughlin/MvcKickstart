@@ -56,7 +56,11 @@ namespace MvcKickstart.Areas.Admin.Controllers
 
 			if (string.IsNullOrEmpty(settings.AnalyticsProfileId))
 			{
-				var config = GetAccountsAndProfiles(settings);
+				var config = new AnalyticsConfig
+					{
+						Accounts = GetAccounts(settings),
+						Profiles = GetProfiles(settings)
+					};
 
 				return View("AnalyticsConfig", config);
 			}
@@ -79,6 +83,12 @@ namespace MvcKickstart.Areas.Admin.Controllers
 				model.Start = model.End;
 				model.End = tempDate;
 			}
+
+			var profiles = GetProfiles(settings);			
+			var profile = profiles.SingleOrDefault(x => x.Id == settings.AnalyticsProfileId);
+			if (profile == null)
+				throw new Exception("Unable to find the specified analytics profile: " + settings.AnalyticsProfileId);
+			model.Profile = profile;
 
 			var authFactory = new GAuthSubRequestFactory("analytics", "MvcKickstart")
 								{
@@ -203,7 +213,7 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			return View(model);
 		}
 
-		private AnalyticsConfig GetAccountsAndProfiles(SiteSettings settings)
+		private IList<Account> GetAccounts(SiteSettings settings)
 		{
 			// Using RestSharp because I could not figure out how to access the analytics management api with the analytics nuget
 			var client = new RestClient();
@@ -213,28 +223,29 @@ namespace MvcKickstart.Areas.Admin.Controllers
 					RequestFormat = DataFormat.Json,
 					JsonSerializer = new RestSharpJsonSerializer()
 				};
+			var accountsResult = client.Execute<ListResponse<Account>>(accountsRequest);
+			return accountsResult.Data.Items;
+		}
+		private IList<Profile> GetProfiles(SiteSettings settings)
+		{
+			// Using RestSharp because I could not figure out how to access the analytics management api with the analytics nuget
+			var client = new RestClient();
+			client.AddHandler("application/json", new RestSharpJsonSerializer());
 			var profilesRequest = new RestRequest("https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?access_token=" + Server.UrlEncode(settings.AnalyticsToken), Method.GET)
 				{
 					RequestFormat = DataFormat.Json,
 					JsonSerializer = new RestSharpJsonSerializer()
 				};
-			var accountsResult = client.Execute<ListResponse<Account>>(accountsRequest);
 			var profilesResult = client.Execute<ListResponse<Profile>>(profilesRequest);
-			var config = new AnalyticsConfig
-				{
-					Accounts = accountsResult.Data.Items,
-					Profiles = profilesResult.Data.Items
-				};
-			return config;
+			return profilesResult.Data.Items;
 		}
 
 		[POST("widgets/analytics/config", RouteName = "Admin_Widgets_AnalyticsConfig")]
 		public ActionResult AnalyticsConfig(AnalyticsConfig model)
 		{
 			var settings = _siteSettingsService.GetSettings();
-			var config = GetAccountsAndProfiles(settings);
-			
-			var profile = config.Profiles.SingleOrDefault(x => x.Id == model.ProfileId);
+			var profiles = GetProfiles(settings);			
+			var profile = profiles.SingleOrDefault(x => x.Id == model.ProfileId);
 			if (profile == null)
 				throw new Exception("Unable to find the specified analytics profile: " + model.ProfileId);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MvcKickstart.Areas.Admin.ViewModels.Widgets.GoogleAnalytics;
 
 namespace MvcKickstart.Areas.Admin.ViewModels.Widgets
 {
@@ -22,5 +23,7 @@ namespace MvcKickstart.Areas.Admin.ViewModels.Widgets
 
 		public DateTime Start { get; set; }
 		public DateTime End { get; set; }
+
+		public Profile Profile { get; set; }
 	}
 }

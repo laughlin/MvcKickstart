@@ -300,6 +300,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\fonts\_lib\fontawesome\fontawesome-webfont.svg" />
     <Content Include="Content\images\Blank.gif" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\js\Account\Register.js" />
@@ -311,6 +312,19 @@
     <Content Include="Content\js\_lib\angularjs\angular-bootstrap-1.0.1.js" />
     <Content Include="Content\js\_lib\angularjs\angular-cookies-1.0.1.js" />
     <Content Include="Content\js\_lib\angularjs\bundle.txt" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-affix.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-alert.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-button.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-carousel.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-collapse.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-dropdown.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-modal.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-popover.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-scrollspy.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-tab.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-tooltip.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-transition.js" />
+    <Content Include="Content\js\_lib\bootstrap\bootstrap-typeahead.js" />
     <Content Include="Content\js\_lib\bootstrap\bundle.txt" />
     <Content Include="Content\js\_lib\foolproof\bundle.txt" />
     <Content Include="Content\js\_lib\foolproof\mvcfoolproof.unobtrusive.js" />
@@ -334,6 +348,9 @@
     <Content Include="Content\js\_lib\modernizr\modernizr-2.5.3-respond-1.1.0.js" />
     <Content Include="Content\less\Shared\bundle.txt" />
     <Content Include="Content\less\_lib\bootstrap\bundle.txt" />
+    <Content Include="Content\less\_lib\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\less\_lib\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\less\_lib\fontawesome\bundle.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -445,6 +462,70 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Widgets\AnalyticsAuthorize.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\_lib\bootstrap\accordion.less" />
+    <Content Include="Content\less\_lib\bootstrap\alerts.less" />
+    <Content Include="Content\less\_lib\bootstrap\bootstrap.less" />
+    <Content Include="Content\less\_lib\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\less\_lib\bootstrap\button-groups.less" />
+    <Content Include="Content\less\_lib\bootstrap\buttons.less" />
+    <Content Include="Content\less\_lib\bootstrap\carousel.less" />
+    <Content Include="Content\less\_lib\bootstrap\close.less" />
+    <Content Include="Content\less\_lib\bootstrap\code.less" />
+    <Content Include="Content\less\_lib\bootstrap\component-animations.less" />
+    <Content Include="Content\less\_lib\bootstrap\dropdowns.less" />
+    <Content Include="Content\less\_lib\bootstrap\forms.less" />
+    <Content Include="Content\less\_lib\bootstrap\grid.less" />
+    <Content Include="Content\less\_lib\bootstrap\hero-unit.less" />
+    <Content Include="Content\less\_lib\bootstrap\labels-badges.less" />
+    <Content Include="Content\less\_lib\bootstrap\layouts.less" />
+    <Content Include="Content\less\_lib\bootstrap\media.less" />
+    <Content Include="Content\less\_lib\bootstrap\mixins.less" />
+    <Content Include="Content\less\_lib\bootstrap\modals.less" />
+    <Content Include="Content\less\_lib\bootstrap\navbar.less" />
+    <Content Include="Content\less\_lib\bootstrap\navs.less" />
+    <Content Include="Content\less\_lib\bootstrap\pager.less" />
+    <Content Include="Content\less\_lib\bootstrap\pagination.less" />
+    <Content Include="Content\less\_lib\bootstrap\popovers.less" />
+    <Content Include="Content\less\_lib\bootstrap\progress-bars.less" />
+    <Content Include="Content\less\_lib\bootstrap\reset.less" />
+    <Content Include="Content\less\_lib\bootstrap\responsive-1200px-min.less" />
+    <Content Include="Content\less\_lib\bootstrap\responsive-767px-max.less" />
+    <Content Include="Content\less\_lib\bootstrap\responsive-768px-979px.less" />
+    <Content Include="Content\less\_lib\bootstrap\responsive-navbar.less" />
+    <Content Include="Content\less\_lib\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\less\_lib\bootstrap\responsive.less" />
+    <Content Include="Content\less\_lib\bootstrap\scaffolding.less" />
+    <Content Include="Content\less\_lib\bootstrap\sprites.less" />
+    <Content Include="Content\less\_lib\bootstrap\tables.less" />
+    <Content Include="Content\less\_lib\bootstrap\thumbnails.less" />
+    <Content Include="Content\less\_lib\bootstrap\tooltip.less" />
+    <Content Include="Content\less\_lib\bootstrap\type.less" />
+    <Content Include="Content\less\_lib\bootstrap\utilities.less" />
+    <Content Include="Content\less\_lib\bootstrap\variables.less" />
+    <Content Include="Content\less\_lib\bootstrap\wells.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\_lib\fontawesome\bootstrap.less" />
+    <Content Include="Content\less\_lib\fontawesome\core.less" />
+    <Content Include="Content\less\_lib\fontawesome\extras.less" />
+    <Content Include="Content\less\_lib\fontawesome\font-awesome-ie7.less" />
+    <Content Include="Content\less\_lib\fontawesome\font-awesome.less" />
+    <Content Include="Content\less\_lib\fontawesome\icons.less" />
+    <Content Include="Content\less\_lib\fontawesome\mixins.less" />
+    <Content Include="Content\less\_lib\fontawesome\path.less" />
+    <Content Include="Content\less\_lib\fontawesome\variables.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\_lib\fontawesome\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\_lib\fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\_lib\fontawesome\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\_lib\fontawesome\FontAwesome.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\YesNoRadioList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\YesNoUnknownRadioList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

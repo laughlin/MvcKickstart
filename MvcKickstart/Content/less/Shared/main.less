@@ -1,11 +1,6 @@
-﻿// Twitter Bootstrap Bundle Reference
-// @reference "../_lib/bootstrap";
-
-// Framework Shared Elements
-// ------------------------------
-
-@import "variables.less";
-@import "mixins.less";
+﻿@import "../_lib/bootstrap/bootstrap.less";
+@import "../_lib/bootstrap/responsive.less";
+@import "../_lib/fontawesome/font-awesome.less";
 
 // Angular ng-cloak support
 // ------------------------
@@ -14,29 +9,9 @@
   display: none;
 }
 
-// Bootstrap 2.1.0 Overrides and Extensions
-// ----------------------------------------
-
-// In Bootstrap 2.1.0 the inverse style of the navbar is not specific enough to use @navbarInverseBrandColor correctly when .brand is a link
-.navbar-inverse {
-  a.brand {
-    color: @navbarInverseBrandColor;
-    &:hover {
-      color: @navbarInverseBrandColor;
-    }
-  }
-}
 
 /* Main Layout
 // ---------*/
-
-body > footer {
-	padding: @baseLineHeight 0;
-}
-
-body > .container {
-	margin-top: 20px;
-}
 
 .navbar .breadcrumb {
 	font-size: @baseFontSize;
@@ -70,6 +45,13 @@ body > .container {
 	.form-search {
 		float: right;
 	}
+}
+
+textarea {
+	width:99%
+}
+.notification {
+	margin: 25px 0;
 }
 
 /* Horizontal Definition Lists (introduced in later bootstrap versions)

@@ -17,8 +17,7 @@ namespace MvcKickstart.Infrastructure.Data
 		public static IEnumerable<Type> GetMigrationTypes()
 		{
 			var type = typeof(DataMigrator);
-			
-			return type.Assembly.GetTypes().Where(t => type.IsAssignableFrom(t) && t != type);
+			return type.Assembly.GetTypes().Where(t => typeof (IMigration).IsAssignableFrom(t)).ToList();
 		}
 
 		/// <summary>

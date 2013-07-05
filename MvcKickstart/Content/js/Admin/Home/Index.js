@@ -108,12 +108,6 @@
 			graph.UseTooltip();
 			
 			$("#AnalyticsSummaryWidgetContent [rel='tooltip']").tooltip();
-		 	// Show the tooltip when moused over the data cell too
-			$("#AnalyticsSummaryWidgetContent table").on('mouseover', 'td', function () {
-				$(this).prev().tooltip('show');
-			}).on('mouseout', 'td', function () {
-				$(this).prev().tooltip('hide');
-			});
 			// Hookup ajax update based on duration dropdown changing
 			$("#Duration").on('change', function() {
 				getAnalytics();
