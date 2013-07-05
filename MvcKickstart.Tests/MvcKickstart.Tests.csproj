@@ -42,9 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="CacheStack, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CacheStack, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CacheStack.1.0.6\lib\net45\CacheStack.dll</HintPath>
+      <HintPath>..\packages\CacheStack.1.0.7\lib\net45\CacheStack.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=1.12.1.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
