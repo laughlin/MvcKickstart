@@ -12,6 +12,7 @@ using Google.GData.Client;
 using MvcKickstart.Areas.Admin.ViewModels.Widgets;
 using MvcKickstart.Areas.Admin.ViewModels.Widgets.GoogleAnalytics;
 using MvcKickstart.Infrastructure;
+using MvcKickstart.Infrastructure.Attributes;
 using MvcKickstart.Infrastructure.Extensions;
 using MvcKickstart.Models;
 using MvcKickstart.Services;
@@ -21,6 +22,7 @@ using Spruce;
 
 namespace MvcKickstart.Areas.Admin.Controllers
 {
+	[Restricted(RequireAdmin = true)]
 	[RouteArea("admin")]
 	public class WidgetsController : BaseController
 	{
