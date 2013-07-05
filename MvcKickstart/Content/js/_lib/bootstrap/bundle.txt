@@ -1,16 +1,4 @@
-﻿2.1.0/bootstrap-transition.js
-2.1.0/bootstrap-alert.js
-2.1.0/bootstrap-affix.js
-2.1.0/bootstrap-modal.js
-2.1.0/bootstrap-dropdown.js
-2.1.0/bootstrap-scrollspy.js
-2.1.0/bootstrap-tab.js
-2.1.0/bootstrap-button.js
-2.1.0/bootstrap-collapse.js
-2.1.0/bootstrap-carousel.js
-2.1.0/bootstrap-tooltip.js
-2.1.0/bootstrap-popover.js
-2.1.0/bootstrap-typeahead.js
+﻿*
 
 [references]
 ~/Content/js/_lib/jquery

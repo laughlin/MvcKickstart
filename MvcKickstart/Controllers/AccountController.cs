@@ -55,7 +55,11 @@ namespace MvcKickstart.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var user = Db.SingleOrDefault<User>(new { model.Username, Password = model.Password.ToSHAHash(), IsDeleted = false });
+				var user = Db.Query<User>("select top 1 * from [{0}] where (Username=@Username OR Email=@Username) and Password=@Password and IsDeleted=0".Fmt(Db.GetTableName<User>()), new
+					{
+						model.Username, 
+						Password = model.Password.ToSHAHash()
+					}).SingleOrDefault();
 				if (user != null)
 				{
 					_authenticationService.SetLoginCookie(user, model.RememberMe);
