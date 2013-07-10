@@ -5,12 +5,11 @@ namespace MvcKickstart.Infrastructure
 {
 	public class UserPrincipal : IPrincipal
 	{
-		private readonly User _user;
-		public User UserObject { get { return _user; } }
+		public User UserObject { get; private set; }
 
 		public UserPrincipal(User user, IIdentity identity)
 		{
-			_user = user;
+			UserObject = user;
 			Identity = identity;
 		}
 
@@ -27,7 +26,7 @@ namespace MvcKickstart.Infrastructure
 		{
 			get
 			{
-				return _user != null && _user.IsAdmin;
+				return UserObject != null && UserObject.IsAdmin;
 			}
 		}
 	}

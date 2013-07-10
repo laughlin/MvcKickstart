@@ -5,3 +5,7 @@
 }
 
 <h1>Welcome!</h1>
+
+<h3>Your login information:</h3>
+<p>Username: @Model.Username</p>
+<p>Forgot your password? You can retrieve it from the login page <a href="@Url.Absolute(Url.Account().Login())">@Url.Absolute(Url.Account().Login())</a></p>

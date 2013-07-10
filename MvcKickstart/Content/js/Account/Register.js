@@ -7,7 +7,7 @@
  $(function() {
 	 $("#Username").typeWatch({
 		wait:750,
-		catpureLength: 2,
+		captureLength: 0,
 		callback: function(value) {
 			$.post(Url.validateUsername, {
 				username: value

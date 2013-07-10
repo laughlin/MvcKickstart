@@ -12,6 +12,7 @@ namespace MvcKickstart.Tests.Controllers.Account
 {
 	public abstract class ControllerTestBase : TestBase
 	{
+		protected Mock<IUserService> UserService { get; set; }
 		protected Mock<IUserAuthenticationService> AuthenticationService { get; set; }
 		protected Mock<IMailController> MailController { get; set; }
 		protected AccountController Controller { get; set; }
@@ -32,10 +33,11 @@ namespace MvcKickstart.Tests.Controllers.Account
 			var emailResult = new EmailResult(new Mock<IMailInterceptor>().Object, new Mock<IMailSender>().Object, new MailMessage(), "", "", Encoding.Unicode, false);
 			MailController.Setup(x => x.ForgotPassword(It.IsAny<ViewModels.Mail.ForgotPassword>())).Returns(emailResult);
 			MailController.Setup(x => x.Welcome(It.IsAny<ViewModels.Mail.Welcome>())).Returns(emailResult);
+			UserService = new Mock<IUserService>();
 			AuthenticationService = new Mock<IUserAuthenticationService>();
 			AuthenticationService.Setup(x => x.ReservedUsernames).Returns(new[] { "admin" });
 
-			Controller = new AccountController(Db, Metrics, Cache, MailController.Object, AuthenticationService.Object);
+			Controller = new AccountController(Db, Metrics, Cache, MailController.Object, UserService.Object, AuthenticationService.Object);
 			ControllerUtilities.SetupControllerContext(Controller);
 		}
 	}

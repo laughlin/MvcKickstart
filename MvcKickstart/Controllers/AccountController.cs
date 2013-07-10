@@ -22,11 +22,13 @@ namespace MvcKickstart.Controllers
     public class AccountController : BaseController
     {
 		private readonly IMailController _mailController;
+	    private readonly IUserService _userService;
 	    private readonly IUserAuthenticationService _authenticationService;
 
-		public AccountController(IDbConnection db, IMetricTracker metrics, ICacheClient cache, IMailController mailController, IUserAuthenticationService authenticationService) : base (db, metrics, cache)
+		public AccountController(IDbConnection db, IMetricTracker metrics, ICacheClient cache, IMailController mailController, IUserService userService, IUserAuthenticationService authenticationService) : base (db, metrics, cache)
 		{
 			_mailController = mailController;
+			_userService = userService;
 			_authenticationService = authenticationService;
 		}
 
@@ -140,8 +142,7 @@ namespace MvcKickstart.Controllers
 				var newUser = Mapper.Map<User>(model);
 				newUser.Password = model.Password.ToSHAHash();
 
-				Db.Save(newUser);
-				Cache.Trigger(TriggerFor.Id<User>(newUser.Id));
+				_userService.Save(newUser);
 				Metrics.Increment(Metric.Users_Register);
 
 				_mailController.Welcome(new ViewModels.Mail.Welcome
@@ -150,7 +151,12 @@ namespace MvcKickstart.Controllers
 						To = newUser.Email
 					}).Deliver();
 
-				return View("RegisterConfirmation", model);			}
+				// Auto login the user
+				_authenticationService.SetLoginCookie(newUser, false);
+
+				NotifySuccess("Your account has been created and you have been logged in. Enjoy!");
+				return Redirect(Url.Home().Index());
+			}
 
 			// If we got this far, something failed, redisplay form
 			model.Password = null; //clear the password so they have to re-enter it
@@ -161,6 +167,9 @@ namespace MvcKickstart.Controllers
 		[DonutOutputCache(VaryByParam = "username")]
 		public JsonResult ValidateUsername(string username)
 		{
+			if (string.IsNullOrWhiteSpace(username))
+				return Json(false);
+
 			if (_authenticationService.ReservedUsernames.Any(x => username.Equals(x, StringComparison.OrdinalIgnoreCase)))
 				return Json(false);
 

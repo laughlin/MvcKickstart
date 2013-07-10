@@ -7,35 +7,25 @@ using Spruce;
 
 namespace MvcKickstart.Services
 {
-	public interface IUserService
+	public interface IUserService : IServiceBase<User>
 	{
-		User GetById(int id);
 		User GetByUsername(string username);
 	}
 
-	public class UserService : IUserService
+	public class UserService : ServiceBase<User>, IUserService
 	{
-		protected IDbConnection Db { get; set; }
-		protected ICacheClient Cache { get; set; }
-		public UserService(IDbConnection db, ICacheClient cache)
+		public UserService(IDbConnection db, ICacheClient cache) : base(db, cache)
 		{
-			Db = db;
-			Cache = cache;
 		}
 
-		public User GetById(int id)
+		protected override string GetIdCacheKey(object id)
 		{
-			return Cache.GetOrCache(CacheKeys.User.ById(id), context =>
-				{
-					var item = Db.GetByIdOrDefault<User>(id);
-					if (item != null)
-						context.InvalidateOn(TriggerFrom.Id<User>(item.Id));
-					return item;
-				});
+			return CacheKeys.Users.ById((int)id);
 		}
+
 		public User GetByUsername(string username)
 		{
-			return Cache.GetOrCache(CacheKeys.User.ByUsername(username), context =>
+			return Cache.GetOrCache(CacheKeys.Users.ByUsername(username), context =>
 				{
 					var item = Db.SingleOrDefault<User>(new { username });
 					if (item != null)

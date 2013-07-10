@@ -4,7 +4,7 @@
 	{
 		public const string SiteSettings = "SiteSettings";
 
-		public static class User
+		public static class Users
 		{
 			public static string ById(int userId)
 			{

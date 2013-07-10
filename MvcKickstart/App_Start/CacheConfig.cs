@@ -20,8 +20,8 @@ namespace MvcKickstart
 				var userItem = item as User;
 				var keys = new List<string>
 					{
-						CacheKeys.User.ById(userItem.Id), 
-						CacheKeys.User.ByUsername(userItem.Username)
+						CacheKeys.Users.ById(userItem.Id), 
+						CacheKeys.Users.ByUsername(userItem.Username)
 					};
 				return keys;
 			});
