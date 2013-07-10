@@ -10,12 +10,9 @@
 	Register to get started!
 }
 
-<header class="form-header">
-	Register to get started!
-</header>
+<h2>Register to get started!</h2>
 
-@using(Html.BeginForm())
-{
+@using(Html.BeginForm()) {
 	@Html.ValidationSummary(false)
 	<div class="form-horizontal">
 		@Html.HiddenFor(x => x.ReturnUrl)

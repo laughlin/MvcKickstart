@@ -8,27 +8,34 @@
 }
 
 <h2>Login</h2>
-<div class="well form-horizontal">
-	@Html.DecodedValidationSummary(false)
 	
-	@using(Html.BeginForm())
-	{
+@using(Html.BeginForm()) {
+	@Html.DecodedValidationSummary(false)
+	<div class="form-horizontal">
 		<fieldset>
 			@Html.HiddenFor(x => x.ReturnUrl)
 			<div class="control-group">
-				@Html.LabelFor(x => x.Username)
-				@Html.TextBoxWithMaxLengthFor(x => x.Username, new {tabindex = 1})
-				@Html.ValidationMessageFor(x => x.Username)
+				@Html.LabelFor(x => x.Username, new { @class = "control-label" })
+				<div class="controls">
+					@Html.TextBoxWithMaxLengthFor(x => x.Username, new {tabindex = 1})
+					@Html.ValidationMessageFor(x => x.Username)
+				</div>
 			</div>
 			<div class="control-group">
-				@Html.LabelFor(x => x.Password)
-				@Html.PasswordWithMaxLengthFor(x => x.Password, new {tabindex = 1})
-				@Html.ValidationMessageFor(x => x.Password)
+				@Html.LabelFor(x => x.Password, new { @class = "control-label" })
+				<div class="controls">
+					@Html.PasswordWithMaxLengthFor(x => x.Password, new {tabindex = 1})
+					@Html.ValidationMessageFor(x => x.Password)
+				</div>
 			</div>
 			<div class="control-group">
-				<a href="@Url.Account().ForgotPassword()">Forgot Your Password?</a>
+				<div class="controls">
+					<a href="@Url.Account().ForgotPassword()">Forgot Your Password?</a>
+				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Login</button>
+			</div>
 		</fieldset>
-	}
-</div>
+	</div>
+}
