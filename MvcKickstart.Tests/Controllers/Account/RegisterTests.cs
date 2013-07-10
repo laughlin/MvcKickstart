@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using FizzWare.NBuilder.Generators;
+using MvcKickstart.Infrastructure;
+using MvcKickstart.Infrastructure.Extensions;
 using Moq;
 using MvcKickstart.Tests.Utilities;
 using MvcKickstart.ViewModels.Account;
@@ -26,20 +28,20 @@ namespace MvcKickstart.Tests.Controllers.Account
 		}
 
 		[Test]
-		public void GivenValidModelState_ReturnsConfirmation()
+		public void GivenValidModelState_ReturnsRedirect()
 		{
 			var model = new Register
 			{
 				Username = GetRandom.String(20),
 				Email = GetRandom.Email(),
-				Password = "password1"
+				Password = "password1",
+				ReturnUrl = "http://google.com"
 			};
 
-			var result = Controller.Register(model) as ViewResult;
+			var result = Controller.Register(model) as RedirectResult;
 			result.Should().Not.Be.Null();
-			result.ViewName.Should().Equal("RegisterConfirmation");
-			var viewModel = result.Model as Register;
-			viewModel.Should().Not.Be.Null();
+			Controller.TempData[ViewDataConstants.Notification].Should().Not.Be.Null();
+			result.Url.Should().Equal(Controller.Url.Home().Index());
 		}
 
 		[Test]
@@ -118,40 +120,6 @@ namespace MvcKickstart.Tests.Controllers.Account
 			result.ViewName.Should().Equal("");
 		}
 
-		[Test]
-		public void GivenLocalReturnUrl_ReturnsConfirmationWithReturnUrl()
-		{
-			var model = new Register
-			{
-				Username = GetRandom.String(20),
-				Email = GetRandom.Email(),
-				Password = "password1",
-				ReturnUrl = "/home/index"
-			};
-
-			var result = Controller.Register(model) as ViewResult;
-			result.Should().Not.Be.Null();
-			result.ViewName.Should().Equal("RegisterConfirmation");
-			var viewModel = result.Model as Register;
-			viewModel.Should().Not.Be.Null();
-			viewModel.ReturnUrl.Should().Equal(model.ReturnUrl);
-		}
-
-		[Test]
-		public void GivenExternalReturnUrl_ReturnsConfirmation()
-		{
-			var model = new Register
-			{
-				Username = GetRandom.String(20),
-				Email = GetRandom.Email(),
-				Password = "password1",
-				ReturnUrl = "http://google.com"
-			};
-
-			var result = Controller.Register(model) as ViewResult;
-			result.Should().Not.Be.Null();
-			result.ViewName.Should().Equal("RegisterConfirmation");
-		}
 		[Test]
 		public void GivenValidPostRequest_SendsEmail()
 		{
