@@ -365,7 +365,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\css\_lib\" />
     <Folder Include="Infrastructure\Data\ScriptedObjects\" />
   </ItemGroup>
