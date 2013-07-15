@@ -3,9 +3,9 @@
 set /p projectName="New Project Name: " %=%
 
 @echo Renaming 'MvcKickstart' to '%projectName%'
-cd ../MvcKickstart
+cd ../MvcKickstart/MvcKickstart
 call:renameFiles
-cd ../MvcKickstart.Tests
+cd ../MvcKickstart/MvcKickstart.Tests
 call:renameFiles
 
 cd ../
