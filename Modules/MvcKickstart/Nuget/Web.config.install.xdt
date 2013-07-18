@@ -1,0 +1,53 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+	<configSections>
+		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" xdt:Transform="Insert" />
+	</configSections>
+	<appSettings xdt:Transform="Insert">
+		<add key="Metrics:Host" value="" />
+		<add key="Metrics:Port" value="8125" />
+		<add key="Metrics:Prefix" value="$rootnamespace$.Dev." />
+	</appSettings>
+	<system.web>
+		<pages>
+			<namespaces>
+				<add namespace="MvcKickstart.Infrastructure" xdt:Transform="Insert" />
+				<add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Transform="Insert" />
+			</namespaces>
+		</pages>
+		<httpModules>
+			<remove name="UrlRoutingModule-4.0" xdt:Transform="Insert" />
+			<remove name="Log4NetContextInformationModule" xdt:Transform="Insert" />
+			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Transform="Insert" />
+			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Transform="Insert" />
+		</httpModules>
+	</system.web>
+	<system.webServer>
+		<modules>
+			<remove name="UrlRoutingModule-4.0" xdt:Transform="Insert" />
+			<remove name="Log4NetContextInformationModule" xdt:Transform="Insert" />
+			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Transform="Insert" />
+			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Transform="Insert" />
+		</modules>
+	</system.webServer>
+	<log4net xdt:Transform="Insert">
+		<appender name="MetricTrackingAppender_Fatal" type="MvcKickstart.Infrastructure.MetricAppender,MvcKickstart">
+			<increment value="Errors.Fatal" />
+			<filter type="log4net.Filter.LevelRangeFilter">
+				<param name="LevelMin" value="ERROR" />
+				<param name="LevelMax" value="FATAL" />
+			</filter>
+		</appender>
+		<appender name="MetricTrackingAppender_Warn" type="MvcKickstart.Infrastructure.MetricAppender,MvcKickstart">
+			<increment value="Errors.Warn" />
+			<filter type="log4net.Filter.LevelRangeFilter">
+				<param name="LevelMin" value="WARN" />
+				<param name="LevelMax" value="WARN" />
+			</filter>
+		</appender>
+		<root>
+			<appender-ref ref="MetricTrackingAppender_Fatal" />
+			<appender-ref ref="MetricTrackingAppender_Warn" />
+		</root>
+	</log4net>
+</configuration>

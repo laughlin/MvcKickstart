@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace MvcKickstart.Infrastructure.Extensions
@@ -38,28 +34,6 @@ namespace MvcKickstart.Infrastructure.Extensions
 			public string AuthResponse()
 			{
 				return Url.RouteUrl("Admin_Home_AuthResponse");
-			}
-		}
-
-		#endregion
-
-		#region Widgets
-
-		public WidgetsUrls Widgets()
-		{
-			return new WidgetsUrls(Url);
-		}
-		public class WidgetsUrls
-		{
-			public UrlHelper Url { get; set; }
-			public WidgetsUrls(UrlHelper url)
-			{
-				Url = url;
-			}
-
-			public string Analytics()
-			{
-				return Url.RouteUrl("Admin_Widgets_Analytics");
 			}
 		}
 

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvcKickstart.RestSharp</id>
+		<version>1.0.0</version>
+		<authors>Jim Geurts</authors>
+		<projectUrl>https://github.com/jgeurts/MvcKickstart</projectUrl>
+		<licenseUrl>https://raw.github.com/jgeurts/MvcKickstart/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvcKickstart module used to easily plug in RestSharp.</description>
+		<summary>MvcKickstart module used to easily plug in RestSharp.</summary>
+		<language>en-US</language>
+		<tags>asp.net mvc kickstart mvckickstart restsharp</tags>
+		<dependencies>
+			<dependency id="RestSharp" version="104.1" />
+			<dependency id="ServiceStack.Text" version="3.9.55" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin\Release\MvcKickstart.RestSharp.dll" target="lib\net45" />
+		<file src="bin\Release\MvcKickstart.RestSharp.pdb" target="lib\net45" />
+	</files>
+</package>

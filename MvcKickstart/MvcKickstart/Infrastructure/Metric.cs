@@ -13,10 +13,6 @@ namespace MvcKickstart.Infrastructure
 	public enum Metric
 	{
 		#region Users
-		[Display(Name = "AuthenticatedUserRequest", GroupName = "Users")]
-		Users_AuthenticatedUserRequest,
-		[Display(Name = "AnonymousUserRequest", GroupName = "Users")]
-		Users_AnonymousUserRequest,
 
 		[Display(Name = "SendPasswordResetEmail", GroupName = "Users")]
 		Users_SendPasswordResetEmail,
@@ -40,21 +36,8 @@ namespace MvcKickstart.Infrastructure
 		Error_Fatal,
 		[Display(Name = "Warn", GroupName = "Errors")]
 		Error_Warn,
-		[Display(Name = "Unhandled", GroupName = "Errors")]
-		Error_Unhandled,
 		[Display(Name = "404", GroupName = "Errors")]
 		Error_404,
-		#endregion
-
-		#region Profiling
-
-		[Display(Name = "RenderTime", GroupName = "Profiling")]
-		[TimingMetric]
-		Profiling_RenderTime,
-		[Display(Name = "ResolveRoute", GroupName = "Profiling")]
-		[TimingMetric]
-		Profiling_ResolveRoute,
-
 		#endregion
 	}
 }

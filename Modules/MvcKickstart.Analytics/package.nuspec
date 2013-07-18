@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvcKickstart.Analytics</id>
+		<version>1.0.0</version>
+		<authors>Jim Geurts</authors>
+		<projectUrl>https://github.com/jgeurts/MvcKickstart</projectUrl>
+		<licenseUrl>https://raw.github.com/jgeurts/MvcKickstart/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvcKickstart module used to add an analytics widget to the admin dashboard.</description>
+		<summary>MvcKickstart module used to add an analytics widget to the admin dashboard.</summary>
+		<language>en-US</language>
+		<tags>asp.net mvc kickstart mvckickstart analytics google</tags>
+		<dependencies>
+			<dependency id="MvcKickstart" version="1.0" />
+			<dependency id="MvcKickstart.RestSharp" version="1.0" />
+			<dependency id="Google.GData.Analytics" version="2.2" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="Nuget\**\*.*" target="content" />
+		<file src="bin\Release\MvcKickstart.RestSharp.dll" target="lib\net45" />
+		<file src="bin\Release\MvcKickstart.RestSharp.pdb" target="lib\net45" />
+	</files>
+</package>

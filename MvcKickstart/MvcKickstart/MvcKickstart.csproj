@@ -218,72 +218,34 @@
     <Compile Include="App_Start\LoggingConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\WidgetsController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\Index.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Widgets\Analytics.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Widgets\AnalyticsConfig.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Widgets\AnalyticsAuthorize.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Widgets\GoogleAnalytics\Account.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Widgets\GoogleAnalytics\Link.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Widgets\GoogleAnalytics\Profile.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Widgets\GoogleAnalytics\ListResponse.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MailController.cs" />
-    <Compile Include="Infrastructure\Attributes\HandlesErrorAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\PasswordStrengthAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\ProfileActionAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\GetOrPostAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\GaugeMetricAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\RestrictedAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\TimingMetricAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\TrackAuthenticationMetricsAttribute.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\CacheKeys.cs" />
     <Compile Include="Infrastructure\CassetteConfiguration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\RestSharpJsonSerializer.cs" />
     <Compile Include="Infrastructure\Data\DataMigrator.cs" />
     <Compile Include="Infrastructure\Data\Migrations\InitializeDbMigration.cs" />
     <Compile Include="Infrastructure\Data\SchemaBuilder.cs" />
     <Compile Include="Infrastructure\Data\Schema\GlobalSection.cs" />
     <Compile Include="Infrastructure\Data\Schema\UserSection.cs" />
-    <Compile Include="Infrastructure\ExpressionHelper.cs" />
-    <Compile Include="Infrastructure\Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
-    <Compile Include="Infrastructure\Extensions\ModelStateExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\UrlHelperAdminUrls.cs" />
     <Compile Include="Infrastructure\Extensions\EnumExtensions.cs" />
-    <Compile Include="Infrastructure\Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\UrlHelperExtensions.cs" />
-    <Compile Include="Infrastructure\IMetricTracker.cs" />
-    <Compile Include="Infrastructure\IocRegistry.cs" />
     <Compile Include="Infrastructure\MainNav.cs" />
-    <Compile Include="Infrastructure\MemoryCacheClient.cs" />
     <Compile Include="Infrastructure\Metric.cs" />
-    <Compile Include="Infrastructure\MetricAppender.cs" />
-    <Compile Include="Infrastructure\MetricStopwatch.cs" />
-    <Compile Include="Infrastructure\MetricTracker.cs" />
-    <Compile Include="Infrastructure\Modules\Log4NetContextInformationModule.cs" />
-    <Compile Include="Infrastructure\Modules\ProfiledUrlRoutingModule.cs" />
-    <Compile Include="Infrastructure\Notification.cs" />
-    <Compile Include="Infrastructure\NotificationType.cs" />
-    <Compile Include="Infrastructure\ServiceStackJsonResult.cs" />
-    <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
-    <Compile Include="Infrastructure\StructureMapSignalrDependencyResolver.cs" />
     <Compile Include="Infrastructure\UserPrincipal.cs" />
-    <Compile Include="Infrastructure\VaryByCustom.cs" />
-    <Compile Include="Infrastructure\ViewDataConstants.cs" />
-    <Compile Include="Models\SiteSettings.cs" />
     <Compile Include="Models\Users\PasswordRetrieval.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServiceBase.cs" />
-    <Compile Include="Services\SiteSettingsService.cs" />
     <Compile Include="Services\UserAuthenticationService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\Account\ResetPassword.cs" />
@@ -296,7 +258,6 @@
     <Compile Include="ViewModels\Mail\ForgotPassword.cs" />
     <Compile Include="ViewModels\Mail\TrackClick.cs" />
     <Compile Include="ViewModels\Mail\Welcome.cs" />
-    <Compile Include="ViewModels\Shared\Error.cs" />
     <Compile Include="ViewModels\Shared\RedirectError.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -306,7 +267,6 @@
     <Content Include="Content\images\Blank.gif" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\js\Account\Register.js" />
-    <Content Include="Content\js\Admin\Home\Index.js" />
     <Content Include="Content\js\Shared\angular.js" />
     <Content Include="Content\js\Shared\bundle.txt" />
     <Content Include="Content\js\Shared\global.js" />
@@ -332,8 +292,6 @@
     <Content Include="Content\js\_lib\foolproof\mvcfoolproof.unobtrusive.js" />
     <Content Include="Content\js\_lib\foolproof\MvcFoolproofJQueryValidation.js" />
     <Content Include="Content\js\_lib\foolproof\MvcFoolproofValidation.js" />
-    <Content Include="Content\js\_lib\jquery.flot\bundle.txt" />
-    <Content Include="Content\js\_lib\jquery.flot\jquery.flot.js" />
     <Content Include="Content\js\_lib\jquery.form\bundle.txt" />
     <Content Include="Content\js\_lib\jquery.form\jquery.form.js" />
     <Content Include="Content\js\_lib\jquery.maskedinput\bundle.txt" />
@@ -445,24 +403,6 @@
     <Content Include="Views\Mail\Welcome.txt.cshtml" />
     <Content Include="Views\Mail\_Layout.html.cshtml" />
     <Content Include="Views\Mail\_Layout.txt.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Widgets\_ViewStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Widgets\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Widgets\Analytics.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\less\Admin\Home\Index.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Widgets\AnalyticsConfig.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Widgets\AnalyticsAuthorize.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\less\_lib\bootstrap\accordion.less" />

@@ -36,20 +36,6 @@ namespace MvcKickstart.Areas.Admin.Controllers
 			return View(model);
 		}
 
-		[GET("authResponse", RouteName = "Admin_Home_AuthResponse")]
-		[Restricted(RequireAdmin = true)]
-		public ActionResult AuthResponse(string token)
-		{
-			var sessionToken = AuthSubUtil.exchangeForSessionToken(token, null);
-
-			var settings = _siteSettingsService.GetSettings();
-			settings.AnalyticsToken = sessionToken;
-			Db.Save(settings);
-			Cache.Trigger(TriggerFor.Id<SiteSettings>(settings.Id));
-
-			return RedirectToAction("Index");
-		}
-
 		#region Partials
 
 		[Route("__partial__Menu")]
