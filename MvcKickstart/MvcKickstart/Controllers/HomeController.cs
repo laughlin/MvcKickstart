@@ -4,14 +4,14 @@ using System.Web.Mvc;
 using System.Xml.Linq;
 using AttributeRouting.Web.Mvc;
 using CacheStack.DonutCaching;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Attributes;
-using MvcKickstart.Infrastructure.Extensions;
-using MvcKickstart.ViewModels.Home;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Attributes;
+using KickstartTemplate.Infrastructure.Extensions;
+using KickstartTemplate.ViewModels.Home;
 using ServiceStack.CacheAccess;
 using StackExchange.Profiling;
 
-namespace MvcKickstart.Controllers
+namespace KickstartTemplate.Controllers
 {
 	public class HomeController : BaseController
 	{

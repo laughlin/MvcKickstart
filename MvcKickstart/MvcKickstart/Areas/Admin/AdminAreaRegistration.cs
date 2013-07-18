@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MvcKickstart.Areas.Admin
+namespace KickstartTemplate.Areas.Admin
 {
 	public class AdminAreaRegistration : AreaRegistration
 	{

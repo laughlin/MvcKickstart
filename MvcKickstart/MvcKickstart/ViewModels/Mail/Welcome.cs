@@ -1,4 +1,4 @@
-﻿namespace MvcKickstart.ViewModels.Mail
+﻿namespace KickstartTemplate.ViewModels.Mail
 {
 	public class Welcome : EmailBase
 	{

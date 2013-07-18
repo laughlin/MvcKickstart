@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace MvcKickstart.Infrastructure.Extensions
+namespace KickstartTemplate.Infrastructure.Extensions
 {
 	public static class EnumExtensions
 	{
@@ -18,7 +18,7 @@ namespace MvcKickstart.Infrastructure.Extensions
 			if (MetricTrackingNames.TryGetValue(metric, out value))
 				return value;
 
-			value = ConfigurationManager.AppSettings["Metrics:Prefix"] ?? "MvcKickstart.";
+			value = ConfigurationManager.AppSettings["Metrics:Prefix"] ?? "KickstartTemplate.";
 			var enumType = metric.GetType();
 			var info = enumType.GetField(metric.ToString());
 			if (info == null)

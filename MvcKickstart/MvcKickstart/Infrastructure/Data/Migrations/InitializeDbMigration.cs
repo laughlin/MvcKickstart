@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data;
-using MvcKickstart.Infrastructure.Extensions;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Infrastructure.Extensions;
+using KickstartTemplate.Models.Users;
 using Spruce;
 using Spruce.Migrations;
 
-namespace MvcKickstart.Infrastructure.Data.Migrations
+namespace KickstartTemplate.Infrastructure.Data.Migrations
 {
 	public class InitializeDbMigration : IMigration
 	{

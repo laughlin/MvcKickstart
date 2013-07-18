@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
-using MvcKickstart.ViewModels.Mail;
+using KickstartTemplate.ViewModels.Mail;
 
-namespace MvcKickstart.Infrastructure.Extensions
+namespace KickstartTemplate.Infrastructure.Extensions
 {
 	public static class UrlHelperExtensions
 	{

@@ -1,8 +1,8 @@
 ﻿using System.Configuration;
 using ActionMailer.Net.Mvc;
-using MvcKickstart.ViewModels.Mail;
+using KickstartTemplate.ViewModels.Mail;
 
-namespace MvcKickstart.Controllers
+namespace KickstartTemplate.Controllers
 {
 	public interface IMailController
 	{
@@ -16,14 +16,14 @@ namespace MvcKickstart.Controllers
 		{
 			SetToAndFromValues(model);
 
-			Subject = "Welcome to MvcKickstart";
+			Subject = "Welcome to KickstartTemplate";
 			return Email("Welcome", model);
 		}
 		public EmailResult ForgotPassword(ForgotPassword model)
 		{
 			SetToAndFromValues(model);
 
-			Subject = "[MvcKickstart] Forgot password";
+			Subject = "[KickstartTemplate] Forgot password";
 			return Email("ForgotPassword", model);
 		}
 

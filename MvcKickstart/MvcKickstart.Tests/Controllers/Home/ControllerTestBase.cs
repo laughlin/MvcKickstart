@@ -1,8 +1,8 @@
-﻿using MvcKickstart.Controllers;
-using MvcKickstart.Tests.Utilities;
+﻿using KickstartTemplate.Controllers;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 
-namespace MvcKickstart.Tests.Controllers.Home
+namespace KickstartTemplate.Tests.Controllers.Home
 {
 	public abstract class ControllerTestBase : TestBase
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using MvcKickstart.Infrastructure.Attributes;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Infrastructure.Attributes;
+using KickstartTemplate.Models.Users;
 
-namespace MvcKickstart.ViewModels.Account
+namespace KickstartTemplate.ViewModels.Account
 {
 	public class ResetPassword
 	{

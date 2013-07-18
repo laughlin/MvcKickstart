@@ -1,4 +1,4 @@
-﻿namespace MvcKickstart.ViewModels.Shared
+﻿namespace KickstartTemplate.ViewModels.Shared
 {
 	public class RedirectError : Error
 	{

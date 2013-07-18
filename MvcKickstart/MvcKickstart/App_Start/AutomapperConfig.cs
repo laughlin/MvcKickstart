@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Models.Users;
 
-namespace MvcKickstart
+namespace KickstartTemplate
 {
 	public class AutomapperConfig
 	{

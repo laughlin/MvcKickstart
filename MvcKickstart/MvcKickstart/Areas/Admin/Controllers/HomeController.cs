@@ -4,16 +4,16 @@ using AttributeRouting;
 using AttributeRouting.Web.Mvc;
 using CacheStack;
 using Google.GData.Client;
-using MvcKickstart.Areas.Admin.ViewModels.Home;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Attributes;
-using MvcKickstart.Infrastructure.Extensions;
-using MvcKickstart.Models;
-using MvcKickstart.Services;
+using KickstartTemplate.Areas.Admin.ViewModels.Home;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Attributes;
+using KickstartTemplate.Infrastructure.Extensions;
+using KickstartTemplate.Models;
+using KickstartTemplate.Services;
 using ServiceStack.CacheAccess;
 using Spruce;
 
-namespace MvcKickstart.Areas.Admin.Controllers
+namespace KickstartTemplate.Areas.Admin.Controllers
 {
 	[RouteArea("admin")]
 	public class HomeController : BaseController

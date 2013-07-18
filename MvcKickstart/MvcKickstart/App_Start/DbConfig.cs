@@ -2,12 +2,12 @@
 using System.Data.SqlClient;
 using System.Threading;
 using System.Web;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Data;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Data;
 using Spruce;
 using StructureMap;
 
-namespace MvcKickstart
+namespace KickstartTemplate
 {
 	public class DbConfig
 	{

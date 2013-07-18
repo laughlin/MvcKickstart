@@ -2,11 +2,11 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using MvcKickstart.Infrastructure;
+using KickstartTemplate.Infrastructure;
 using StackExchange.Profiling;
 using StructureMap;
 
-namespace MvcKickstart
+namespace KickstartTemplate
 {
 	public class MvcApplication : HttpApplication
 	{

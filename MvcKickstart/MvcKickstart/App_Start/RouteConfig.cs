@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using AttributeRouting.Web.Mvc;
 
-namespace MvcKickstart
+namespace KickstartTemplate
 {
 	public class RouteConfig
 	{

@@ -3,12 +3,12 @@ using System.Text;
 using ActionMailer.Net;
 using ActionMailer.Net.Mvc;
 using Moq;
-using MvcKickstart.Controllers;
-using MvcKickstart.Models.Users;
-using MvcKickstart.Services;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Controllers;
+using KickstartTemplate.Models.Users;
+using KickstartTemplate.Services;
+using KickstartTemplate.Tests.Utilities;
 
-namespace MvcKickstart.Tests.Controllers.Account
+namespace KickstartTemplate.Tests.Controllers.Account
 {
 	public abstract class ControllerTestBase : TestBase
 	{

@@ -1,15 +1,15 @@
 ﻿using System.Web.Mvc;
-using MvcKickstart.Infrastructure.Extensions;
+using KickstartTemplate.Infrastructure.Extensions;
 using FizzWare.NBuilder.Generators;
 using Moq;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Models.Users;
-using MvcKickstart.Tests.Utilities;
-using MvcKickstart.ViewModels.Account;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Models.Users;
+using KickstartTemplate.Tests.Utilities;
+using KickstartTemplate.ViewModels.Account;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Account
+namespace KickstartTemplate.Tests.Controllers.Account
 {
 	public class LoginTests : ControllerTestBase
 	{

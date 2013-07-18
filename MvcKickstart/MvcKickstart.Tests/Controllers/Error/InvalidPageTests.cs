@@ -4,13 +4,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Moq;
-using MvcKickstart.Controllers;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Controllers;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Error
+namespace KickstartTemplate.Tests.Controllers.Error
 {
 	public class InvalidPageTests : TestBase
 	{

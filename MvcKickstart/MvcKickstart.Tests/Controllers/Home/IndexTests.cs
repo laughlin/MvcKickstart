@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
-using MvcKickstart.ViewModels.Home;
+using KickstartTemplate.ViewModels.Home;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Home
+namespace KickstartTemplate.Tests.Controllers.Home
 {
 	public class IndexTests : ControllerTestBase
 	{

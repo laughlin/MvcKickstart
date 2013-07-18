@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Routing;
 
-namespace MvcKickstart.Tests.Routing
+namespace KickstartTemplate.Tests.Routing
 {
 	public abstract class RouteTestBase : IDisposable
 	{

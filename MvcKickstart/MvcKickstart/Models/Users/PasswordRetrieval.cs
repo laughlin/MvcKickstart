@@ -1,7 +1,7 @@
 ﻿using System;
 using Spruce.Schema.Attributes;
 
-namespace MvcKickstart.Models.Users
+namespace KickstartTemplate.Models.Users
 {
 	public class PasswordRetrieval
 	{

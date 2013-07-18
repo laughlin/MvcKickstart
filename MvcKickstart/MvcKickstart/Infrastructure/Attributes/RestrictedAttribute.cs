@@ -8,16 +8,16 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Dapper;
-using MvcKickstart.Infrastructure.Extensions;
-using MvcKickstart.Models.Users;
-using MvcKickstart.Services;
-using MvcKickstart.ViewModels.Shared;
+using KickstartTemplate.Infrastructure.Extensions;
+using KickstartTemplate.Models.Users;
+using KickstartTemplate.Services;
+using KickstartTemplate.ViewModels.Shared;
 using ServiceStack.CacheAccess;
 using ServiceStack.Text;
 using Spruce;
 using StructureMap;
 
-namespace MvcKickstart.Infrastructure.Attributes
+namespace KickstartTemplate.Infrastructure.Attributes
 {
 	public class RestrictedAttribute : AuthorizeAttribute
 	{

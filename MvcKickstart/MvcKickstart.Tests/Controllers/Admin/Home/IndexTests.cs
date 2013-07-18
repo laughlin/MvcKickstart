@@ -1,11 +1,11 @@
 ﻿using System.Data;
 using System.Web.Mvc;
-using MvcKickstart.Areas.Admin.ViewModels.Home;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Areas.Admin.ViewModels.Home;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Admin.Home
+namespace KickstartTemplate.Tests.Controllers.Admin.Home
 {
 	public class IndexTests : ControllerTestBase
 	{

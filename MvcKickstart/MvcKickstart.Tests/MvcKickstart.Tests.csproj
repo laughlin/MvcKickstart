@@ -7,8 +7,8 @@
     <ProjectGuid>{0185B6AD-63B2-4CCD-84C5-7ACAC4FC32AA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcKickstart.Tests</RootNamespace>
-    <AssemblyName>MvcKickstart.Tests</AssemblyName>
+    <RootNamespace>KickstartTemplate.Tests</RootNamespace>
+    <AssemblyName>KickstartTemplate.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -198,9 +198,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcKickstart\MvcKickstart.csproj">
+    <ProjectReference Include="..\KickstartTemplate\KickstartTemplate.csproj">
       <Project>{29fd2c9a-a11f-4495-9799-e50866c89878}</Project>
-      <Name>MvcKickstart</Name>
+      <Name>KickstartTemplate</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

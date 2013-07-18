@@ -7,17 +7,17 @@ using AutoMapper;
 using CacheStack;
 using CacheStack.DonutCaching;
 using Dapper;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Attributes;
-using MvcKickstart.Infrastructure.Extensions;
-using MvcKickstart.Models.Users;
-using MvcKickstart.Services;
-using MvcKickstart.ViewModels.Account;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Attributes;
+using KickstartTemplate.Infrastructure.Extensions;
+using KickstartTemplate.Models.Users;
+using KickstartTemplate.Services;
+using KickstartTemplate.ViewModels.Account;
 using ServiceStack.CacheAccess;
 using ServiceStack.Text;
 using Spruce;
 
-namespace MvcKickstart.Controllers
+namespace KickstartTemplate.Controllers
 {
     public class AccountController : BaseController
     {

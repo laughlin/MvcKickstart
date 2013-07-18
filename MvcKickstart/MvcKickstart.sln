@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcKickstart", "MvcKickstart\MvcKickstart.csproj", "{29FD2C9A-A11F-4495-9799-E50866C89878}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickstartTemplate", "KickstartTemplate\KickstartTemplate.csproj", "{29FD2C9A-A11F-4495-9799-E50866C89878}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5A3A9E3A-5C7B-4487-B14E-1DC749FEA553}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5A3A9E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcKickstart.Tests", "MvcKickstart.Tests\MvcKickstart.Tests.csproj", "{0185B6AD-63B2-4CCD-84C5-7ACAC4FC32AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickstartTemplate.Tests", "KickstartTemplate.Tests\KickstartTemplate.Tests.csproj", "{0185B6AD-63B2-4CCD-84C5-7ACAC4FC32AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

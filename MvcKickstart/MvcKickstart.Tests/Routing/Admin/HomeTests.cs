@@ -1,8 +1,8 @@
 ﻿using MvcContrib.TestHelper;
-using MvcKickstart.Areas.Admin.Controllers;
+using KickstartTemplate.Areas.Admin.Controllers;
 using NUnit.Framework;
 
-namespace MvcKickstart.Tests.Routing.Admin
+namespace KickstartTemplate.Tests.Routing.Admin
 {
 	public class HomeTests : RouteTestBase
 	{

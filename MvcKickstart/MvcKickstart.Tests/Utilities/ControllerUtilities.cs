@@ -8,12 +8,12 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using Moq;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Attributes;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Attributes;
+using KickstartTemplate.Models.Users;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Utilities
+namespace KickstartTemplate.Tests.Utilities
 {
 	public static class ControllerUtilities
 	{

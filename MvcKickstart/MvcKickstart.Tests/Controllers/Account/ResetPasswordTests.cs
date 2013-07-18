@@ -4,17 +4,17 @@ using System.Web.Mvc;
 using Dapper;
 using FizzWare.NBuilder.Generators;
 using Moq;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Extensions;
-using MvcKickstart.Models.Users;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Extensions;
+using KickstartTemplate.Models.Users;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 using ServiceStack.Text;
 using Should.Fluent;
-using MvcKickstart.ViewModels.Account;
+using KickstartTemplate.ViewModels.Account;
 using Spruce;
 
-namespace MvcKickstart.Tests.Controllers.Account
+namespace KickstartTemplate.Tests.Controllers.Account
 {
 	public class ResetPasswordTests : ControllerTestBase
 	{

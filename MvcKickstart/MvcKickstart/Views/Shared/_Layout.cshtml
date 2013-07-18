@@ -15,9 +15,9 @@
 		@if (IsSectionDefined("Title"))
 		{
 			@RenderSection("Title", false)
-			<text> :: MvcKickstart</text>
+			<text> :: KickstartTemplate</text>
 		} else {
-			<text>MvcKickstart</text>
+			<text>KickstartTemplate</text>
 		}
 	</title>
 	@RenderSection("Meta", false)
@@ -37,7 +37,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="@Url.Home().Index()">MvcKickstart</a>
+				<a class="brand" href="@Url.Home().Index()">KickstartTemplate</a>
 				@if (IsSectionDefined("Nav"))
 				{
 					@RenderSection("Nav")

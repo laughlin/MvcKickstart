@@ -1,4 +1,4 @@
-﻿namespace MvcKickstart.ViewModels.Home
+﻿namespace KickstartTemplate.ViewModels.Home
 {
 	public class Index
 	{

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MvcKickstart.Infrastructure.Attributes;
+using KickstartTemplate.Infrastructure.Attributes;
 
-namespace MvcKickstart.ViewModels.Account
+namespace KickstartTemplate.ViewModels.Account
 {
 	public class Register
 	{

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Spruce.Schema.Attributes;
 
-namespace MvcKickstart.Models.Users
+namespace KickstartTemplate.Models.Users
 {
 	public class User
 	{

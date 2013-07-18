@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MvcKickstart.Infrastructure.Extensions
+namespace KickstartTemplate.Infrastructure.Extensions
 {
 	public class UrlHelperAdminUrls
 	{

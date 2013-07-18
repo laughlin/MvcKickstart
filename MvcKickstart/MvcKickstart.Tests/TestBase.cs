@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Data;
 using Moq;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 using ServiceStack.CacheAccess;
 using StructureMap;
 
-namespace MvcKickstart.Tests
+namespace KickstartTemplate.Tests
 {
 	public abstract class TestBase
 	{

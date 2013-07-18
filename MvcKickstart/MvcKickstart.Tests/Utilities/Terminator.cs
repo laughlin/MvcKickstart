@@ -1,10 +1,10 @@
 ﻿using System.Data;
 using System.Linq;
 using Dapper;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Models.Users;
 using Spruce;
 
-namespace MvcKickstart.Tests.Utilities
+namespace KickstartTemplate.Tests.Utilities
 {
 	public class Terminator
 	{

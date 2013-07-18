@@ -7,7 +7,7 @@ using Cassette;
 using Cassette.Scripts;
 using Cassette.Stylesheets;
 
-namespace MvcKickstart.Infrastructure
+namespace KickstartTemplate.Infrastructure
 {
     /// <summary>
     /// Configures the Cassette asset bundles for the web application.

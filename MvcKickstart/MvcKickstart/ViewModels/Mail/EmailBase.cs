@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvcKickstart.ViewModels.Mail
+namespace KickstartTemplate.ViewModels.Mail
 {
 	public abstract class EmailBase
 	{

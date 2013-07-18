@@ -1,8 +1,8 @@
 ﻿using System;
-using MvcKickstart.Areas.Admin;
+using KickstartTemplate.Areas.Admin;
 using NUnit.Framework;
 
-namespace MvcKickstart.Tests.Controllers.Admin
+namespace KickstartTemplate.Tests.Controllers.Admin
 {
 	[SetUpFixture]
 	public class AdminAreaTests

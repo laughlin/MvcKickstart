@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading;
 using System.Web.Mvc;
 using CacheStack;
-using MvcKickstart.Models.Users;
-using MvcKickstart.Services;
-using MvcKickstart.ViewModels.Shared;
+using KickstartTemplate.Models.Users;
+using KickstartTemplate.Services;
+using KickstartTemplate.ViewModels.Shared;
 using ServiceStack.CacheAccess;
 using ServiceStack.Logging;
 using StructureMap;
 
-namespace MvcKickstart.Infrastructure
+namespace KickstartTemplate.Infrastructure
 {
 	public abstract class BaseController : Controller, IWithCacheContext
 	{

@@ -1,12 +1,12 @@
 ﻿using System.Data;
 using System.Web.Mvc;
 using AttributeRouting.Web.Mvc;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Extensions;
-using MvcKickstart.ViewModels.Mail;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Extensions;
+using KickstartTemplate.ViewModels.Mail;
 using ServiceStack.CacheAccess;
 
-namespace MvcKickstart.Controllers
+namespace KickstartTemplate.Controllers
 {
 	public class EmailController : BaseController
 	{

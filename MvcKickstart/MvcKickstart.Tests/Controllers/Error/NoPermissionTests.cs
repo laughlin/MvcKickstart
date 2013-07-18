@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
-using MvcKickstart.Controllers;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Controllers;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Error
+namespace KickstartTemplate.Tests.Controllers.Error
 {
 	public class NoPermissionTests : TestBase
 	{

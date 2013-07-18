@@ -1,9 +1,9 @@
 ﻿using System;
-using MvcKickstart.Models;
+using KickstartTemplate.Models;
 using Spruce.Migrations;
 using Spruce.Schema;
 
-namespace MvcKickstart.Infrastructure.Data.Schema
+namespace KickstartTemplate.Infrastructure.Data.Schema
 {
 	/// <summary>
 	/// These are db objects that don't really fit anywhere else. They are core to the system as a whole

@@ -1,7 +1,7 @@
 ﻿using System.Security.Principal;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Models.Users;
 
-namespace MvcKickstart.Infrastructure
+namespace KickstartTemplate.Infrastructure
 {
 	public class UserPrincipal : IPrincipal
 	{

@@ -6,7 +6,7 @@ using ServiceStack.CacheAccess;
 using ServiceStack.Text;
 using Spruce;
 
-namespace MvcKickstart.Services
+namespace KickstartTemplate.Services
 {
 	public interface IServiceBase<T> where T : class
 	{

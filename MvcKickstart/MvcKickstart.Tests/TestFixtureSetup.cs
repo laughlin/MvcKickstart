@@ -1,11 +1,11 @@
 ﻿using System.Data;
 using System.Web.Routing;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Data;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Data;
 using NUnit.Framework;
 using StructureMap;
 
-namespace MvcKickstart.Tests
+namespace KickstartTemplate.Tests
 {
 	[SetUpFixture]
 	public class TestFixtureSetup

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data;
-using MvcKickstart.Infrastructure.Extensions;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Infrastructure.Extensions;
+using KickstartTemplate.Models.Users;
 using FizzWare.NBuilder;
 using FizzWare.NBuilder.Generators;
 using Spruce;
 
-namespace MvcKickstart.Tests.Utilities
+namespace KickstartTemplate.Tests.Utilities
 {
 	public class Generator
 	{

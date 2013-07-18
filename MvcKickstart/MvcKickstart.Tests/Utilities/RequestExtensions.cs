@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace MvcKickstart.Tests.Utilities
+namespace KickstartTemplate.Tests.Utilities
 {
 	public static class RequestExtensions
 	{

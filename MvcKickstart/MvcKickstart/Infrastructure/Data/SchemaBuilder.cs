@@ -1,9 +1,9 @@
 ﻿using System.Data;
 using Dapper;
-using MvcKickstart.Infrastructure.Data.Schema;
+using KickstartTemplate.Infrastructure.Data.Schema;
 using Spruce.Schema;
 
-namespace MvcKickstart.Infrastructure.Data
+namespace KickstartTemplate.Infrastructure.Data
 {
 	public class SchemaBuilder
 	{

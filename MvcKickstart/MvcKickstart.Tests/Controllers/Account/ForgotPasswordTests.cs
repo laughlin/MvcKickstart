@@ -1,12 +1,12 @@
 ﻿using System.Web.Mvc;
 using FizzWare.NBuilder.Generators;
 using Moq;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 using Should.Fluent;
-using MvcKickstart.ViewModels.Account;
+using KickstartTemplate.ViewModels.Account;
 
-namespace MvcKickstart.Tests.Controllers.Account
+namespace KickstartTemplate.Tests.Controllers.Account
 {
 	public class ForgotPasswordTests : ControllerTestBase
 	{

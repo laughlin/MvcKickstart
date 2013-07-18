@@ -1,4 +1,4 @@
-﻿namespace MvcKickstart.Infrastructure
+﻿namespace KickstartTemplate.Infrastructure
 {
 	public static class CacheKeys
 	{

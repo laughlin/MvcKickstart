@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Dapper;
-using MvcKickstart.Infrastructure.Data.Migrations;
+using KickstartTemplate.Infrastructure.Data.Migrations;
 using ServiceStack.Text;
 using Spruce;
 using Spruce.Migrations;
 using Spruce.Schema;
 
-namespace MvcKickstart.Infrastructure.Data
+namespace KickstartTemplate.Infrastructure.Data
 {
 	public class DataMigrator
 	{

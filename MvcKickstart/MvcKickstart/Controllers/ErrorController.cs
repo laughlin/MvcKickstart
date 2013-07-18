@@ -3,12 +3,12 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using CacheStack.DonutCaching;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Attributes;
-using MvcKickstart.ViewModels.Error;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Attributes;
+using KickstartTemplate.ViewModels.Error;
 using ServiceStack.CacheAccess;
 
-namespace MvcKickstart.Controllers
+namespace KickstartTemplate.Controllers
 {
 	public class ErrorController : BaseController
 	{

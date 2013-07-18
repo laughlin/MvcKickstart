@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web.Security;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Models.Users;
 
-namespace MvcKickstart.Services
+namespace KickstartTemplate.Services
 {
 	public interface IUserAuthenticationService
 	{

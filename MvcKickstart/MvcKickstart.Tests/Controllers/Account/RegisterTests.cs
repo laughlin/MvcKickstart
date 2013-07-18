@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 using FizzWare.NBuilder.Generators;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Extensions;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Infrastructure.Extensions;
 using Moq;
-using MvcKickstart.Tests.Utilities;
-using MvcKickstart.ViewModels.Account;
+using KickstartTemplate.Tests.Utilities;
+using KickstartTemplate.ViewModels.Account;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Account
+namespace KickstartTemplate.Tests.Controllers.Account
 {
 	public class RegisterTests : ControllerTestBase
 	{

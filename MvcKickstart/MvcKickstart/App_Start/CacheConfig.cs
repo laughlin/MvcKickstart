@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using CacheStack;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Models.Users;
 using ServiceStack.CacheAccess;
 using StructureMap;
 
-namespace MvcKickstart
+namespace KickstartTemplate
 {
 	public class CacheConfig
 	{

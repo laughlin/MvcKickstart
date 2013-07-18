@@ -1,11 +1,11 @@
 ﻿using System.Data;
 using CacheStack;
-using MvcKickstart.Infrastructure;
-using MvcKickstart.Models.Users;
+using KickstartTemplate.Infrastructure;
+using KickstartTemplate.Models.Users;
 using ServiceStack.CacheAccess;
 using Spruce;
 
-namespace MvcKickstart.Services
+namespace KickstartTemplate.Services
 {
 	public interface IUserService : IServiceBase<User>
 	{

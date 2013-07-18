@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
 using Moq;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Account
+namespace KickstartTemplate.Tests.Controllers.Account
 {
 	public class LogoutTests : ControllerTestBase
 	{

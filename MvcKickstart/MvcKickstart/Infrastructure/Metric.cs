@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MvcKickstart.Infrastructure.Attributes;
+using KickstartTemplate.Infrastructure.Attributes;
 
-namespace MvcKickstart.Infrastructure
+namespace KickstartTemplate.Infrastructure
 {
 	/// <summary>
 	/// An enumeration of all internal metrics tracked in the system

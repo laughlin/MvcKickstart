@@ -1,10 +1,10 @@
 ﻿using Moq;
-using MvcKickstart.Areas.Admin.Controllers;
-using MvcKickstart.Models.Users;
-using MvcKickstart.Services;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Areas.Admin.Controllers;
+using KickstartTemplate.Models.Users;
+using KickstartTemplate.Services;
+using KickstartTemplate.Tests.Utilities;
 
-namespace MvcKickstart.Tests.Controllers.Admin.Home
+namespace KickstartTemplate.Tests.Controllers.Admin.Home
 {
 	public abstract class ControllerTestBase : TestBase
 	{

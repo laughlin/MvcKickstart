@@ -1,9 +1,9 @@
 ﻿using System;
 using MvcContrib.TestHelper;
-using MvcKickstart.Controllers;
+using KickstartTemplate.Controllers;
 using NUnit.Framework;
 
-namespace MvcKickstart.Tests.Routing
+namespace KickstartTemplate.Tests.Routing
 {
 	public class AccountTests : RouteTestBase
 	{

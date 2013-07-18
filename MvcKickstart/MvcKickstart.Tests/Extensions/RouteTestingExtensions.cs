@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using MvcContrib.TestHelper;
 
-namespace MvcKickstart.Tests.Extensions
+namespace KickstartTemplate.Tests.Extensions
 {
 	public static class RouteTestingExtensions
 	{

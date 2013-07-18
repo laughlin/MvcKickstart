@@ -1,4 +1,4 @@
-﻿namespace MvcKickstart.Infrastructure
+﻿namespace KickstartTemplate.Infrastructure
 {
 	public enum MainNav
 	{

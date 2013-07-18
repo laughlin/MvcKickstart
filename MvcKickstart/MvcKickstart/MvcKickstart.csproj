@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcKickstart</RootNamespace>
-    <AssemblyName>MvcKickstart</AssemblyName>
+    <RootNamespace>KickstartTemplate</RootNamespace>
+    <AssemblyName>KickstartTemplate</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -213,9 +213,6 @@
     <Compile Include="App_Start\AutomapperConfig.cs" />
     <Compile Include="App_Start\CacheConfig.cs" />
     <Compile Include="App_Start\DbConfig.cs" />
-    <Compile Include="App_Start\IocConfig.cs" />
-    <Compile Include="App_Start\JsonConfig.cs" />
-    <Compile Include="App_Start\LoggingConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\Index.cs" />
@@ -261,7 +258,6 @@
     <Compile Include="ViewModels\Shared\RedirectError.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\fonts\_lib\fontawesome\fontawesome-webfont.svg" />
     <Content Include="Content\images\Blank.gif" />

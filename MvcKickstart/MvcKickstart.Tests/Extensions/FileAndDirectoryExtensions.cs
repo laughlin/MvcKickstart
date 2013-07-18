@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace MvcKickstart.Tests.Extensions
+namespace KickstartTemplate.Tests.Extensions
 {
 	public static class FileAndDirectoryExtensions
 	{

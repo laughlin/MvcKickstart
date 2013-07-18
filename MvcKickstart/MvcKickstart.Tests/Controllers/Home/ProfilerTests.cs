@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
 using Moq;
-using MvcKickstart.Controllers;
-using MvcKickstart.Models.Users;
-using MvcKickstart.Tests.Utilities;
+using KickstartTemplate.Controllers;
+using KickstartTemplate.Models.Users;
+using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Home
+namespace KickstartTemplate.Tests.Controllers.Home
 {
 	public class ProfilerTests : ControllerTestBase
 	{

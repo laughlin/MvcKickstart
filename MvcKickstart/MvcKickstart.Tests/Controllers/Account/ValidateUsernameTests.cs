@@ -1,8 +1,8 @@
-﻿using MvcKickstart.Infrastructure;
+﻿using KickstartTemplate.Infrastructure;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace MvcKickstart.Tests.Controllers.Account
+namespace KickstartTemplate.Tests.Controllers.Account
 {
 	public class ValidateUsernameTests : ControllerTestBase
 	{
