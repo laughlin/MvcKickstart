@@ -2,7 +2,7 @@
 using MvcKickstart.Infrastructure;
 using StructureMap;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.IocConfig), "PreStart")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof($rootnamespace$.IocConfig), "PreStart", Order = -100)]
 
 namespace $rootnamespace$ 
 {

@@ -1,7 +1,7 @@
 ﻿using ServiceStack.Logging;
 using ServiceStack.Logging.Log4Net;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.LoggingConfig), "PreStart")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof($rootnamespace$.LoggingConfig), "PreStart")]
 
 namespace $rootnamespace$ 
 {

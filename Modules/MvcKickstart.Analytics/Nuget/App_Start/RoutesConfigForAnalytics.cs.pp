@@ -3,7 +3,7 @@ using System.Web.Routing;
 using AttributeRouting.Web.Mvc;
 using MvcKickstart.Analytics.Controllers
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.RouteConfigForAnalytics), "PreStart")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof($rootnamespace$.RouteConfigForAnalytics), "PreStart")]
 
 namespace $rootnamespace$ 
 {

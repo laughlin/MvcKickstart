@@ -9,7 +9,7 @@ using Spruce.Migrations;
 using Spruce.Schema;
 using StructureMap;
 
-[assembly: WebActivator.PostApplicationStartMethod(typeof($rootnamespace$.MvcKickstartDbMigrator), "PostStart")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof($rootnamespace$.MvcKickstartDbMigrator), "PreStart", Order = 1000)]
 
 namespace $rootnamespace$ 
 {
@@ -25,7 +25,7 @@ namespace $rootnamespace$
 				.ToList();
 		}
 
-		public static void PostStart() 
+		public static void PreStart() 
 		{
 			var db = ObjectFactory.GetInstance<IDbConnection>();
 			if (!db.TableExists(db.GetTableName<DataMigration>()))

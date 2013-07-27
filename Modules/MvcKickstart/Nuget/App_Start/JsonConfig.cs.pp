@@ -1,6 +1,6 @@
 ﻿using ServiceStack.Text;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.JsonConfig), "PreStart")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof($rootnamespace$.JsonConfig), "PreStart")]
 
 namespace $rootnamespace$ 
 {

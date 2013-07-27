@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using MvcKickstart.Infrastructure.Attributes;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.FiltersConfig), "PreStart")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof($rootnamespace$.FiltersConfig), "PreStart", Order = 100)]
 
 namespace $rootnamespace$ 
 {
