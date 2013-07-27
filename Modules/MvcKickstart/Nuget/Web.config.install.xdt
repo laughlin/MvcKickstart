@@ -1,53 +1,53 @@
 ﻿<?xml version="1.0"?>
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
-	<configSections>
-		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" xdt:Transform="Insert" />
+	<configSections xdt:Transform="InsertIfMissing">
+		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" xdt:Transform="InsertIfMissing" />
 	</configSections>
-	<appSettings xdt:Transform="Insert">
-		<add key="Metrics:Host" value="" />
-		<add key="Metrics:Port" value="8125" />
-		<add key="Metrics:Prefix" value="$rootnamespace$.Dev." />
+	<appSettings xdt:Transform="InsertIfMissing">
+		<add key="Metrics:Host" value="" xdt:Transform="InsertIfMissing" />
+		<add key="Metrics:Port" value="8125" xdt:Transform="InsertIfMissing" />
+		<add key="Metrics:Prefix" value="$rootnamespace$.Dev." xdt:Transform="InsertIfMissing" />
 	</appSettings>
-	<system.web>
-		<pages>
-			<namespaces>
-				<add namespace="MvcKickstart.Infrastructure" xdt:Transform="Insert" />
-				<add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Transform="Insert" />
+	<system.web xdt:Transform="InsertIfMissing">
+		<pages xdt:Transform="InsertIfMissing">
+			<namespaces xdt:Transform="InsertIfMissing">
+				<add namespace="MvcKickstart.Infrastructure" xdt:Transform="InsertIfMissing" />
+				<add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Transform="InsertIfMissing" />
 			</namespaces>
 		</pages>
-		<httpModules>
-			<remove name="UrlRoutingModule-4.0" xdt:Transform="Insert" />
-			<remove name="Log4NetContextInformationModule" xdt:Transform="Insert" />
-			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Transform="Insert" />
-			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Transform="Insert" />
+		<httpModules xdt:Transform="InsertIfMissing">
+			<remove name="UrlRoutingModule-4.0" xdt:Transform="InsertIfMissing" />
+			<remove name="Log4NetContextInformationModule" xdt:Transform="InsertIfMissing" />
+			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Transform="InsertIfMissing" />
+			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Transform="InsertIfMissing" />
 		</httpModules>
 	</system.web>
-	<system.webServer>
-		<modules>
-			<remove name="UrlRoutingModule-4.0" xdt:Transform="Insert" />
-			<remove name="Log4NetContextInformationModule" xdt:Transform="Insert" />
-			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Transform="Insert" />
-			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Transform="Insert" />
+	<system.webServer xdt:Transform="InsertIfMissing">
+		<modules xdt:Transform="InsertIfMissing">
+			<remove name="UrlRoutingModule-4.0" xdt:Transform="InsertIfMissing" />
+			<remove name="Log4NetContextInformationModule" xdt:Transform="InsertIfMissing" />
+			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Transform="InsertIfMissing" />
+			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Transform="InsertIfMissing" />
 		</modules>
 	</system.webServer>
-	<log4net xdt:Transform="Insert">
-		<appender name="MetricTrackingAppender_Fatal" type="MvcKickstart.Infrastructure.MetricAppender,MvcKickstart">
+	<log4net xdt:Transform="InsertIfMissing">
+		<appender name="MetricTrackingAppender_Fatal" type="MvcKickstart.Infrastructure.MetricAppender,MvcKickstart" xdt:Transform="InsertIfMissing">
 			<increment value="Errors.Fatal" />
 			<filter type="log4net.Filter.LevelRangeFilter">
 				<param name="LevelMin" value="ERROR" />
 				<param name="LevelMax" value="FATAL" />
 			</filter>
 		</appender>
-		<appender name="MetricTrackingAppender_Warn" type="MvcKickstart.Infrastructure.MetricAppender,MvcKickstart">
+		<appender name="MetricTrackingAppender_Warn" type="MvcKickstart.Infrastructure.MetricAppender,MvcKickstart" xdt:Transform="InsertIfMissing">
 			<increment value="Errors.Warn" />
 			<filter type="log4net.Filter.LevelRangeFilter">
 				<param name="LevelMin" value="WARN" />
 				<param name="LevelMax" value="WARN" />
 			</filter>
 		</appender>
-		<root>
-			<appender-ref ref="MetricTrackingAppender_Fatal" />
-			<appender-ref ref="MetricTrackingAppender_Warn" />
+		<root xdt:Transform="InsertIfMissing">
+			<appender-ref ref="MetricTrackingAppender_Fatal" xdt:Transform="InsertIfMissing" />
+			<appender-ref ref="MetricTrackingAppender_Warn" xdt:Transform="InsertIfMissing" />
 		</root>
 	</log4net>
 </configuration>
