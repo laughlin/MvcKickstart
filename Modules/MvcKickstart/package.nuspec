@@ -23,7 +23,7 @@
 			<dependency id="ServiceStack.Logging.Log4Net" version="1.0" />
 			<dependency id="Spruce" version="1.0.6" />
 			<dependency id="structuremap" version="2.6.4" />
-			<dependency id="WebActivator" version="1.0.0" />
+			<dependency id="WebActivator" version="2" />
 		</dependencies>
 	</metadata>
 	<files>

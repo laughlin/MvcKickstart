@@ -7,7 +7,7 @@ using ServiceStack.Text;
 using Spruce;
 using Spruce.Migrations;
 using Spruce.Schema;
-using Structuremap;
+using StructureMap;
 
 [assembly: WebActivator.PostApplicationStartMethod(typeof($rootnamespace$.MvcKickstartDbMigrator), "PostStart")]
 
@@ -33,6 +33,7 @@ namespace $rootnamespace$
 				db.CreateTable<DataMigration>();
 			}
 			var alreadyExecutedMigrations = db.Query<DataMigration>("select * from [{0}]".Fmt(db.GetTableName<DataMigration>()));
+			var migrationTypes = GetMigrationTypes();
 			foreach (var migration in migrationTypes.Where(t => !alreadyExecutedMigrations.Any(m => m.Name == t.Name)).Select(x => (IMigration)Activator.CreateInstance(x)).OrderBy(x => x.Order))
 			{
 				migration.Execute(db);
