@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0"?>
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
 	<configSections>
-		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" xdt:Transform="Remove" />
+		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" xdt:Locator="Match(name)" xdt:Transform="Remove" />
 	</configSections>
-	<appSettings xdt:Transform="Remove">
-		<add key="Metrics:Host" value="" />
-		<add key="Metrics:Port" value="8125" />
-		<add key="Metrics:Prefix" value="$rootnamespace$.Dev." />
+	<appSettings>
+		<add key="Metrics:Host" value="" xdt:Locator="Match(key)" xdt:Transform="Remove" />
+		<add key="Metrics:Port" value="8125" xdt:Locator="Match(key)" xdt:Transform="Remove" />
+		<add key="Metrics:Prefix" value="$rootnamespace$.Dev." xdt:Locator="Match(key)" xdt:Transform="Remove" />
 	</appSettings>
 	<system.web>
 		<pages>
 			<namespaces>
-				<add namespace="MvcKickstart.Infrastructure" xdt:Transform="Remove" />
-				<add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Transform="Remove" />
+				<add namespace="MvcKickstart.Infrastructure" xdt:Locator="Match(namespace)" xdt:Transform="Remove" />
+				<add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Locator="Match(namespace)" xdt:Transform="Remove" />
 			</namespaces>
 		</pages>
 		<httpModules>
-			<remove name="UrlRoutingModule-4.0" xdt:Transform="Remove" />
-			<remove name="Log4NetContextInformationModule" xdt:Transform="Remove" />
-			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Transform="Remove" />
-			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Transform="Remove" />
+			<remove name="UrlRoutingModule-4.0" xdt:Locator="Match(name)" xdt:Transform="Remove" />
+			<remove name="Log4NetContextInformationModule" xdt:Locator="Match(name)" xdt:Transform="Remove" />
+			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Locator="Match(name)" xdt:Transform="Remove" />
+			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Locator="Match(name)" xdt:Transform="Remove" />
 		</httpModules>
 	</system.web>
 	<system.webServer>
 		<modules>
-			<remove name="UrlRoutingModule-4.0" xdt:Transform="Remove" />
-			<remove name="Log4NetContextInformationModule" xdt:Transform="Remove" />
-			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Transform="Remove" />
-			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Transform="Remove" />
+			<remove name="UrlRoutingModule-4.0" xdt:Locator="Match(name)" xdt:Transform="Remove" />
+			<remove name="Log4NetContextInformationModule" xdt:Locator="Match(name)" xdt:Transform="Remove" />
+			<add name="UrlRoutingModule-4.0" type="MvcKickstart.Infrastructure.Modules.ProfiledUrlRoutingModule, MvcKickstart" xdt:Locator="Match(name)" xdt:Transform="Remove" />
+			<add name="Log4NetContextInformationModule" type="MvcKickstart.Infrastructure.Modules.Log4NetContextInformationModule, MvcKickstart" xdt:Locator="Match(name)" xdt:Transform="Remove" />
 		</modules>
 	</system.webServer>
 	<log4net xdt:Transform="Remove">
-		<appender name="MetricTrackingAppender_Fatal" type="MvcKickstart.Infrastructure.MetricAppender,MvcKickstart">
+		<appender name="MetricTrackingAppender_Fatal" type="MvcKickstart.Infrastructure.MetricAppender,MvcKickstart" xdt:Locator="Match(name)">
 			<increment value="Errors.Fatal" />
 			<filter type="log4net.Filter.LevelRangeFilter">
 				<param name="LevelMin" value="ERROR" />

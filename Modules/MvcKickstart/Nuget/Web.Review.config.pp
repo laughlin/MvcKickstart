@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0"?>
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
 	<appSettings>
-		<add key="Metrics:Prefix" value="$rootnamespace$.Release." xdt:Locator="Match(key)" xdt:Transform="SetAttributes" />
+		<add key="Metrics:Prefix" value="$rootnamespace$.Review." xdt:Locator="Match(key)" xdt:Transform="SetAttributes" />
 	</appSettings>
 	<cassette rewriteHtml="false" debug="false" xdt:Transform="Replace" />
 	<system.web>
+		<compilation xdt:Transform="RemoveAttributes(debug)" />
+		<customErrors mode="RemoteOnly" xdt:Transform="SetAttributes" />
 		<caching>
 			<outputCache enableOutputCache="true" xdt:Transform="SetAttributes" />
 		</caching>
@@ -21,11 +23,9 @@
 		<appender name="SmtpAppender" type="log4net.Appender.SmtpAppender,log4net" xdt:Transform="Insert">
 			<to value="notset@localhost" />
 			<from value="do_not_reply@localhost.com" />
-			<subject value="Error :: $rootnamespace$ (Production)" />
+			<subject value="Error :: $rootnamespace$ (Review)" />
 			<smtpHost value="localhost" />
-			<!--<bufferSize value="512" />
-			<lossy value="false" />-->
-			<bufferSize value="256" />
+			<bufferSize value="512" />
 			<lossy value="false" />
 			<filter type="log4net.Filter.LevelRangeFilter">
 				<param name="LevelMin" value="ERROR" />
@@ -38,7 +38,7 @@
 		<appender name="SmtpWarnAppender" type="log4net.Appender.SmtpAppender,log4net" xdt:Transform="Insert">
 			<to value="notset@localhost" />
 			<from value="do_not_reply@localhost.com" />
-			<subject value="Warn :: $rootnamespace$ (Production)" />
+			<subject value="Warn :: $rootnamespace$ (Review)" />
 			<smtpHost value="localhost" />
 			<bufferSize value="512" />
 			<lossy value="false" />
