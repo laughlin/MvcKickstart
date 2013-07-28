@@ -28,7 +28,7 @@ namespace MvcKickstart.Analytics.Controllers
 	public class WidgetsController : BaseController
 	{
 		private readonly ISiteSettingsService _siteSettingsService;
-		public WidgetsController(IDbConnection db, IMetricTracker metrics, ICacheClient cache, ISiteSettingsService siteSettingsService) : base(db, metrics, cache)
+		public WidgetsController(IDbConnection db, ICacheClient cache, IMetricTracker metrics, ISiteSettingsService siteSettingsService) : base(db, cache, metrics)
 		{
 			_siteSettingsService = siteSettingsService;
 		}

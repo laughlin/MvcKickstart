@@ -20,13 +20,30 @@ namespace MvcKickstart.Infrastructure
 		/// </summary>
 		public ICacheContext CacheContext { get; private set; }
 
-		protected BaseController(IDbConnection db, IMetricTracker metrics, ICacheClient cache)
+		protected BaseController()
+		{
+			Log = LogManager.GetLogger(GetType());
+		}
+
+		protected BaseController(IDbConnection db) : this()
 		{
 			Db = db;
-			Metrics = metrics;
-			Log = LogManager.GetLogger(GetType());
+		}
+
+		protected BaseController(ICacheClient cache) : this()
+		{
 			Cache = cache;
 			CacheContext = new CacheContext(Cache);
+		}
+
+		protected BaseController(IDbConnection db, ICacheClient cache) : this(cache)
+		{
+			Db = db;
+		}
+
+		protected BaseController(IDbConnection db, ICacheClient cache, IMetricTracker metrics) : this(db, cache)
+		{
+			Metrics = metrics;
 		}
 
 		protected override void Execute(System.Web.Routing.RequestContext requestContext)

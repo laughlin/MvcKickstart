@@ -63,4 +63,5 @@ namespace KickstartTemplate.Infrastructure.Data
 
 			return migrationsRun;
 		}
-	}}
+	}
+}
