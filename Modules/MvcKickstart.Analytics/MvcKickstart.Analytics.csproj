@@ -146,7 +146,6 @@
     <Compile Include="ViewModels\Widgets\Config.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Nuget\App_Start\RoutesConfigForAnalytics.cs.pp" />
     <None Include="Nuget\Areas\Admin\Views\Home\Index.cshtml.pp" />
     <None Include="Nuget\Areas\Admin\Views\Widgets\Analytics.cshtml.pp" />
     <None Include="Nuget\Areas\Admin\Views\Widgets\AnalyticsAuthorize.cshtml.pp" />

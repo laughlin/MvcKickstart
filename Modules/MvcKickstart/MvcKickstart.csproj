@@ -157,6 +157,10 @@
     <Compile Include="Models\SiteSettingsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Error.cs" />
+    <None Include="Nuget\Areas\Admin\Views\Web.config.install.xdt" />
+    <None Include="Nuget\Areas\Admin\Views\Web.config.uninstall.xdt" />
+    <None Include="Nuget\Views\Web.config.install.xdt" />
+    <None Include="Nuget\Views\Web.config.uninstall.xdt" />
     <None Include="Nuget\Web.config.uninstall.xdt" />
     <None Include="Nuget\Web.Release.config.pp" />
     <None Include="Nuget\Web.Review.config.pp" />
