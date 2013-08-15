@@ -10,10 +10,7 @@ namespace $rootnamespace$
 	{
 		public static void PreStart() 
 		{
-			RouteTable.Routes.MapAttributeRoutes(config => 
-			{
-				config.AddRoutesFromAssembly(Assembly.GetAssembly(typeof(MvcKickstart.Analytics.Controllers.WidgetController)));
-			});
+			RouteTable.Routes.MapAttributeRoutes(config => config.AddRoutesFromAssembly(Assembly.GetAssembly(typeof(MvcKickstart.Analytics.Controllers.WidgetsController))));
 		}
 	}
 }

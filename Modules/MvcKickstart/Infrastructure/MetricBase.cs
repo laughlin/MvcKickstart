@@ -12,6 +12,11 @@ namespace MvcKickstart.Infrastructure
 		[TimingMetric]
 		public const string Profiling_ResolveRoute = "Profiling.ResolveRoute";
 
+		public const string Error_404 = "Errors.404";
+		public const string Error_Fatal = "Errors.Fatal";
+		public const string Error_Error = "Errors.Error";
+		public const string Error_Warn = "Errors.Warn";
+		public const string Error_Info = "Errors.Info";
 		public const string Error_Unhandled = "Errors.Unhandled";
 	}
 }
