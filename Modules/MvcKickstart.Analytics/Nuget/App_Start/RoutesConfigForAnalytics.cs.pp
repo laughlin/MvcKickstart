@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using System.Web.Routing;
 using AttributeRouting.Web.Mvc;
-using MvcKickstart.Analytics.Controllers
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof($rootnamespace$.RouteConfigForAnalytics), "PreStart")]
 
@@ -13,7 +12,7 @@ namespace $rootnamespace$
 		{
 			RouteTable.Routes.MapAttributeRoutes(config => 
 			{
-				config.AddRoutesFromAssembly(Assembly.GetAssembly(typeof(AnalyticsController)));
+				config.AddRoutesFromAssembly(Assembly.GetAssembly(typeof(MvcKickstart.Analytics.Controllers.WidgetController)));
 			});
 		}
 	}
