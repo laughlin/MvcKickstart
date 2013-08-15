@@ -35,7 +35,7 @@ namespace MvcKickstart.Infrastructure.Attributes
 			if (stopwatch == null)
 				return;
 			stopwatch.Stop();
-			Metrics.Timing(Metric.Profiling_RenderTime, stopwatch.Elapsed.TotalMilliseconds);
+			Metrics.Timing(MetricBase.Profiling_RenderTime, stopwatch.Elapsed.TotalMilliseconds);
 			filterContext.HttpContext.Items[ViewDataConstants.ProfileActionStopwatch] = null;
 		}
 	}

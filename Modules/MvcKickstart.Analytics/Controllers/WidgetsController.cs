@@ -25,7 +25,7 @@ namespace MvcKickstart.Analytics.Controllers
 {
 //	[Restricted(RequireAdmin = true)]
 	[RouteArea("admin")]
-	public class WidgetsController : BaseController
+	public class WidgetsController : MvcKickstart.Infrastructure.ControllerBase
 	{
 		private readonly ISiteSettingsService _siteSettingsService;
 		public WidgetsController(IDbConnection db, ICacheClient cache, IMetricTracker metrics, ISiteSettingsService siteSettingsService) : base(db, cache, metrics)

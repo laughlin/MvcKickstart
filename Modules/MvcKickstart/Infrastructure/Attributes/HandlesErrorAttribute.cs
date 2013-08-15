@@ -17,7 +17,7 @@ namespace MvcKickstart.Infrastructure.Attributes
 
 		public override void OnException(ExceptionContext filterContext)
 		{
-			Metrics.Increment(Metric.Error_Unhandled);
+			Metrics.Increment(MetricBase.Error_Unhandled);
 			if (filterContext != null && filterContext.Exception != null)
 			{
 				Log.Error("Unhandled exception", filterContext.Exception);

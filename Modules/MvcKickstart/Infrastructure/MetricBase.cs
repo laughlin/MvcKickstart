@@ -2,7 +2,7 @@
 
 namespace MvcKickstart.Infrastructure
 {
-	public class Metric
+	public class MetricBase
 	{
 		public const string Users_RequestAuthenticated = "Users.RequestAuthenticated";
 		public const string Users_RequestAnonymous = "Users.RequestAnonymous";

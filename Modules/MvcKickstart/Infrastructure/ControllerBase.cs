@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Mvc;
@@ -9,7 +10,7 @@ using ServiceStack.Logging;
 
 namespace MvcKickstart.Infrastructure
 {
-	public abstract class BaseController : Controller, IWithCacheContext
+	public abstract class ControllerBase : Controller, IWithCacheContext
 	{
 		protected IDbConnection Db { get; private set; }
 		protected IMetricTracker Metrics { get; private set; }
@@ -20,28 +21,28 @@ namespace MvcKickstart.Infrastructure
 		/// </summary>
 		public ICacheContext CacheContext { get; private set; }
 
-		protected BaseController()
+		protected ControllerBase()
 		{
 			Log = LogManager.GetLogger(GetType());
 		}
 
-		protected BaseController(IDbConnection db) : this()
+		protected ControllerBase(IDbConnection db) : this()
 		{
 			Db = db;
 		}
 
-		protected BaseController(ICacheClient cache) : this()
+		protected ControllerBase(ICacheClient cache) : this()
 		{
 			Cache = cache;
 			CacheContext = new CacheContext(Cache);
 		}
 
-		protected BaseController(IDbConnection db, ICacheClient cache) : this(cache)
+		protected ControllerBase(IDbConnection db, ICacheClient cache) : this(cache)
 		{
 			Db = db;
 		}
 
-		protected BaseController(IDbConnection db, ICacheClient cache, IMetricTracker metrics) : this(db, cache)
+		protected ControllerBase(IDbConnection db, ICacheClient cache, IMetricTracker metrics) : this(db, cache)
 		{
 			Metrics = metrics;
 		}
@@ -69,6 +70,14 @@ namespace MvcKickstart.Infrastructure
 		/// <summary>
 		/// Returns the specified error object as json.  Sets the response status code to the ErrorCode value
 		/// </summary>
+		/// <returns></returns>
+		public JsonResult JsonError()
+		{
+			return JsonError(new Error());
+		}
+		/// <summary>
+		/// Returns the specified error object as json.  Sets the response status code to the ErrorCode value
+		/// </summary>
 		/// <param name="error">Error to return</param>
 		/// <returns></returns>
 		protected JsonResult JsonError(Error error)
@@ -83,6 +92,12 @@ namespace MvcKickstart.Infrastructure
 		/// <returns></returns>
 		protected JsonResult JsonError(Error error, int responseCode)
 		{
+			if (error.ValidationMessages == null && ModelState != null)
+			{
+				error.ValidationMessages = ModelState.Where(x => x.Value.Errors.Any()).ToDictionary(x => x.Key, x => x.Value.Errors.Select(e => e.ErrorMessage).ToArray());
+			}
+
+			Response.TrySkipIisCustomErrors = true;
 			Response.StatusCode = responseCode;
 			return Json(error);
 		}

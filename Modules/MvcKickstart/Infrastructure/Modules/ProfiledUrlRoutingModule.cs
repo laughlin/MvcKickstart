@@ -19,7 +19,7 @@ namespace MvcKickstart.Infrastructure.Modules
 				return;
 			}
 
-			using (new MetricStopwatch(Metric.Profiling_ResolveRoute))
+			using (new MetricStopwatch(MetricBase.Profiling_ResolveRoute))
 			{
 				base.PostResolveRequestCache(context);
 			}

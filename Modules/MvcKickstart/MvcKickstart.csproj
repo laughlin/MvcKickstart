@@ -125,7 +125,7 @@
     <Compile Include="Infrastructure\Attributes\ProfileActionAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\TimingMetricAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\TrackAuthenticationMetricsAttribute.cs" />
-    <Compile Include="Infrastructure\BaseController.cs" />
+    <Compile Include="Infrastructure\ControllerBase.cs" />
     <Compile Include="Infrastructure\ExpressionHelper.cs" />
     <Compile Include="Infrastructure\Extensions\DateTimeExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
@@ -135,8 +135,8 @@
     <Compile Include="Infrastructure\IMetricTracker.cs" />
     <Compile Include="Infrastructure\IocRegistry.cs" />
     <Compile Include="Infrastructure\MemoryCacheClient.cs" />
-    <Compile Include="Infrastructure\Metric.cs" />
     <Compile Include="Infrastructure\MetricAppender.cs" />
+    <Compile Include="Infrastructure\MetricBase.cs" />
     <Compile Include="Infrastructure\MetricStopwatch.cs" />
     <Compile Include="Infrastructure\MetricTracker.cs" />
     <Compile Include="Infrastructure\Modules\Log4NetContextInformationModule.cs" />

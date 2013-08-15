@@ -16,7 +16,7 @@ namespace MvcKickstart.Infrastructure.Attributes
 		{
 			if (!filterContext.Controller.ControllerContext.IsChildAction && !filterContext.RequestContext.HttpContext.Request.IsAjaxRequest())
 			{
-				Metrics.Increment(filterContext.HttpContext.User.Identity.IsAuthenticated ? Metric.Users_RequestAuthenticated : Metric.Users_RequestAnonymous);
+				Metrics.Increment(filterContext.HttpContext.User.Identity.IsAuthenticated ? MetricBase.Users_RequestAuthenticated : MetricBase.Users_RequestAnonymous);
 			}
 
 			base.OnActionExecuting(filterContext);
