@@ -39,7 +39,7 @@ namespace MvcKickstart.Analytics.Controllers
 			return Redirect(Url.AdminHome());
 		}
 
-		[GET("widgets/analytics", RouteName = "MvcKickstart_Analytics_Widgets_AnalyticsWidget")]
+		[GET("widgets/analyticsWidget", RouteName = "MvcKickstart_Analytics_Widgets_AnalyticsWidget")]
 		public ActionResult AnalyticsWidget()
 		{			
 			return View();
@@ -55,7 +55,7 @@ namespace MvcKickstart.Analytics.Controllers
 			Db.Save(settings);
 			Cache.Trigger(TriggerFor.Id<SiteSettings>(settings.Id));
 
-			return RedirectToAction(Url.AdminHome());
+			return Redirect(Url.AdminHome());
 		}
 
 		[POST("widgets/analytics", RouteName = "MvcKickstart_Analytics_Widgets_Analytics")]
@@ -276,7 +276,7 @@ namespace MvcKickstart.Analytics.Controllers
 			Db.Save(settings);
 			Cache.Trigger(TriggerFor.Id<SiteSettings>(settings.Id));
 
-			return RedirectToRoute("Admin_Home_Index");
+			return Redirect(Url.AdminHome());
 		}
 	}
 }

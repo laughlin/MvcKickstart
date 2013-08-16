@@ -19,6 +19,9 @@ namespace MvcKickstart.Infrastructure
 						scan.TheCallingAssembly();
 						if (executingAssembly != null)
 							scan.Assembly(executingAssembly);
+
+						// Make sure all plugins/modules are wired up with default conventions
+						scan.AssembliesFromApplicationBaseDirectory(x => x.FullName.Contains("MvcKickstart"));
 						scan.AssemblyContainingType<IocRegistry>();
 						scan.WithDefaultConventions();
 					});

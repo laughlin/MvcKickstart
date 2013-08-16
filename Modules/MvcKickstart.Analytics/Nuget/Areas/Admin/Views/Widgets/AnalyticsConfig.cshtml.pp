@@ -1,6 +1,6 @@
-﻿@model MvcKickstart.Analytics.ViewModels.Widgets.AnalyticsConfig
+﻿@model MvcKickstart.Analytics.ViewModels.Widgets.Config
 
-@using (Html.BeginRouteForm("Admin_Widgets_AnalyticsConfig")) {
+@using (Html.BeginRouteForm("MvcKickstart_Analytics_Widgets_AnalyticsConfig")) {
 	<div class="control-group">
 		@Html.LabelFor(x => x.ProfileId)
 		<select name="ProfileId" id="ProfileId">
