@@ -5,6 +5,7 @@ using KickstartTemplate.Infrastructure.Extensions;
 using Moq;
 using KickstartTemplate.Tests.Utilities;
 using KickstartTemplate.ViewModels.Account;
+using MvcKickstart.Infrastructure;
 using NUnit.Framework;
 using Should.Fluent;
 

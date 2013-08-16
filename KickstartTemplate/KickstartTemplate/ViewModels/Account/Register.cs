@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using KickstartTemplate.Infrastructure.Attributes;
+using MvcKickstart.Infrastructure.Attributes;
 
 namespace KickstartTemplate.ViewModels.Account
 {

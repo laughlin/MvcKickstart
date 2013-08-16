@@ -12,7 +12,7 @@ namespace KickstartTemplate.Tests.Controllers.Home
 		{
 			base.Setup();
 
-			Controller = new HomeController(Db, Metrics, Cache);
+			Controller = new HomeController(Db, Cache, Metrics);
 			ControllerUtilities.SetupControllerContext(Controller);
 		}
 	}

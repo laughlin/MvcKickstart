@@ -8,6 +8,8 @@ using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.Models.Users;
 using KickstartTemplate.Tests.Utilities;
+using MvcKickstart.Infrastructure;
+using MvcKickstart.Infrastructure.Extensions;
 using NUnit.Framework;
 using ServiceStack.Text;
 using Should.Fluent;

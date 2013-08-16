@@ -1,6 +1,4 @@
 ﻿using System;
-using KickstartTemplate.Models;
-using Spruce.Migrations;
 using Spruce.Schema;
 
 namespace KickstartTemplate.Infrastructure.Data.Schema
@@ -14,11 +12,7 @@ namespace KickstartTemplate.Infrastructure.Data.Schema
 		{
 			get
 			{
-				return new []
-				{
-					typeof(DataMigration),
-					typeof(SiteSettings)
-				};
+				return new Type[]{};
 			}
 		}
 

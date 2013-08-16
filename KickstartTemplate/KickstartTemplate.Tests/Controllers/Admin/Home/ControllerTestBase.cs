@@ -1,7 +1,6 @@
 ﻿using Moq;
 using KickstartTemplate.Areas.Admin.Controllers;
 using KickstartTemplate.Models.Users;
-using KickstartTemplate.Services;
 using KickstartTemplate.Tests.Utilities;
 
 namespace KickstartTemplate.Tests.Controllers.Admin.Home
@@ -10,7 +9,6 @@ namespace KickstartTemplate.Tests.Controllers.Admin.Home
 	{
 		protected User User { get; private set; }
 		protected HomeController Controller { get; set; }
-		protected Mock<SiteSettingsService> SiteSettingsServiceMock { get; set; }
 
 		public override void Setup()
 		{
@@ -21,9 +19,8 @@ namespace KickstartTemplate.Tests.Controllers.Admin.Home
 					x.Username = "admin";
 					x.IsAdmin = true;
 				});
-			SiteSettingsServiceMock = new Mock<SiteSettingsService>(Db, Cache);
 
-			Controller = new HomeController(Db, Metrics, Cache, SiteSettingsServiceMock.Object);
+			Controller = new HomeController(Db, Cache, Metrics);
 			ControllerUtilities.SetupControllerContext(Controller, User);
 		}
 	}

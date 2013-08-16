@@ -4,6 +4,7 @@ using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.Models.Users;
 using FizzWare.NBuilder;
 using FizzWare.NBuilder.Generators;
+using MvcKickstart.Infrastructure.Extensions;
 using Spruce;
 
 namespace KickstartTemplate.Tests.Utilities

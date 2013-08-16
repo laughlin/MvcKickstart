@@ -37,7 +37,7 @@ namespace KickstartTemplate.Tests.Controllers.Account
 			AuthenticationService = new Mock<IUserAuthenticationService>();
 			AuthenticationService.Setup(x => x.ReservedUsernames).Returns(new[] { "admin" });
 
-			Controller = new AccountController(Db, Metrics, Cache, MailController.Object, UserService.Object, AuthenticationService.Object);
+			Controller = new AccountController(Db, Cache, Metrics, MailController.Object, UserService.Object, AuthenticationService.Object);
 			ControllerUtilities.SetupControllerContext(Controller);
 		}
 	}

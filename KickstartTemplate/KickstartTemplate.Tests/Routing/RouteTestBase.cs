@@ -8,7 +8,7 @@ namespace KickstartTemplate.Tests.Routing
 		protected RouteTestBase()
 		{
 			if (RouteTable.Routes == null || RouteTable.Routes.Count == 0)
-				RouteConfig.RegisterRoutes(RouteTable.Routes);
+				AttributeRoutingConfig.RegisterRoutes(RouteTable.Routes);
 		}
 
 		public void Dispose()

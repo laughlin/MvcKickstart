@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Web.Routing;
-using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Data;
+using MvcKickstart.Infrastructure;
 using NUnit.Framework;
 using StructureMap;
 
@@ -14,9 +14,9 @@ namespace KickstartTemplate.Tests
 		public void Setup()
 		{
 			if (RouteTable.Routes == null || RouteTable.Routes.Count == 0)
-				RouteConfig.RegisterRoutes(RouteTable.Routes);
+				AttributeRoutingConfig.RegisterRoutes(RouteTable.Routes);
 
-			ObjectFactory.Initialize(x => x.AddRegistry(new IocRegistry()));
+			IocConfig.PreStart();
 
 			DbConfig.Setup();
 

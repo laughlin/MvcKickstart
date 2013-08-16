@@ -2,37 +2,26 @@
 using System.Web.Mvc;
 using AttributeRouting;
 using AttributeRouting.Web.Mvc;
-using CacheStack;
-using Google.GData.Client;
 using KickstartTemplate.Areas.Admin.ViewModels.Home;
 using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Attributes;
-using KickstartTemplate.Infrastructure.Extensions;
-using KickstartTemplate.Models;
-using KickstartTemplate.Services;
+using MvcKickstart.Infrastructure;
 using ServiceStack.CacheAccess;
-using Spruce;
 
 namespace KickstartTemplate.Areas.Admin.Controllers
 {
 	[RouteArea("admin")]
 	public class HomeController : BaseController
     {
-		private readonly ISiteSettingsService _siteSettingsService;
-		public HomeController(IDbConnection db, IMetricTracker metrics, ICacheClient cache, ISiteSettingsService siteSettingsService) : base(db, metrics, cache)
+		public HomeController(IDbConnection db, ICacheClient cache, IMetricTracker metrics) : base(db, cache, metrics)
 		{
-			_siteSettingsService = siteSettingsService;
 		}
 
 		[GET("", RouteName = "Admin_Home_Index")]
 		[Restricted(RequireAdmin = true)]
 		public ActionResult Index()
 		{
-			var settings = _siteSettingsService.GetSettings();
-			var model = new Index
-				{
-					HasAnalyticsConfigured = !string.IsNullOrEmpty(settings.AnalyticsToken)
-				};
+			var model = new Index();
 			return View(model);
 		}
 

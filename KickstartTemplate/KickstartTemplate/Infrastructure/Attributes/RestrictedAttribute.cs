@@ -12,6 +12,7 @@ using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.Models.Users;
 using KickstartTemplate.Services;
 using KickstartTemplate.ViewModels.Shared;
+using MvcKickstart.Infrastructure;
 using ServiceStack.CacheAccess;
 using ServiceStack.Text;
 using Spruce;

@@ -13,6 +13,8 @@ using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.Models.Users;
 using KickstartTemplate.Services;
 using KickstartTemplate.ViewModels.Account;
+using MvcKickstart.Infrastructure;
+using MvcKickstart.Infrastructure.Extensions;
 using ServiceStack.CacheAccess;
 using ServiceStack.Text;
 using Spruce;
@@ -25,7 +27,7 @@ namespace KickstartTemplate.Controllers
 	    private readonly IUserService _userService;
 	    private readonly IUserAuthenticationService _authenticationService;
 
-		public AccountController(IDbConnection db, IMetricTracker metrics, ICacheClient cache, IMailController mailController, IUserService userService, IUserAuthenticationService authenticationService) : base (db, metrics, cache)
+		public AccountController(IDbConnection db, ICacheClient cache, IMetricTracker metrics, IMailController mailController, IUserService userService, IUserAuthenticationService authenticationService) : base (db, cache, metrics)
 		{
 			_mailController = mailController;
 			_userService = userService;
@@ -48,7 +50,11 @@ namespace KickstartTemplate.Controllers
 				return RedirectToAction("Index", "Home");
 			}
 
-			var model = new Login {ReturnUrl = returnUrl};
+			var model = new Login
+				{
+					ReturnUrl = returnUrl,
+					RememberMe = true
+				};
 			return View(model);
 		}
 

@@ -114,6 +114,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MiniProfiler.2.1.0\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
+    <Reference Include="MvcKickstart, Version=1.0.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvcKickstart.1.0.19\lib\net45\MvcKickstart.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcKickstart.Analytics, Version=1.0.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvcKickstart.Analytics.1.0.19\lib\net45\MvcKickstart.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcKickstart.RestSharp, Version=1.0.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvcKickstart.RestSharp.1.0.19\lib\net45\MvcKickstart.RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -128,29 +140,29 @@
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common, Version=3.9.54.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Common, Version=3.9.56.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Common.3.9.54\lib\net35\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Common.3.9.56\lib\net35\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=3.9.54.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Interfaces, Version=3.9.56.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Common.3.9.54\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Common.3.9.56\lib\net35\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Logging.Log4Net, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ServiceStack.Logging.Log4Net.1.0.9.0\lib\net35\ServiceStack.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text, Version=3.9.54.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Text, Version=3.9.56.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Text.3.9.54\lib\net35\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Text.3.9.56\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="Sigil, Version=3.0.0.0, Culture=neutral, PublicKeyToken=2d06c3494341c8ab, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sigil.3.0.0\lib\net45\Sigil.dll</HintPath>
     </Reference>
-    <Reference Include="Spruce, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Spruce, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Spruce.1.0.6\lib\net45\Spruce.dll</HintPath>
+      <HintPath>..\packages\Spruce.1.0.8\lib\net45\Spruce.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
@@ -208,11 +220,20 @@
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.5.1\lib\net40\WebActivator.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AttributeRoutingConfig.cs" />
     <Compile Include="App_Start\AutomapperConfig.cs" />
     <Compile Include="App_Start\CacheConfig.cs" />
     <Compile Include="App_Start\DbConfig.cs" />
+    <Compile Include="App_Start\FiltersConfig.cs" />
+    <Compile Include="App_Start\IocConfig.cs" />
+    <Compile Include="App_Start\JsonConfig.cs" />
+    <Compile Include="App_Start\LoggingConfig.cs" />
+    <Compile Include="App_Start\MvcKickstartDbMigrator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\Index.cs" />
@@ -233,6 +254,7 @@
     <Compile Include="Infrastructure\Data\SchemaBuilder.cs" />
     <Compile Include="Infrastructure\Data\Schema\GlobalSection.cs" />
     <Compile Include="Infrastructure\Data\Schema\UserSection.cs" />
+    <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\UrlHelperAdminUrls.cs" />
     <Compile Include="Infrastructure\Extensions\EnumExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\UrlHelperExtensions.cs" />
@@ -258,11 +280,12 @@
     <Compile Include="ViewModels\Shared\RedirectError.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\css\Admin\Widgets\Analytics.css" />
     <Content Include="Content\fonts\_lib\fontawesome\fontawesome-webfont.svg" />
     <Content Include="Content\images\Blank.gif" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\js\Account\Register.js" />
+    <Content Include="Content\js\Admin\Widgets\Analytics.js" />
     <Content Include="Content\js\Shared\angular.js" />
     <Content Include="Content\js\Shared\bundle.txt" />
     <Content Include="Content\js\Shared\global.js" />
@@ -288,6 +311,8 @@
     <Content Include="Content\js\_lib\foolproof\mvcfoolproof.unobtrusive.js" />
     <Content Include="Content\js\_lib\foolproof\MvcFoolproofJQueryValidation.js" />
     <Content Include="Content\js\_lib\foolproof\MvcFoolproofValidation.js" />
+    <Content Include="Content\js\_lib\jquery.flot\bundle.txt" />
+    <Content Include="Content\js\_lib\jquery.flot\jquery.flot.js" />
     <Content Include="Content\js\_lib\jquery.form\bundle.txt" />
     <Content Include="Content\js\_lib\jquery.form\jquery.form.js" />
     <Content Include="Content\js\_lib\jquery.maskedinput\bundle.txt" />
@@ -313,13 +338,13 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\css\_lib\" />
+    <Folder Include="Content\js\Admin\Home\" />
     <Folder Include="Infrastructure\Data\ScriptedObjects\" />
   </ItemGroup>
   <ItemGroup>
@@ -359,9 +384,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Home\Web.config" />
@@ -463,6 +485,20 @@
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\YesNoRadioList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\YesNoUnknownRadioList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Widgets\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Widgets\AnalyticsWidget.cshtml" />
+    <Content Include="Areas\Admin\Views\Widgets\AnalyticsConfig.cshtml" />
+    <Content Include="Areas\Admin\Views\Widgets\AnalyticsAuthorize.cshtml" />
+    <Content Include="Areas\Admin\Views\Widgets\Analytics.cshtml" />
+    <Content Include="Areas\Admin\Views\Widgets\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

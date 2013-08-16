@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using KickstartTemplate.Infrastructure.Attributes;
 using KickstartTemplate.Models.Users;
+using MvcKickstart.Infrastructure.Attributes;
 
 namespace KickstartTemplate.ViewModels.Account
 {

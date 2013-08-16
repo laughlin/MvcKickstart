@@ -11,7 +11,7 @@ namespace KickstartTemplate.Tests.Controllers.Error
 		[Test]
 		public void GivenRequest_ReturnsNoPermissionPageView()
 		{
-			var controller = new ErrorController(Db, Metrics, Cache);
+			var controller = new ErrorController(Db, Cache, Metrics);
 			ControllerUtilities.SetupControllerContext(controller);
 
 			var result = controller.NoPermission() as ViewResult;

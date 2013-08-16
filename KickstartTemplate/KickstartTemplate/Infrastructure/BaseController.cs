@@ -1,30 +1,17 @@
 ﻿using System.Data;
-using System.Net;
 using System.Security.Principal;
-using System.Text;
 using System.Threading;
 using System.Web.Mvc;
-using CacheStack;
 using KickstartTemplate.Models.Users;
 using KickstartTemplate.Services;
-using KickstartTemplate.ViewModels.Shared;
+using MvcKickstart.Infrastructure;
 using ServiceStack.CacheAccess;
-using ServiceStack.Logging;
 using StructureMap;
 
 namespace KickstartTemplate.Infrastructure
 {
-	public abstract class BaseController : Controller, IWithCacheContext
+	public abstract class BaseController : MvcKickstart.Infrastructure.ControllerBase
 	{
-		protected IDbConnection Db { get; private set; }
-		protected IMetricTracker Metrics { get; private set; }
-		protected ILog Log { get; private set; }
-		protected ICacheClient Cache { get; private set; }
-		/// <summary>
-		/// Used to set the cache context for donut cached actions
-		/// </summary>
-		public ICacheContext CacheContext { get; private set; }
-
 		public new UserPrincipal User
 		{
 			get
@@ -33,13 +20,20 @@ namespace KickstartTemplate.Infrastructure
 			}
 		}
 
-		protected BaseController(IDbConnection db, IMetricTracker metrics, ICacheClient cache)
+		protected BaseController()
 		{
-			Db = db;
-			Metrics = metrics;
-			Log = LogManager.GetLogger(GetType());
-			Cache = cache;
-			CacheContext = new CacheContext(Cache);
+		}
+		protected BaseController(IDbConnection db) : base(db)
+		{
+		}
+		protected BaseController(ICacheClient cache) : base(cache)
+		{
+		}
+		protected BaseController(IDbConnection db, ICacheClient cache) : base(db, cache)
+		{
+		}
+		protected BaseController(IDbConnection db, ICacheClient cache, IMetricTracker metrics) : base(db, cache, metrics)
+		{
 		}
 
 		protected override void OnAuthorization(AuthorizationContext filterContext)
@@ -75,89 +69,6 @@ namespace KickstartTemplate.Infrastructure
 
 			Thread.CurrentPrincipal = filterContext.HttpContext.User;
 			base.OnAuthorization(filterContext);
-		}
-
-		protected override void Execute(System.Web.Routing.RequestContext requestContext)
-		{
-			base.Execute(requestContext);
-			// If this is an ajax request, clear the tempdata notification.
-			if (requestContext.HttpContext.Request.IsAjaxRequest())
-			{
-				TempData[ViewDataConstants.Notification] = null;
-			}
-		}
-
-		protected override JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior)
-		{
-			return new ServiceStackJsonResult
-			{
-				Data = data,
-				ContentType = contentType,
-				ContentEncoding = contentEncoding
-			};
-		}
-
-		/// <summary>
-		/// Returns the specified error object as json.  Sets the response status code to the ErrorCode value
-		/// </summary>
-		/// <param name="error">Error to return</param>
-		/// <returns></returns>
-		protected JsonResult JsonError(Error error)
-		{
-			return JsonError(error, error.ErrorCode ?? (int) HttpStatusCode.InternalServerError);
-		}
-		/// <summary>
-		/// Returns the specified error object as json.
-		/// </summary>
-		/// <param name="error">Error to return</param>
-		/// <param name="responseCode">StatusCode to return with the response</param>
-		/// <returns></returns>
-		protected JsonResult JsonError(Error error, int responseCode)
-		{
-			Response.StatusCode = responseCode;
-			return Json(error);
-		}
-
-		/// <summary>
-		/// Specify a success notification to be shown this request
-		/// </summary>
-		/// <param name="message">Notification message</param>
-		protected void NotifySuccess(string message)
-		{
-			Notify(message, NotificationType.Success);
-		}
-		/// <summary>
-		/// Specify a info notification to be shown this request
-		/// </summary>
-		/// <param name="message">Notification message</param>
-		protected void NotifyInfo(string message)
-		{
-			Notify(message, NotificationType.Info);
-		}
-		/// <summary>
-		/// Specify a warning notification to be shown this request
-		/// </summary>
-		/// <param name="message">Notification message</param>
-		protected void NotifyWarning(string message)
-		{
-			Notify(message, NotificationType.Warning);
-		}
-		/// <summary>
-		/// Specify an error notification to be shown this request
-		/// </summary>
-		/// <param name="message">Notification message</param>
-		protected void NotifyError(string message)
-		{
-			Notify(message, NotificationType.Error);
-		}
-		/// <summary>
-		/// Specify a notification to be shown this request
-		/// </summary>
-		/// <param name="message">Notification message</param>
-		/// <param name="type">Notification type</param>
-		protected void Notify(string message, NotificationType type)
-		{
-			TempData[ViewDataConstants.Notification] = new Notification(message, type);
 		}
 	}
 }

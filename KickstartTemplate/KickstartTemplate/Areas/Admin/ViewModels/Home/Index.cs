@@ -7,6 +7,5 @@ namespace KickstartTemplate.Areas.Admin.ViewModels.Home
 {
 	public class Index
 	{
-		public bool HasAnalyticsConfigured { get; set; }
 	}
 }

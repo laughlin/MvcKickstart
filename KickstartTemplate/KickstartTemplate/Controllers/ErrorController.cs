@@ -4,15 +4,16 @@ using System.Net;
 using System.Web.Mvc;
 using CacheStack.DonutCaching;
 using KickstartTemplate.Infrastructure;
-using KickstartTemplate.Infrastructure.Attributes;
 using KickstartTemplate.ViewModels.Error;
+using MvcKickstart.Infrastructure;
+using MvcKickstart.Infrastructure.Attributes;
 using ServiceStack.CacheAccess;
 
 namespace KickstartTemplate.Controllers
 {
 	public class ErrorController : BaseController
 	{
-		public ErrorController(IDbConnection db, IMetricTracker metrics, ICacheClient cache) : base (db, metrics, cache){}
+		public ErrorController(IDbConnection db, ICacheClient cache, IMetricTracker metrics) : base (db, cache, metrics){}
 
 		[GetOrPost("Error", RouteName = "Error_Index")]
 		[DonutOutputCache]

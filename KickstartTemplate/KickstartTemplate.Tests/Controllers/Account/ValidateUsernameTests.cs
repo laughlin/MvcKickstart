@@ -1,4 +1,4 @@
-﻿using KickstartTemplate.Infrastructure;
+﻿using MvcKickstart.Infrastructure;
 using NUnit.Framework;
 using Should.Fluent;
 

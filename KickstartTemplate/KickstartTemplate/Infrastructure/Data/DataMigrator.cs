@@ -30,7 +30,9 @@ namespace KickstartTemplate.Infrastructure.Data
 			var migrationsRun = 0;
 			var migrationTypes = GetMigrationTypes();
 
-			if (!db.TableExists(db.GetTableName<DataMigration>()))
+			var alreadyExecutedMigrations = db.Query<DataMigration>("select * from [{0}]".Fmt(db.GetTableName<DataMigration>())).ToList();
+
+			if (!alreadyExecutedMigrations.Any(x => x.Name == typeof(InitializeDbMigration).Name))
 			{
 				// Create all data, run data init migration
 				var schemaBuilder = new SchemaBuilder(db);
@@ -47,7 +49,6 @@ namespace KickstartTemplate.Infrastructure.Data
 				return db.BulkInsert(migrations);
 			}
 
-			var alreadyExecutedMigrations = db.Query<DataMigration>("select * from [{0}]".Fmt(db.GetTableName<DataMigration>()));
 			foreach (var migration in migrationTypes.Where(t => !alreadyExecutedMigrations.Any(m => m.Name == t.Name)).Select(x => (IMigration)Activator.CreateInstance(x)).OrderBy(x => x.Order))
 			{
 				migration.Execute(db);

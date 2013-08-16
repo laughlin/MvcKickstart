@@ -14,7 +14,7 @@ namespace KickstartTemplate.Tests.Controllers.Home
 		[Test]
 		public void GivenAnonymousUser_ReturnsEmptyResult()
 		{
-			var controller = new HomeController(Db, Metrics, Cache);
+			var controller = new HomeController(Db, Cache, Metrics);
 
 			ControllerUtilities.SetupControllerContext(controller);
 
@@ -25,7 +25,7 @@ namespace KickstartTemplate.Tests.Controllers.Home
 		[Test]
 		public void GivenInvalidPermissions_ReturnsEmptyResult()
 		{
-			var controller = new HomeController(Db, Metrics, Cache);
+			var controller = new HomeController(Db, Cache, Metrics);
 
 			ControllerUtilities.SetupControllerContext(controller, new User { Username = "testUser" });
 
@@ -36,7 +36,7 @@ namespace KickstartTemplate.Tests.Controllers.Home
 		[Test]
 		public void GivenValidPermissions_ReturnsStringResult()
 		{
-			var controller = new HomeController(Db, Metrics, Cache);
+			var controller = new HomeController(Db, Cache, Metrics);
 
 			ControllerUtilities.SetupControllerContext(controller, new User
 				                                                       {

@@ -13,7 +13,8 @@ namespace KickstartTemplate.ViewModels.Account
 		[Required(ErrorMessage = "{0} is required")]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
-        
+        [UIHint("YesNoRadioList")]
+		[Display(Name = "Remember Me")]
 		public bool RememberMe { get; set; }
 
 		public string ReturnUrl { get; set; }

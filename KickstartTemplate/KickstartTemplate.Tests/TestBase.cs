@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
 using Moq;
-using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Tests.Utilities;
+using MvcKickstart.Infrastructure;
 using NUnit.Framework;
 using ServiceStack.CacheAccess;
 using StructureMap;

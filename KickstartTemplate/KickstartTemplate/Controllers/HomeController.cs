@@ -5,9 +5,10 @@ using System.Xml.Linq;
 using AttributeRouting.Web.Mvc;
 using CacheStack.DonutCaching;
 using KickstartTemplate.Infrastructure;
-using KickstartTemplate.Infrastructure.Attributes;
 using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.ViewModels.Home;
+using MvcKickstart.Infrastructure;
+using MvcKickstart.Infrastructure.Extensions;
 using ServiceStack.CacheAccess;
 using StackExchange.Profiling;
 
@@ -15,7 +16,7 @@ namespace KickstartTemplate.Controllers
 {
 	public class HomeController : BaseController
 	{
-		public HomeController(IDbConnection db, IMetricTracker metrics, ICacheClient cache) : base(db, metrics, cache)
+		public HomeController(IDbConnection db, ICacheClient cache, IMetricTracker metrics) : base(db, cache, metrics)
 		{
 		}
 
