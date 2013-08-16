@@ -47,9 +47,9 @@
     <Reference Include="ActionMailer.Net.Mvc">
       <HintPath>..\packages\ActionMailer.0.7.4\lib\Net40\ActionMailer.Net.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="AjaxMin, Version=4.95.4924.12383, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+    <Reference Include="AjaxMin, Version=4.97.4951.28478, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AjaxMin.4.95.4924.12392\lib\net40\AjaxMin.dll</HintPath>
+      <HintPath>..\packages\AjaxMin.4.97.4951.28483\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
     <Reference Include="AttributeRouting, Version=3.5.6.0, Culture=neutral, PublicKeyToken=c10f85d521a011a9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -70,21 +70,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CacheStack.1.0.7\lib\net45\CacheStack.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette, Version=2.2.1.13705, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette, Version=2.2.2.34609, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.2.2.1\lib\net40-client\Cassette.dll</HintPath>
+      <HintPath>..\packages\Cassette.2.2.2\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Aspnet, Version=2.2.1.13706, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.Aspnet, Version=2.2.2.34610, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.Aspnet.2.2.1\lib\net40\Cassette.Aspnet.dll</HintPath>
+      <HintPath>..\packages\Cassette.Aspnet.2.2.2\lib\net40\Cassette.Aspnet.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Less, Version=2.2.1.13705, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.Less, Version=2.2.2.34609, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.Less.2.2.1\lib\net40-client\Cassette.Less.dll</HintPath>
+      <HintPath>..\packages\Cassette.Less.2.2.2\lib\net40-client\Cassette.Less.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Views, Version=2.2.1.13706, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.Views, Version=2.2.2.34610, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.Views.2.2.1\lib\net40\Cassette.Views.dll</HintPath>
+      <HintPath>..\packages\Cassette.Views.2.2.2\lib\net40\Cassette.Views.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=1.12.1.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -133,28 +133,28 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\protobuf-net.2.0.0.640\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
-    <Reference Include="PublicBroadcasting, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PublicBroadcasting, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PublicBroadcasting.1.0.8\lib\net45\PublicBroadcasting.dll</HintPath>
+      <HintPath>..\packages\PublicBroadcasting.1.0.9\lib\net45\PublicBroadcasting.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common, Version=3.9.56.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Common, Version=3.9.58.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Common.3.9.56\lib\net35\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Common.3.9.58\lib\net35\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=3.9.56.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Interfaces, Version=3.9.58.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Common.3.9.56\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Common.3.9.58\lib\net35\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Logging.Log4Net, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Logging.Log4Net, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Logging.Log4Net.1.0.9.0\lib\net35\ServiceStack.Logging.Log4Net.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Logging.Log4Net.1.0.10.0\lib\net35\ServiceStack.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text, Version=3.9.56.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Text, Version=3.9.58.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Text.3.9.56\lib\net35\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Text.3.9.58\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="Sigil, Version=3.0.0.0, Culture=neutral, PublicKeyToken=2d06c3494341c8ab, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
