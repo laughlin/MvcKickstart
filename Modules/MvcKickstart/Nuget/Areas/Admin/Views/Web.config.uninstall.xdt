@@ -3,8 +3,8 @@
     <system.web.webPages.razor>
         <pages>
             <namespaces>
-                <add namespace="MvcKickstart.Infrastructure" xdt:Transform="Remove"/>
-                <add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Transform="Remove"/>
+                <add namespace="MvcKickstart.Infrastructure" xdt:Locator="Match(namespace)" xdt:Transform="Remove"/>
+                <add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Locator="Match(namespace)" xdt:Transform="Remove"/>
             </namespaces>
         </pages>
     </system.web.webPages.razor>

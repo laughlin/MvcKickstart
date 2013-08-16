@@ -3,8 +3,8 @@
     <system.web.webPages.razor>
         <pages>
             <namespaces>
-                <add namespace="MvcKickstart.Infrastructure" xdt:Transform="InsertIfMissing"/>
-                <add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Transform="InsertIfMissing"/>
+                <add namespace="MvcKickstart.Infrastructure" xdt:Locator="Match(namespace)" xdt:Transform="InsertIfMissing"/>
+                <add namespace="MvcKickstart.Infrastructure.Extensions" xdt:Locator="Match(namespace)" xdt:Transform="InsertIfMissing"/>
             </namespaces>
         </pages>
     </system.web.webPages.razor>
