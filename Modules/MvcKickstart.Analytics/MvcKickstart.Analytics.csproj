@@ -151,7 +151,7 @@
     <None Include="Nuget\Areas\Admin\Views\Widgets\AnalyticsAuthorize.cshtml.pp" />
     <None Include="Nuget\Areas\Admin\Views\Widgets\AnalyticsConfig.cshtml.pp" />
     <None Include="Nuget\Areas\Admin\Views\Widgets\AnalyticsWidget.cshtml.pp" />
-    <None Include="Nuget\Areas\Admin\Views\Widgets\Web.config.install.xdt" />
+    <None Include="Nuget\Areas\Admin\Views\Widgets\Web.config.pp" />
     <None Include="Nuget\Areas\Admin\Views\Widgets\_ViewStart.cshtml.pp" />
     <None Include="Nuget\Content\css\Admin\Widgets\Analytics.css.pp" />
     <None Include="Nuget\Content\js\Admin\Widgets\Analytics.js.pp" />
