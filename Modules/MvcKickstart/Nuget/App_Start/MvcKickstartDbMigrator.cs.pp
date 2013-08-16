@@ -21,7 +21,6 @@ namespace $rootnamespace$
 		{
 			return AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("MvcKickstart"))
 				.SelectMany(asm => asm.GetTypes().Where(t => typeof (IMigration).IsAssignableFrom(t)))
-				.OrderBy(x => ((IMigration)x).Order)
 				.ToList();
 		}
 

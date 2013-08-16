@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 using ServiceStack.CacheAccess;
 using StackExchange.Profiling;
 using StackExchange.Profiling.Data;
@@ -11,11 +12,13 @@ namespace MvcKickstart.Infrastructure
 {
 	public class IocRegistry : Registry
 	{
-		public IocRegistry()
+		public IocRegistry(Assembly executingAssembly)
 		{
 			Scan(scan =>
 					{
 						scan.TheCallingAssembly();
+						if (executingAssembly != null)
+							scan.Assembly(executingAssembly);
 						scan.AssemblyContainingType<IocRegistry>();
 						scan.WithDefaultConventions();
 					});

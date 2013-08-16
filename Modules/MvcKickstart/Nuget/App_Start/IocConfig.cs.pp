@@ -11,7 +11,7 @@ namespace $rootnamespace$
 		public static void PreStart() 
 		{
 			// If changes need to be made to IocRegistry, please subclass it and replace the following line
-			ObjectFactory.Initialize(x => x.AddRegistry(new IocRegistry()));
+			ObjectFactory.Initialize(x => x.AddRegistry(new IocRegistry(typeof(IocConfig).Assembly)));
 			DependencyResolver.SetResolver(new StructureMapDependencyScope(ObjectFactory.Container));
 		}
 	}
