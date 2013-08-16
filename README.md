@@ -1,7 +1,7 @@
 MvcKickstart
 ===========
 
-A base site template I use to start a new asp.net mvc project.  This is a .net 4.5, asp.net mvc 4 project. You should be able to relatively easily back port this to .net 4.0 and mvc 3, if needed.
+A base site template I use to start a new asp.net mvc project.  This is a .net 4.5, asp.net mvc 4 project. 
 
 Overview
 --------
@@ -39,8 +39,8 @@ Technology Choices
 
 Renaming Utility
 ----------------
-The Rename Utility (/__Rename Utility/rename.bat) can be used to rename the project from 'MvcKickstart' to whatever you need it named. 
-When you run that file, it will prompt you for the new name. Once the name is entered, the utility will run through all the files to replace any occurrances of 'MvcKickstart' (primarily the namespaces) to the name you entered. It will also rename the project files/folders, solution file, and update the solution file to reference the new project names.
+The Rename Utility (/__Rename Utility/rename.bat) can be used to rename the project from 'KickstartTemplate' to whatever you need it named. 
+When you run that file, it will prompt you for the new name. Once the name is entered, the utility will run through all the files to replace any occurrances of 'KickstartTemplate' (primarily the namespaces) to the name you entered. It will also rename the project files/folders, solution file, and update the solution file to reference the new project names.
 
 Questions
 -----------------
