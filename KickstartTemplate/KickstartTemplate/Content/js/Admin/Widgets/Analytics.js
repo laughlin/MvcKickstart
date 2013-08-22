@@ -44,7 +44,7 @@
 	getAnalytics();
 	 
 	function getAnalytics() {
-		$("#AnalyticsLoading").show();
+		$("#AnalyticsLoading").removeClass('hide');
 		
 		$.post(Url.widgetsAnalytics, {
 			duration: $("#Duration").val()

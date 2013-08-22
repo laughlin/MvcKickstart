@@ -1,5 +1,4 @@
 ﻿global.js
-rating.js
 
 [references]
 ~/Content/js/_lib/jquery

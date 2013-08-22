@@ -19,9 +19,9 @@ namespace KickstartTemplate.Infrastructure
 			bundles.AddPerIndividualFile<StylesheetBundle>("Content/css", new ExcludeDirectorySearch("*.css", new[] { "_lib" }));
 			bundles.AddPerSubDirectory<StylesheetBundle>("Content/css/_lib");
 
-			bundles.AddPerIndividualFile<StylesheetBundle>("Content/less", new ExcludeDirectorySearch("*.less", new[] { "_lib", "Shared" }));
-			bundles.Add<StylesheetBundle>("Content/less/Shared");
-			bundles.AddPerSubDirectory<StylesheetBundle>("Content/less/_lib");
+			//bundles.AddPerIndividualFile<StylesheetBundle>("Content/less", new ExcludeDirectorySearch("*.less", new[] { "_lib", "Shared" }));
+			//bundles.Add<StylesheetBundle>("Content/less/Shared");
+			//bundles.AddPerSubDirectory<StylesheetBundle>("Content/less/_lib");
 
 			// Exclude the lib and Admin directories since those are bundled per directory
 			bundles.AddPerIndividualFile<ScriptBundle>("Content/js", new ExcludeDirectorySearch("*.js", new []{"_lib"}));

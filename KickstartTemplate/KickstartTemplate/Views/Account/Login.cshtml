@@ -7,40 +7,53 @@
 	Login
 }
 
-<h2>Login</h2>
+<div class="page-header">
+	<h2>Login</h2>
+</div>
 	
 @using(Html.BeginForm()) {
 	@Html.DecodedValidationSummary(false)
-	<div class="form-horizontal">
-		<fieldset>
+	<div class="form-horizontal row">
+		<fieldset class="col-md-6">
 			@Html.HiddenFor(x => x.ReturnUrl)
-			<div class="control-group">
-				@Html.LabelFor(x => x.Username, new { @class = "control-label" })
-				<div class="controls">
-					@Html.TextBoxWithMaxLengthFor(x => x.Username, new {tabindex = 1})
+			<div class="form-group">
+				@Html.LabelFor(x => x.Username, new { @class = "col-md-4 control-label" })
+				<div class="col-md-8">
+					@Html.TextBoxWithMaxLengthFor(x => x.Username, new { @class = "form-control", tabindex = 1 })
 					@Html.ValidationMessageFor(x => x.Username)
 				</div>
 			</div>
-			<div class="control-group">
-				@Html.LabelFor(x => x.Password, new { @class = "control-label" })
-				<div class="controls">
-					@Html.PasswordWithMaxLengthFor(x => x.Password, new {tabindex = 1})
+			<div class="form-group">
+				@Html.LabelFor(x => x.Password, new { @class = "col-md-4 control-label" })
+				<div class="col-md-8">
+					@Html.PasswordWithMaxLengthFor(x => x.Password, new { @class = "form-control", tabindex = 1 })
 					@Html.ValidationMessageFor(x => x.Password)
 				</div>
 			</div>
-			<div class="control-group">
-				@Html.LabelFor(x => x.RememberMe, new { @class = "control-label" })
-				<div class="controls">
+			@*
+			<div class="form-group">
+				@Html.LabelFor(x => x.RememberMe, new { @class = "col-md-4 control-label" })
+				<div class="col-md-8">
 					@Html.EditorFor(x => x.RememberMe)
 				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<a href="@Url.Account().ForgotPassword()">Forgot Your Password?</a>
+			</div>*@
+			@Html.HiddenFor(x => x.RememberMe)
+			<div class="form-group">
+				<div class="col-md-8 col-md-offset-4">
+					<div class="row">
+						<div class="col-xs-4">
+							<button type="submit" class="btn btn-primary">Login</button>
+						</div>
+						<div class="col-xs-8 form-control-static">
+							<a href="@Url.Account().ForgotPassword()">Forgot your password?</a>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Login</button>
+			<div class="form-group">
+				<div class="col-md-8 col-md-offset-4 form-control-static">
+					New here? <a href="@Url.Account().Register()">Create an account</a>
+				</div>
 			</div>
 		</fieldset>
 	</div>

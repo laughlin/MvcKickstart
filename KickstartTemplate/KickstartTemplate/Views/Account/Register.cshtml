@@ -7,50 +7,56 @@
 	}, "head");
 }
 @section Title {
-	Register to get started!
+	Create an Account
 }
 
-<h2>Register to get started!</h2>
+<div class="page-header">
+	<h2>Create an Account</h2>
+</div>
 
 @using(Html.BeginForm()) {
 	@Html.ValidationSummary(false)
-	<div class="form-horizontal">
-		@Html.HiddenFor(x => x.ReturnUrl)
-		<fieldset>
-			<div class="control-group">
-				@Html.LabelFor(x => x.Username, new { @class = "control-label" })
-				<div class="controls">
-					@Html.TextBoxWithMaxLengthFor(x => x.Username)
-					<span class="help-inline username-valid hide" title="Username is valid"><i class="icon-ok"></i></span>
-					<span class="help-inline username-invalid hide" title="Username is not available"><i class="icon-remove"></i></span>
+	<div class="form-horizontal row">
+		<fieldset class="col-md-6">
+			@Html.HiddenFor(x => x.ReturnUrl)
+			<div class="form-group">
+				@Html.LabelFor(x => x.Username, new { @class = "col-md-4 control-label" })
+				<div class="col-md-8">
+					@Html.TextBoxWithMaxLengthFor(x => x.Username, new { @class = "form-control" })
+					<span class="form-control-static username-valid hide" title="Username is valid"><i class="icon-ok"></i></span>
+					<span class="form-control-static username-invalid hide" title="Username is not available"><i class="icon-remove"></i></span>
 					@Html.ValidationMessageFor(x => x.Username)
 				</div>
 			</div>
-			<div class="control-group">
-				@Html.LabelFor(x => x.Name, new { @class = "control-label" })
-				<div class="controls">
-					@Html.TextBoxWithMaxLengthFor(x => x.Name)
+			<div class="form-group">
+				@Html.LabelFor(x => x.Name, new { @class = "col-md-4 control-label" })
+				<div class="col-md-8">
+					@Html.TextBoxWithMaxLengthFor(x => x.Name, new { @class = "form-control" })
 					@Html.ValidationMessageFor(x => x.Name)
 				</div>
 			</div>
-			<div class="control-group">
-				@Html.LabelFor(x => x.Email, new { @class = "control-label" })
-				<div class="controls">
-					@Html.TextBoxWithMaxLengthFor(x => x.Email)
+			<div class="form-group">
+				@Html.LabelFor(x => x.Email, new { @class = "col-md-4 control-label" })
+				<div class="col-md-8">
+					@Html.TextBoxWithMaxLengthFor(x => x.Email, new { @class = "form-control" })
 					@Html.ValidationMessageFor(x => x.Email)
 				</div>
 			</div>
-			<div class="control-group">
-				@Html.LabelFor(x => x.Password, new { @class = "control-label" })
-				<div class="controls">
-					@Html.PasswordWithMaxLengthFor(x => x.Password)
+			<div class="form-group">
+				@Html.LabelFor(x => x.Password, new { @class = "col-md-4 control-label" })
+				<div class="col-md-8">
+					@Html.PasswordWithMaxLengthFor(x => x.Password, new { @class = "form-control" })
 					@Html.ValidationMessageFor(x => x.Password)
 				</div>
 			</div>
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Join Now</button>
-				<div class="control-group">
-					Already a member? <a href="@Url.Account().Login()">Sign in</a>
+			<div class="form-group">
+				<div class="col-md-8 col-md-offset-4">
+					<button type="submit" class="btn btn-primary">Create New Account</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-8 col-md-offset-4 form-control-static">
+					Already have an account? <a href="@Url.Account().Login()">Login</a>
 				</div>
 			</div>
 		</fieldset>

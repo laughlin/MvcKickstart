@@ -1,16 +1,12 @@
 ﻿@{
-	Bundles.Reference("~/Content/js/_lib/modernizr", "head");
-	Bundles.Reference("~/Content/js/_lib/bootstrap");
+	Bundles.Reference("~/Content/css/Shared/global.css");
 	Bundles.Reference("~/Content/js/Shared/global.js");
-	
-	Bundles.Reference("~/Content/less/Shared");
 }
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
 	<title>
 		@if (IsSectionDefined("Title"))
 		{
@@ -21,56 +17,38 @@
 		}
 	</title>
 	@RenderSection("Meta", false)
-	<meta name="viewport" content="width=device-width" />
-	<link rel="icon" href="@Url.Content("~/favicon.ico")" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" href="@Url.Image("~/content/images/favicon.png")" />
 	@Bundles.RenderStylesheets("bootstrap")
 	@Bundles.RenderStylesheets()
 	@Bundles.RenderScripts("head")
 </head>
 <body>
 	@Html.Action("Menu", "Home", new { Area = "Admin" }, true)
-	<div class="navbar navbar-static-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	<header class="navbar navbar-static-top" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="@Url.Home().Index()">KickstartTemplate</a>
-				@if (IsSectionDefined("Nav"))
-				{
-					@RenderSection("Nav")
-				} 
-				else
-				{
-					<div class="nav-collapse">
-						<ul class="nav">
-							@{
-								var nav = ViewBag.MainNav ?? MainNav.None;
-							}
-							<li @if (nav == MainNav.Home) { <text>class="active"</text> }><a href="@Url.Home().Index()">Home</a></li>
-						</ul>
-						<ul class="nav pull-right">
-							<li>@Html.Action("UsernameOrLogin", "Home", new { Area = "" }, true)</li>
-						</ul>
-					</div>
-				}
-				@if (IsSectionDefined("Breadcrumb"))
-				{
-					<div class="breadcrumb">
-						@RenderSection("Breadcrumb")
-					</div>
-				}
+				</button>
+				<a href="@Url.Home().Index()" class="navbar-brand">KickstartTemplate</a>
 			</div>
+			<nav class="collapse navbar-collapse navbar-collapse" role="navigation">
+				@Html.Action("Menu", "Home", new { Area = "" }, true)
+			</nav>
 		</div>
-	</div>
-	<div class="container">
+	</header>
+	<main class="container" role="main">
 		@Html.Action("Notification", "Home", new { Area = "" }, true)
 		@RenderBody()
-	</div>
-	<footer class="container">
-		<p>&copy; @DateTime.Today.Year</p>
+	</main>
+	<footer class="container" role="contentinfo">
+		<ul class="list-inline">
+			<li>&copy; @DateTime.Today.Year</li>
+		</ul>
 	</footer>
 	@Bundles.RenderScripts()
 	@Html.Action("Profiler", "Home", new { Area = "" }, true)

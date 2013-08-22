@@ -69,14 +69,12 @@ namespace KickstartTemplate.Controllers
 			return PartialView("_Notification");
 		}
 
-		[Route("__partial__Home_UsernameOrLogin")]
+		[Route("__partial__Home_Menu")]
 		[DonutOutputCache(VaryByCustom = VaryByCustom.User)]
-		public ActionResult UsernameOrLogin()
+		public ActionResult Menu()
 		{
-			// This route could probably also go in a UsersController if it exists
-			return PartialView("_UsernameOrLogin");
+			return PartialView("_Menu");
 		}
-
 
 		#endregion
 	}

@@ -13,7 +13,7 @@
 		}
 		try
 		{
-			Bundles.Reference("~/Content/less/" + ViewContext.RouteData.Values["controller"]);
+			Bundles.Reference("~/Content/css/" + ViewContext.RouteData.Values["controller"] + "/" + ViewContext.RouteData.Values["action"] + ".css");
 		}
 		catch (ArgumentException)
 		{

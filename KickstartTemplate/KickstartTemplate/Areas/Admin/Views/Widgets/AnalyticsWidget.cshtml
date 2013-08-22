@@ -8,7 +8,7 @@
 }
 
 <div id="AnalyticsSummaryWidget" class="well widget">
-	<h4>Analytics Summary</h4>
+	<h2>Analytics Summary</h2>
 	<div class="content">
 		<small>Loading...</small>
 	</div>
