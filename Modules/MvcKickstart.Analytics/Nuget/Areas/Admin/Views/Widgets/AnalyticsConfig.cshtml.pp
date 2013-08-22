@@ -1,9 +1,9 @@
 ﻿@model MvcKickstart.Analytics.ViewModels.Widgets.Config
 
 @using (Html.BeginRouteForm("MvcKickstart_Analytics_Widgets_AnalyticsConfig")) {
-	<div class="control-group">
+	<div class="form-group">
 		@Html.LabelFor(x => x.ProfileId)
-		<select name="ProfileId" id="ProfileId">
+		<select name="ProfileId" id="ProfileId" class="form-control">
 			@foreach (var account in Model.Accounts.OrderBy(x => x.Name)) {
 				if (!Model.Profiles.Any(x => x.AccountId == account.Id)) {
 					continue;
@@ -16,5 +16,7 @@
 			}
 		</select>
 	</div>
-	<button type="submit" class="btn">Submit</button>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</div>
 }

@@ -7,7 +7,7 @@
 <div id="AnalyticsSummaryWidgetContent">
 	<div class="row">
 		<div class="col-sm-6">
-			@Model.Profile.Name
+			<h4>@Model.Profile.Name</h4>
 		</div>
 		<div class="col-sm-6">
 			<div class="text-right">
@@ -16,7 +16,7 @@
 					new SelectListItem { Text = "Past 30 days", Value = "30" },
 					new SelectListItem { Text = "Past 60 days", Value = "60" },
 					new SelectListItem { Text = "Yesterday", Value = "1" }
-				})
+				}, new { @class = "form-control analyticsTimeframe" })
 			</div>
 		</div>
 	</div>
@@ -72,7 +72,7 @@
 			</tbody>
 		</table>
 	} else {
-		<p>There were no pageviews discoverd :(</p>
+		<p>There were no pageviews discovered :(</p>
 	}
 	<div class="row">
 		<div class="col-sm-6">

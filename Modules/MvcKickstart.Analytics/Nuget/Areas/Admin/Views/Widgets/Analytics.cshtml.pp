@@ -5,24 +5,24 @@
 	var analyticsDataLabels = [@for (var i = 0; i < Model.Visits.Count(); i++) {var item = Model.Visits.ElementAt(i);if (i > 0) {<text>,</text>}<text>"@item.Key.ToString("dddd, MMM d, yyyy")"</text>}];
 </script>
 <div id="AnalyticsSummaryWidgetContent">
-	<div class="row-fluid">
-		<div class="span6">
-			@Model.Profile.Name
+	<div class="row">
+		<div class="col-sm-6">
+			<h4>@Model.Profile.Name</h4>
 		</div>
-		<div class="span6">
-			<div class="pull-right">
+		<div class="col-sm-6">
+			<div class="text-right">
 				<img id="AnalyticsLoading" src="@Url.Image("loading.gif")" alt="..." class="hide" />
 				@Html.DropDownListFor(x => x.Duration, new [] {
 					new SelectListItem { Text = "Past 30 days", Value = "30" },
 					new SelectListItem { Text = "Past 60 days", Value = "60" },
 					new SelectListItem { Text = "Yesterday", Value = "1" }
-				})
+				}, new { @class = "form-control analyticsTimeframe" })
 			</div>
 		</div>
 	</div>
 	<div id="AnalyticsGraph"></div>
 
-	<h6>Site Usage</h6>
+	<h3>Site Usage</h3>
 	<table class="table table-bordered table-condensed">
 		<tbody>
 			<tr>
@@ -53,7 +53,7 @@
 
 	</table>
 
-	<h6>Top Pages</h6>
+	<h3>Top Pages</h3>
 	@if (Model.PageViews.Any()) {
 		<table class="table table-bordered table-condensed">
 			<thead>
@@ -72,11 +72,11 @@
 			</tbody>
 		</table>
 	} else {
-		<p>There were no pageviews discoverd :(</p>
-	}	
-	<table style="width:100%">
-		<td style="width:50%;padding-right:1%">
-			<h6>Top Referrers</h6>
+		<p>There were no pageviews discovered :(</p>
+	}
+	<div class="row">
+		<div class="col-sm-6">
+			<h3>Top Referrers</h3>
 			@if (Model.TopReferrers.Any()) {
 				<table class="table table-bordered table-condensed">
 					<thead>
@@ -95,12 +95,12 @@
 					</tbody>
 				</table>
 			} else {
-				<p>There were no referrers discoverd :(</p>
+				<p>There were no referrers discovered :(</p>
 			}	
-		</td>
-		<td style="width:50%;padding-left:1%">
-			<h6>Top Searches</h6>
-			@if (Model.TopReferrers.Any()) {
+		</div>
+		<div class="col-sm-6">
+			<h3>Top Searches</h3>
+			@if (Model.TopSearches.Any()) {
 				<table class="table table-bordered table-condensed">
 					<thead>
 						<tr>
@@ -118,10 +118,10 @@
 					</tbody>
 				</table>
 			} else {
-				<p>There were no searches discoverd :(</p>
+				<p>There were no searches discovered :(</p>
 			}	
-		</td>
-	</table>
+		</div>
+	</div>
 
 	<small class="footerRight">Generated at @DateTime.Now.ToSmallTime()</small>
 </div>

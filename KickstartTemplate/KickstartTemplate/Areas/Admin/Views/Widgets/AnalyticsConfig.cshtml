@@ -2,7 +2,7 @@
 
 @using (Html.BeginRouteForm("MvcKickstart_Analytics_Widgets_AnalyticsConfig")) {
 	<div class="form-group">
-		@Html.LabelFor(x => x.ProfileId, new { @class = "control-label" })
+		@Html.LabelFor(x => x.ProfileId)
 		<select name="ProfileId" id="ProfileId" class="form-control">
 			@foreach (var account in Model.Accounts.OrderBy(x => x.Name)) {
 				if (!Model.Profiles.Any(x => x.AccountId == account.Id)) {

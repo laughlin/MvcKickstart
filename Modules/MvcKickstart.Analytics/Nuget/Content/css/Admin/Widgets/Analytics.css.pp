@@ -29,3 +29,7 @@ small.footerRight {
 #AnalyticsGraph {
 	height: 230px;
 }
+.analyticsTimeframe {
+	width:auto !important;
+	display: inline-block !important;
+}
