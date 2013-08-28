@@ -103,7 +103,7 @@ namespace MvcKickstart.Infrastructure
 		}
 
 		/// <summary>
-		/// Specify a success notification to be shown this request
+		/// Specify a success notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
 		protected void NotifySuccess(string message)
@@ -111,7 +111,7 @@ namespace MvcKickstart.Infrastructure
 			Notify(message, NotificationType.Success);
 		}
 		/// <summary>
-		/// Specify a info notification to be shown this request
+		/// Specify a info notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
 		protected void NotifyInfo(string message)
@@ -119,7 +119,7 @@ namespace MvcKickstart.Infrastructure
 			Notify(message, NotificationType.Info);
 		}
 		/// <summary>
-		/// Specify a warning notification to be shown this request
+		/// Specify a warning notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
 		protected void NotifyWarning(string message)
@@ -127,7 +127,7 @@ namespace MvcKickstart.Infrastructure
 			Notify(message, NotificationType.Warning);
 		}
 		/// <summary>
-		/// Specify an error notification to be shown this request
+		/// Specify an error notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
 		protected void NotifyError(string message)
@@ -135,13 +135,21 @@ namespace MvcKickstart.Infrastructure
 			Notify(message, NotificationType.Error);
 		}
 		/// <summary>
-		/// Specify a notification to be shown this request
+		/// Specify a notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
 		/// <param name="type">Notification type</param>
 		protected void Notify(string message, NotificationType type)
 		{
-			TempData[ViewDataConstants.Notification] = new Notification(message, type);
+			Notify(new Notification(message, type));
+		}
+		/// <summary>
+		/// Specify a notification to be shown for this request
+		/// </summary>
+		/// <param name="notification">Notification message</param>
+		protected void Notify(Notification notification)
+		{
+			TempData[ViewDataConstants.Notification] = notification;
 		}
 	}
 }
