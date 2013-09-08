@@ -12,14 +12,18 @@ namespace MvcKickstart.Infrastructure
 {
 	public class IocRegistry : Registry
 	{
-		public IocRegistry(Assembly executingAssembly)
+		public IocRegistry(params Assembly[] additionalAssembliesToScan)
 		{
 			Scan(scan =>
 					{
 						scan.TheCallingAssembly();
-						if (executingAssembly != null)
-							scan.Assembly(executingAssembly);
-
+						if (additionalAssembliesToScan != null)
+						{
+							foreach (var assembly in additionalAssembliesToScan)
+							{
+								scan.Assembly(assembly);
+							}
+						}
 						// Make sure all plugins/modules are wired up with default conventions
 						scan.AssembliesFromApplicationBaseDirectory(x => x.FullName.Contains("MvcKickstart"));
 						scan.AssemblyContainingType<IocRegistry>();
