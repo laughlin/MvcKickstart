@@ -3,12 +3,15 @@
 set /p projectName="New Project Name: " %=%
 
 @echo Renaming 'KickstartTemplate' to '%projectName%'
+::@echo %CD%
 cd ../KickstartTemplate/KickstartTemplate
 call:renameFiles
-cd ../KickstartTemplate/KickstartTemplate.Tests
+@echo Renaming 'KickstartTemplate.Tests' to '%projectName%.Tests'
+::@echo %CD%
+cd ../../KickstartTemplate/KickstartTemplate.Tests
 call:renameFiles
-
 cd ../
+
 ::@echo %CD%
 ::find/replace in root directory (no recursion to avoid the __Rename Utility__ directory)
 "__Rename Utility__/fart.exe" -- * "KickstartTemplate" %projectName%
@@ -30,9 +33,9 @@ goto:eof
 :renameFiles
 ::echo %CD%
 ::find/replace in project subdirectories
-"../__Rename Utility__/fart.exe" -r -- * "KickstartTemplate" %projectName%
+"../../__Rename Utility__/fart.exe" -r -- * "KickstartTemplate" %projectName%
 
 ::rename files in project subdirectories
-"../__Rename Utility__/fart.exe" -r -f -- * "KickstartTemplate" %projectName%
+"../../__Rename Utility__/fart.exe" -r -f -- * "KickstartTemplate" %projectName%
 
 goto:eof
