@@ -25,8 +25,11 @@
 			<from value="do_not_reply@localhost.com" />
 			<subject value="Error :: $rootnamespace$ (Review)" />
 			<smtpHost value="localhost" />
-			<bufferSize value="512" />
-			<lossy value="false" />
+			<bufferSize value="20" />
+			<lossy value="true" />
+			<evaluator type="log4net.Core.LevelEvaluator">
+				<threshold value="ERROR" />
+			</evaluator>
 			<filter type="log4net.Filter.LevelRangeFilter">
 				<param name="LevelMin" value="ERROR" />
 				<param name="LevelMax" value="FATAL" />
@@ -40,8 +43,11 @@
 			<from value="do_not_reply@localhost.com" />
 			<subject value="Warn :: $rootnamespace$ (Review)" />
 			<smtpHost value="localhost" />
-			<bufferSize value="512" />
-			<lossy value="false" />
+			<bufferSize value="20" />
+			<lossy value="true" />
+			<evaluator type="log4net.Core.LevelEvaluator">
+				<threshold value="WARN" />
+			</evaluator>
 			<filter type="log4net.Filter.LevelRangeFilter">
 				<param name="LevelMin" value="WARN" />
 				<param name="LevelMax" value="WARN" />
