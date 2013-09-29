@@ -146,6 +146,7 @@
     <Compile Include="Infrastructure\Notification.cs" />
     <Compile Include="Infrastructure\NotificationType.cs" />
     <Compile Include="Infrastructure\ServiceStackJsonResult.cs" />
+    <Compile Include="Infrastructure\SmtpCachingAppender.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
     <Compile Include="Infrastructure\VaryByCustom.cs" />
     <Compile Include="Infrastructure\ViewDataConstants.cs" />

@@ -20,7 +20,7 @@
 		</handlers>
 	</system.webServer>
 	<log4net>
-		<appender name="SmtpAppender" type="log4net.Appender.SmtpAppender,log4net" xdt:Transform="Insert">
+		<appender name="SmtpAppender" type="MvcKickstart.Infrastructure.SmtpCachingAppender, MvcKickstart" xdt:Transform="Insert">
 			<to value="notset@localhost" />
 			<from value="do_not_reply@localhost.com" />
 			<subject value="Error :: $rootnamespace$ (Review)" />
@@ -38,7 +38,7 @@
 				<conversionPattern value="%property{log4net:HostName} :: %level :: %message %newlineLogger: %logger%newlineThread: %thread%newlineDate: %date%newlineNDC: %property{NDC}%newlineUrl: %property{CurrentRequestUrl}%newlineUser: %property{CurrentRequestUsername}%newlineReferrer: %property{CurrentRequestReferrer}%newlineUser-Agent:%property{CurrentRequestUserAgent}%newline%newline" />
 			</layout>
 		</appender>
-		<appender name="SmtpWarnAppender" type="log4net.Appender.SmtpAppender,log4net" xdt:Transform="Insert">
+		<appender name="SmtpWarnAppender" type="MvcKickstart.Infrastructure.SmtpCachingAppender, MvcKickstart" xdt:Transform="Insert">
 			<to value="notset@localhost" />
 			<from value="do_not_reply@localhost.com" />
 			<subject value="Warn :: $rootnamespace$ (Review)" />
