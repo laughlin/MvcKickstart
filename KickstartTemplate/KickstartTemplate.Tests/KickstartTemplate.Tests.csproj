@@ -112,6 +112,9 @@
     <Reference Include="MvcContrib.TestHelper">
       <HintPath>..\packages\MvcContrib.Mvc3.TestHelper-ci.3.0.100.0\lib\MvcContrib.TestHelper.dll</HintPath>
     </Reference>
+    <Reference Include="MvcKickstart">
+      <HintPath>..\packages\MvcKickstart.1.0.25\lib\net45\MvcKickstart.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
