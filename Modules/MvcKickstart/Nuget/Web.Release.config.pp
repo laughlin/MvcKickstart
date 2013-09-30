@@ -30,35 +30,12 @@
 			<evaluator type="log4net.Core.LevelEvaluator">
 				<threshold value="ERROR" />
 			</evaluator>
-			<filter type="log4net.Filter.LevelRangeFilter">
-				<param name="LevelMin" value="ERROR" />
-				<param name="LevelMax" value="FATAL" />
-			</filter>
-			<layout type="log4net.Layout.PatternLayout,log4net">
-				<conversionPattern value="%property{log4net:HostName} :: %level :: %message %newlineLogger: %logger%newlineThread: %thread%newlineDate: %date%newlineNDC: %property{NDC}%newlineUrl: %property{CurrentRequestUrl}%newlineUser: %property{CurrentRequestUsername}%newlineReferrer: %property{CurrentRequestReferrer}%newlineUser-Agent:%property{CurrentRequestUserAgent}%newline%newline" />
-			</layout>
-		</appender>
-		<appender name="SmtpWarnAppender" type="MvcKickstart.Infrastructure.SmtpCachingAppender, MvcKickstart" xdt:Transform="Insert">
-			<to value="notset@localhost" />
-			<from value="do_not_reply@localhost.com" />
-			<subject value="Warn :: $rootnamespace$ (Production)" />
-			<smtpHost value="localhost" />
-			<bufferSize value="20" />
-			<lossy value="true" />
-			<evaluator type="log4net.Core.LevelEvaluator">
-				<threshold value="WARN" />
-			</evaluator>
-			<filter type="log4net.Filter.LevelRangeFilter">
-				<param name="LevelMin" value="WARN" />
-				<param name="LevelMax" value="WARN" />
-			</filter>
 			<layout type="log4net.Layout.PatternLayout,log4net">
 				<conversionPattern value="%property{log4net:HostName} :: %level :: %message %newlineLogger: %logger%newlineThread: %thread%newlineDate: %date%newlineNDC: %property{NDC}%newlineUrl: %property{CurrentRequestUrl}%newlineUser: %property{CurrentRequestUsername}%newlineReferrer: %property{CurrentRequestReferrer}%newlineUser-Agent:%property{CurrentRequestUserAgent}%newline%newline" />
 			</layout>
 		</appender>
 		<root>
 			<appender-ref ref="SmtpAppender" xdt:Transform="Insert" />
-			<appender-ref ref="SmtpWarnAppender" xdt:Transform="Insert" />
 		</root>
 	</log4net>
 </configuration>
