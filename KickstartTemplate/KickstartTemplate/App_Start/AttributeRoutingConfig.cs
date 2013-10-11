@@ -1,5 +1,6 @@
 ﻿using System.Web.Routing;
 using AttributeRouting.Web.Mvc;
+using KickstartTemplate.Infrastructure;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(KickstartTemplate.AttributeRoutingConfig), "Start")]
 
@@ -12,7 +13,11 @@ namespace KickstartTemplate
 			// See http://github.com/mccalltd/AttributeRouting/wiki for more options.
 			// To debug routes locally using the built in ASP.NET development server, go to /routes.axd
             
-			routes.MapAttributeRoutes();
+			routes.MapAttributeRoutes(x =>
+				{
+					x.AddRoutesFromAssemblyOf<BaseController>();
+					x.UseLowercaseRoutes = true;
+				});
 		}
 
         public static void Start() 
