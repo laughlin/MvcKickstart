@@ -71,7 +71,7 @@ namespace MvcKickstart.Infrastructure
 		/// Returns the specified error object as json.  Sets the response status code to the ErrorCode value
 		/// </summary>
 		/// <returns></returns>
-		public JsonResult JsonError()
+		protected JsonResult JsonError()
 		{
 			return JsonError(new Error());
 		}
@@ -106,7 +106,7 @@ namespace MvcKickstart.Infrastructure
 		/// Specify a success notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
-		protected void NotifySuccess(string message)
+		public void NotifySuccess(string message)
 		{
 			Notify(message, NotificationType.Success);
 		}
@@ -114,7 +114,7 @@ namespace MvcKickstart.Infrastructure
 		/// Specify a info notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
-		protected void NotifyInfo(string message)
+		public void NotifyInfo(string message)
 		{
 			Notify(message, NotificationType.Info);
 		}
@@ -122,7 +122,7 @@ namespace MvcKickstart.Infrastructure
 		/// Specify a warning notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
-		protected void NotifyWarning(string message)
+		public void NotifyWarning(string message)
 		{
 			Notify(message, NotificationType.Warning);
 		}
@@ -130,7 +130,7 @@ namespace MvcKickstart.Infrastructure
 		/// Specify an error notification to be shown for this request
 		/// </summary>
 		/// <param name="message">Notification message</param>
-		protected void NotifyError(string message)
+		public void NotifyError(string message)
 		{
 			Notify(message, NotificationType.Error);
 		}
@@ -139,7 +139,7 @@ namespace MvcKickstart.Infrastructure
 		/// </summary>
 		/// <param name="message">Notification message</param>
 		/// <param name="type">Notification type</param>
-		protected void Notify(string message, NotificationType type)
+		public void Notify(string message, NotificationType type)
 		{
 			Notify(new Notification(message, type));
 		}
@@ -147,7 +147,7 @@ namespace MvcKickstart.Infrastructure
 		/// Specify a notification to be shown for this request
 		/// </summary>
 		/// <param name="notification">Notification message</param>
-		protected void Notify(Notification notification)
+		public void Notify(Notification notification)
 		{
 			TempData[ViewDataConstants.Notification] = notification;
 		}
