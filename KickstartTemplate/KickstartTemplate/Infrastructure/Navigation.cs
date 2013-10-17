@@ -1,6 +1,6 @@
 ﻿namespace KickstartTemplate.Infrastructure
 {
-	public enum MainNav
+	public enum Navigation
 	{
 		None,
 		Home,

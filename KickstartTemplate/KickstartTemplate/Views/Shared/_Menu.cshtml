@@ -1,9 +1,9 @@
 ﻿@{
 	Layout = null;
-	var nav = ViewBag.MainNav ?? MainNav.None;
+	var nav = ViewBag.Nav ?? Navigation.None;
 }
 <ul class="nav navbar-nav">
-	<li @if (nav == MainNav.Home) { <text>class="active"</text> }><a href="@Url.Home().Index()">Home</a></li>
+	<li @if (nav == Navigation.Home) { <text>class="active"</text> }><a href="@Url.Home().Index()">Home</a></li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
 	@if (User.Identity.IsAuthenticated) {

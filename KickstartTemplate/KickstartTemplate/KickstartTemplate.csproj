@@ -258,7 +258,7 @@
     <Compile Include="Infrastructure\Extensions\UrlHelperAdminUrls.cs" />
     <Compile Include="Infrastructure\Extensions\EnumExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\UrlHelperExtensions.cs" />
-    <Compile Include="Infrastructure\MainNav.cs" />
+    <Compile Include="Infrastructure\Navigation.cs" />
     <Compile Include="Infrastructure\Metric.cs" />
     <Compile Include="Infrastructure\UserPrincipal.cs" />
     <Compile Include="Models\Users\PasswordRetrieval.cs" />
