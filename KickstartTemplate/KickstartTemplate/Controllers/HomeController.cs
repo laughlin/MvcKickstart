@@ -7,6 +7,7 @@ using CacheStack.DonutCaching;
 using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.ViewModels.Home;
+using KickstartTemplate.ViewModels.Shared;
 using MvcKickstart.Infrastructure;
 using MvcKickstart.Infrastructure.Extensions;
 using ServiceStack.CacheAccess;
@@ -70,10 +71,14 @@ namespace KickstartTemplate.Controllers
 		}
 
 		[Route("__partial__Home_Menu")]
-		[DonutOutputCache(VaryByCustom = VaryByCustom.User)]
-		public ActionResult Menu()
+		[DonutOutputCache(VaryByParam = "nav", VaryByCustom = VaryByCustom.User)]
+		public ActionResult Menu(Navigation nav)
 		{
-			return PartialView("_Menu");
+			var model = new Menu
+				{
+					Nav = nav
+				};
+			return PartialView("_Menu", model);
 		}
 
 		#endregion

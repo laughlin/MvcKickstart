@@ -277,6 +277,7 @@
     <Compile Include="ViewModels\Mail\ForgotPassword.cs" />
     <Compile Include="ViewModels\Mail\TrackClick.cs" />
     <Compile Include="ViewModels\Mail\Welcome.cs" />
+    <Compile Include="ViewModels\Shared\Menu.cs" />
     <Compile Include="ViewModels\Shared\RedirectError.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -422,6 +423,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Shared\Web.config" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
