@@ -247,7 +247,7 @@ namespace MvcKickstart.Analytics.Controllers
 					JsonSerializer = new RestSharpJsonSerializer()
 				};
 			var accountsResult = client.Execute<ListResponse<Account>>(accountsRequest);
-			return accountsResult.Data.Items;
+			return accountsResult.Data.Items ?? new List<Account>();
 		}
 		private IList<Profile> GetProfiles(SiteSettings settings)
 		{
@@ -260,7 +260,7 @@ namespace MvcKickstart.Analytics.Controllers
 					JsonSerializer = new RestSharpJsonSerializer()
 				};
 			var profilesResult = client.Execute<ListResponse<Profile>>(profilesRequest);
-			return profilesResult.Data.Items;
+			return profilesResult.Data.Items ?? new List<Profile>();
 		}
 
 		[POST("widgets/analytics/config", RouteName = "MvcKickstart_Analytics_Widgets_AnalyticsConfig")]
