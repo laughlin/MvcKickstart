@@ -1,7 +1,5 @@
 ﻿using System.Data;
 using System.Web.Mvc;
-using AttributeRouting;
-using AttributeRouting.Web.Mvc;
 using KickstartTemplate.Areas.Admin.ViewModels.Home;
 using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Attributes;
@@ -17,7 +15,7 @@ namespace KickstartTemplate.Areas.Admin.Controllers
 		{
 		}
 
-		[GET("", RouteName = "Admin_Home_Index")]
+		[HttpGet, Route("", Name = "Admin_Home_Index")]
 		[Restricted(RequireAdmin = true)]
 		public ActionResult Index()
 		{

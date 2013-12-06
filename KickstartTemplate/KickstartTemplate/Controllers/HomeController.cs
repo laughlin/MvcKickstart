@@ -2,7 +2,6 @@
 using System.IO;
 using System.Web.Mvc;
 using System.Xml.Linq;
-using AttributeRouting.Web.Mvc;
 using CacheStack.DonutCaching;
 using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Extensions;
@@ -21,7 +20,7 @@ namespace KickstartTemplate.Controllers
 		{
 		}
 
-		[GET("", RouteName = "Home_Index")]
+		[HttpGet, Route("", Name = "Home_Index")]
 		[DonutOutputCache]
 		public ActionResult Index()
 		{
@@ -29,7 +28,7 @@ namespace KickstartTemplate.Controllers
 			return View(model);
 		}
 
-		[GET("sitemap.xml")]
+		[HttpGet, Route("sitemap.xml")]
 		public FileResult SiteMap()
 		{
 			var doc = new XDocument();

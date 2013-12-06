@@ -15,14 +15,14 @@ namespace KickstartTemplate.Controllers
 	{
 		public ErrorController(IDbConnection db, ICacheClient cache, IMetricTracker metrics) : base (db, cache, metrics){}
 
-		[GetOrPost("Error", RouteName = "Error_Index")]
+		[Route("Error", Name = "Error_Index")]
 		[DonutOutputCache]
 		public ActionResult Index()
 		{
 			return View("Error");
 		}
 
-		[GetOrPost("Invalid-Page", RouteName = "Error_InvalidPage")]
+		[Route("Invalid-Page", Name = "Error_InvalidPage")]
 		[DonutOutputCache]
 		public ActionResult InvalidPage()
 		{
@@ -48,7 +48,7 @@ namespace KickstartTemplate.Controllers
 			return View(model);
 		}
 
-		[GetOrPost("No-Permission", RouteName = "Error_NoPermission")]
+		[Route("No-Permission", Name = "Error_NoPermission")]
 		[DonutOutputCache]
 		public ActionResult NoPermission()
 		{

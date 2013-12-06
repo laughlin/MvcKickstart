@@ -2,7 +2,6 @@
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
-using AttributeRouting.Web.Mvc;
 using AutoMapper;
 using CacheStack;
 using CacheStack.DonutCaching;
@@ -34,14 +33,14 @@ namespace KickstartTemplate.Controllers
 			_authenticationService = authenticationService;
 		}
 
-		[GET("account", RouteName = "Account_Index")]
+		[HttpGet, Route("account", Name = "Account_Index")]
 		[DonutOutputCache]
 		public ActionResult Index()
 		{
 			return Redirect(Url.Home().Index());
 		}
 
-		[GET("account/login", RouteName = "Account_Login")]
+		[HttpGet, Route("account/login", Name = "Account_Login")]
 		[DonutOutputCache(VaryByParam = "returnUrl", VaryByCustom = VaryByCustom.UserIsAuthenticated)]
 		public ActionResult Login(string returnUrl)
 		{
@@ -58,7 +57,7 @@ namespace KickstartTemplate.Controllers
 			return View(model);
 		}
 
-		[POST("account/login")]
+		[HttpPost, Route("account/login")]
 		public ActionResult Login(Login model)
 		{
 			if (ModelState.IsValid)
@@ -87,7 +86,7 @@ namespace KickstartTemplate.Controllers
 		}
 
 		[Restricted]
-		[GET("account/logout", RouteName = "Account_Logout")]
+		[HttpGet, Route("account/logout", Name = "Account_Logout")]
 		public ActionResult Logout(string returnUrl)
 		{
 			Metrics.Increment(Metric.Users_Logout);
@@ -99,7 +98,7 @@ namespace KickstartTemplate.Controllers
 
 		#region Register
 
-		[GET("account/register", RouteName = "Account_Register")]
+		[HttpGet, Route("account/register", Name = "Account_Register")]
 		[DonutOutputCache(VaryByParam = "returnUrl", VaryByCustom = VaryByCustom.UserIsAuthenticated)]
 		public ActionResult Register(string returnUrl)
 		{
@@ -111,7 +110,7 @@ namespace KickstartTemplate.Controllers
 			return View(new Register { ReturnUrl = returnUrl });
 		}
 
-		[POST("account/register")]
+		[HttpPost, Route("account/register")]
 		public ActionResult Register(Register model)
 		{
 			if (ModelState.IsValid)
@@ -169,7 +168,7 @@ namespace KickstartTemplate.Controllers
 			return View(model);
 		}
 
-		[POST("account/validate-username", RouteName = "Account_ValidateUsername")]
+		[HttpPost, Route("account/validate-username", Name = "Account_ValidateUsername")]
 		[DonutOutputCache(VaryByParam = "username")]
 		public JsonResult ValidateUsername(string username)
 		{
@@ -190,14 +189,14 @@ namespace KickstartTemplate.Controllers
 		#endregion
 
 		#region Forgot Password
-		[GET("account/forgot-password", RouteName = "Account_ForgotPassword")]
+		[HttpGet, Route("account/forgot-password", Name = "Account_ForgotPassword")]
 		[DonutOutputCache]
 		public ActionResult ForgotPassword()
 		{
 			return View();
 		}
 
-		[POST("account/forgot-password")]
+		[HttpPost, Route("account/forgot-password")]
 		public ActionResult ForgotPassword(ForgotPassword model)
 		{
 			if (ModelState.IsValid)
@@ -229,7 +228,7 @@ namespace KickstartTemplate.Controllers
 			return View(model);
 		}
 
-		[GET("account/reset-password/{token}", RouteName = "Account_ResetPassword")]
+		[HttpGet, Route("account/reset-password/{token}", Name = "Account_ResetPassword")]
 		public ActionResult ResetPassword(string token)
 		{
 			if (User.Identity.IsAuthenticated)
@@ -259,7 +258,7 @@ namespace KickstartTemplate.Controllers
 			return View(model);
 		}
 
-		[POST("account/reset-password/{token}")]
+		[HttpPost, Route("account/reset-password/{token}")]
 		public ActionResult ResetPassword(ResetPassword model)
 		{
 			if (User.Identity.IsAuthenticated)

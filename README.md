@@ -1,7 +1,7 @@
 MvcKickstart
 ===========
 
-A base site template I use to start a new asp.net mvc project.  This is a .net 4.5, asp.net mvc 4 project. 
+A base site template I use to start a new asp.net mvc project.  This is a .net 4.5, asp.net mvc 5 project. 
 
 Overview
 --------
