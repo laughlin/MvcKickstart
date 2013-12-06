@@ -17,6 +17,7 @@
 			<dependency id="Cassette.Aspnet" version="2.2.1" />
 			<dependency id="CommonServiceLocator" version="1.0" />
 			<dependency id="Microsoft.AspNet.Mvc" version="4.0" />
+			<dependency id="Microsoft.Net.Http" version="2.2" />
 			<dependency id="Microsoft.Web.Infrastructure" version="1.0" />
 			<dependency id="MiniProfiler" version="2.1.0" />
 			<dependency id="ServiceStack.Common" version="3.9.55" />
@@ -25,6 +26,8 @@
 			<dependency id="structuremap" version="2.6.4" />
 			<dependency id="WebActivatorEx" version="2.0" />
 		</dependencies>
+		<releaseNotes>v1.2 Changes:
+* Support MemoryCacheClient in a webfarm environment</releaseNotes>
 	</metadata>
 	<files>
 		<file src="nuget\**\*.*" target="content" />

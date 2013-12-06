@@ -1,27 +1,32 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
-using System.Web;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using ServiceStack.CacheAccess;
 using ServiceStack.Logging;
+using ServiceStack.Text;
 
 namespace MvcKickstart.Infrastructure
 {
-	// Sucks that I have to copy the code from https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/CacheAccess.Providers/MemoryCacheClient.cs but 
-	// I don't want to have to add the ServiceStack nuget and its dependencies just for this class.
-	public class MemoryCacheClient : ICacheClient
+	public class MemoryCacheClient : ICacheClient, ICacheClientBroadcaster
 	{
 		private static readonly ILog Log = LogManager.GetLogger(typeof(MemoryCacheClient));
 
-		private ConcurrentDictionary<string, CacheEntry> memory;
-		private ConcurrentDictionary<string, int> counters;
+		private ConcurrentDictionary<string, CacheEntry> _memory;
+		private ConcurrentDictionary<string, int> _counters;
+		private readonly IList<string> _broadcastNodes;
 
 		public bool FlushOnDispose { get; set; }
 
 		private class CacheEntry
 		{
-			private object cacheValue;
+			private object _cacheValue;
 
 			public CacheEntry(object value, DateTime expiresAt)
 			{
@@ -34,10 +39,10 @@ namespace MvcKickstart.Infrastructure
 
 			internal object Value
 			{
-				get { return cacheValue; }
+				get { return _cacheValue; }
 				set
 				{
-					cacheValue = value;
+					_cacheValue = value;
 					LastModifiedTicks = DateTime.Now.Ticks;
 				}
 			}
@@ -47,8 +52,26 @@ namespace MvcKickstart.Infrastructure
 
 		public MemoryCacheClient()
 		{
-			this.memory = new ConcurrentDictionary<string, CacheEntry>();
-			this.counters = new ConcurrentDictionary<string, int>();
+			_memory = new ConcurrentDictionary<string, CacheEntry>();
+			_counters = new ConcurrentDictionary<string, int>();
+			_broadcastNodes = new List<string>();
+			// Expected a list of machine names like bia-web1,bia-web2
+			foreach (var node in (ConfigurationManager.AppSettings["CacheStack:BroadcastNodes"] ?? string.Empty).Split(new [] { ',',';' }, StringSplitOptions.RemoveEmptyEntries))
+			{
+				// Don't broadcast to yourself
+				if (Environment.MachineName.Equals(node, StringComparison.OrdinalIgnoreCase))
+					continue;
+				_broadcastNodes.Add(node);
+			}
+			// Handle list of sites and machine name maps: bia-web1:web1.biacreations.com,bia-web2:web2.biacreations.com
+			foreach (var map in (ConfigurationManager.AppSettings["CacheStack:BroadcastNodeMap"] ?? string.Empty).Split(new [] { ',',';' }, StringSplitOptions.RemoveEmptyEntries))
+			{
+				var mapParts = map.Split(new [] { ':' }, 1, StringSplitOptions.RemoveEmptyEntries);
+				// Don't broadcast to yourself
+				if (Environment.MachineName.Equals(mapParts[0], StringComparison.OrdinalIgnoreCase))
+					continue;
+				_broadcastNodes.Add(mapParts[1]);
+			}
 		}
 
 		private bool CacheAdd(string key, object value)
@@ -58,12 +81,12 @@ namespace MvcKickstart.Infrastructure
 
 		private bool TryGetValue(string key, out CacheEntry entry)
 		{
-			return this.memory.TryGetValue(key, out entry);
+			return _memory.TryGetValue(key, out entry);
 		}
 
 		private void Set(string key, CacheEntry entry)
 		{
-			this.memory[key] = entry;
+			_memory[key] = entry;
 		}
 
 		/// <summary>
@@ -76,10 +99,10 @@ namespace MvcKickstart.Infrastructure
 		private bool CacheAdd(string key, object value, DateTime expiresAt)
 		{
 			CacheEntry entry;
-			if (this.TryGetValue(key, out entry)) return false;
+			if (TryGetValue(key, out entry)) return false;
 
 			entry = new CacheEntry(value, expiresAt);
-			this.Set(key, entry);
+			Set(key, entry);
 
 			return true;
 		}
@@ -105,10 +128,10 @@ namespace MvcKickstart.Infrastructure
 		private bool CacheSet(string key, object value, DateTime expiresAt, long? checkLastModified)
 		{
 			CacheEntry entry;
-			if (!this.TryGetValue(key, out entry))
+			if (!TryGetValue(key, out entry))
 			{
 				entry = new CacheEntry(value, expiresAt);
-				this.Set(key, entry);
+				Set(key, entry);
 				return true;
 			}
 
@@ -135,14 +158,23 @@ namespace MvcKickstart.Infrastructure
 		{
 			if (!FlushOnDispose) return;
 
-			this.memory = new ConcurrentDictionary<string, CacheEntry>();
-			this.counters = new ConcurrentDictionary<string, int>();
+			_memory = new ConcurrentDictionary<string, CacheEntry>();
+			_counters = new ConcurrentDictionary<string, int>();
 		}
 
 		public bool Remove(string key)
 		{
+			return Remove(key, true);
+		}
+		public bool Remove(string key, bool broadcast)
+		{
 			CacheEntry item;
-			return this.memory.TryRemove(key, out item);
+			var result = _memory.TryRemove(key, out item);
+			if (broadcast)
+			{
+				Broadcast("remove", new { key });
+			}
+			return result;
 		}
 
 		public void RemoveAll(IEnumerable<string> keys)
@@ -151,7 +183,7 @@ namespace MvcKickstart.Infrastructure
 			{
 				try
 				{
-					this.Remove(key);
+					Remove(key);
 				}
 				catch (Exception ex)
 				{
@@ -171,11 +203,11 @@ namespace MvcKickstart.Infrastructure
 			lastModifiedTicks = 0;
 
 			CacheEntry cacheEntry;
-			if (this.memory.TryGetValue(key, out cacheEntry))
+			if (_memory.TryGetValue(key, out cacheEntry))
 			{
 				if (cacheEntry.ExpiresAt < DateTime.Now)
 				{
-					this.memory.TryRemove(key, out cacheEntry);
+					_memory.TryRemove(key, out cacheEntry);
 					return null;
 				}
 				lastModifiedTicks = cacheEntry.LastModifiedTicks;
@@ -193,12 +225,12 @@ namespace MvcKickstart.Infrastructure
 
 		private int UpdateCounter(string key, int value)
 		{
-			if (!this.counters.ContainsKey(key))
+			if (!_counters.ContainsKey(key))
 			{
-				this.counters[key] = 0;
+				_counters[key] = 0;
 			}
-			this.counters[key] += value;
-			return this.counters[key];
+			_counters[key] += value;
+			return _counters[key];
 		}
 
 		public long Increment(string key, uint amount)
@@ -258,7 +290,49 @@ namespace MvcKickstart.Infrastructure
 
 		public void FlushAll()
 		{
-			this.memory = new ConcurrentDictionary<string, CacheEntry>();
+			FlushAll(true);
+		}
+
+		public void FlushAll(bool broadcast)
+		{
+			_memory = new ConcurrentDictionary<string, CacheEntry>();
+
+			if (broadcast)
+			{
+				Broadcast("flushall");
+			}
+		}
+
+		private void Broadcast(string action, object values = null)
+		{
+			if (!_broadcastNodes.Any())
+				return;
+
+			var additionalValues = new StringBuilder();
+			if (values != null)
+			{
+				foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(values))
+				{
+					additionalValues.Append("&");
+					additionalValues.Append(descriptor.Name);
+					additionalValues.Append("=");
+					additionalValues.Append(descriptor.GetValue(values));
+				}
+			}
+
+			var httpOptions = new HttpClientHandler
+				{
+					AllowAutoRedirect = true
+				};
+			foreach (var node in _broadcastNodes)
+			{
+				var client = new HttpClient(httpOptions);
+				client.GetAsync("{0}/Cache.axd?action={1}{2}".Fmt(
+					node,
+					action,
+					additionalValues.ToString()
+				)).Start();
+			}
 		}
 
 		public IDictionary<string, T> GetAll<T>(IEnumerable<string> keys)
