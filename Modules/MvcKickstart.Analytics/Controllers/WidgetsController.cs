@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
-using AttributeRouting;
-using AttributeRouting.Web.Mvc;
 using CacheStack;
 using CacheStack.DonutCaching;
 using Google.GData.Analytics;
@@ -33,19 +31,19 @@ namespace MvcKickstart.Analytics.Controllers
 			_siteSettingsService = siteSettingsService;
 		}
 
-		[GET("widgets/analytics", RouteName = "MvcKickstart_Analytics_Widgets_Index")]
+		[HttpGet, Route("widgets/analytics", Name = "MvcKickstart_Analytics_Widgets_Index")]
 		public ActionResult Index()
 		{			
 			return Redirect(Url.AdminHome());
 		}
 
-		[GET("widgets/analyticsWidget", RouteName = "MvcKickstart_Analytics_Widgets_AnalyticsWidget")]
+		[HttpGet, Route("widgets/analyticsWidget", Name = "MvcKickstart_Analytics_Widgets_AnalyticsWidget")]
 		public ActionResult AnalyticsWidget()
 		{			
 			return View();
 		}
 
-		[GET("widgets/analytics/authResponse", RouteName = "MvcKickstart_Analytics_Widgets_AuthResponse")]
+		[HttpGet, Route("widgets/analytics/authResponse", Name = "MvcKickstart_Analytics_Widgets_AuthResponse")]
 		public ActionResult AuthResponse(string token)
 		{
 			var sessionToken = AuthSubUtil.exchangeForSessionToken(token, null);
@@ -58,7 +56,7 @@ namespace MvcKickstart.Analytics.Controllers
 			return Redirect(Url.AdminHome());
 		}
 
-		[POST("widgets/analytics", RouteName = "MvcKickstart_Analytics_Widgets_Analytics")]
+		[HttpPost, Route("widgets/analytics", Name = "MvcKickstart_Analytics_Widgets_Analytics")]
 		[DonutOutputCache]
 		public ActionResult Analytics(int? duration)
 		{
@@ -263,7 +261,7 @@ namespace MvcKickstart.Analytics.Controllers
 			return profilesResult.Data.Items ?? new List<Profile>();
 		}
 
-		[POST("widgets/analytics/config", RouteName = "MvcKickstart_Analytics_Widgets_AnalyticsConfig")]
+		[HttpPost, Route("widgets/analytics/config", Name = "MvcKickstart_Analytics_Widgets_AnalyticsConfig")]
 		public ActionResult AnalyticsConfig(Config model)
 		{
 			var settings = _siteSettingsService.GetSettings();

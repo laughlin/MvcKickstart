@@ -10,15 +10,7 @@
 		<caching>
 			<outputCache enableOutputCache="true" xdt:Transform="SetAttributes" />
 		</caching>
-		<httpHandlers>
-			<add path="routes.axd" xdt:Locator="Match(path)" xdt:Transform="Remove" />
-		</httpHandlers>
 	</system.web>
-	<system.webServer>
-		<handlers>
-			<add name="AttributeRouting" xdt:Locator="Match(name)" xdt:Transform="Remove" />
-		</handlers>
-	</system.webServer>
 	<log4net>
 		<appender name="SmtpAppender" type="MvcKickstart.Infrastructure.SmtpCachingAppender, MvcKickstart" xdt:Transform="Insert">
 			<to value="notset@localhost" />
