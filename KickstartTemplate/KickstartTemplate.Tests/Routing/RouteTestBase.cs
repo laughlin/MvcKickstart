@@ -8,7 +8,7 @@ namespace KickstartTemplate.Tests.Routing
 		protected RouteTestBase()
 		{
 			if (RouteTable.Routes == null || RouteTable.Routes.Count == 0)
-				AttributeRoutingConfig.RegisterRoutes(RouteTable.Routes);
+				MvcAttributeRoutesHack.MapAttributeRoutes();
 		}
 
 		public void Dispose()

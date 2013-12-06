@@ -1,4 +1,9 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Reflection;
+using System.Web.Mvc;
 using System.Web.Routing;
 using KickstartTemplate.Infrastructure.Data;
 using MvcKickstart.Infrastructure;
@@ -13,9 +18,6 @@ namespace KickstartTemplate.Tests
 		[SetUp]
 		public void Setup()
 		{
-			if (RouteTable.Routes == null || RouteTable.Routes.Count == 0)
-				AttributeRoutingConfig.RegisterRoutes(RouteTable.Routes);
-
 			IocConfig.PreStart();
 
 			DbConfig.Setup();
@@ -25,6 +27,9 @@ namespace KickstartTemplate.Tests
 			new SchemaBuilder(db).GenerateSchema(true);
 
 			AutomapperConfig.CreateMappings();
+
+			// Map routes... This is an annoying hack because the MVC team figured people don't care about testing attribute routes!
+			MvcAttributeRoutesHack.MapAttributeRoutes();
 		}
 	}
 }
