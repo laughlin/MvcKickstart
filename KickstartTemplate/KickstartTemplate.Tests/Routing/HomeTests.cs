@@ -1,4 +1,4 @@
-﻿using MvcContrib.TestHelper;
+﻿using KickstartTemplate.Tests.Extensions;
 using KickstartTemplate.Controllers;
 using NUnit.Framework;
 

@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Moq;
 using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Attributes;
@@ -89,8 +90,8 @@ namespace KickstartTemplate.Tests.Utilities
 				) { User = principal };
 
 			controller.ControllerContext = mockContext.Object;
-			var mockUrlHelper = new Mock<UrlHelper>(mockContext.Object.RequestContext);
-			controller.Url = mockUrlHelper.Object;
+			var urlHelper = new UrlHelper(new RequestContext(httpContext.Object, new RouteData()), RouteTable.Routes);
+			controller.Url = urlHelper;
 		}
 
 		/// <summary>
