@@ -34,9 +34,8 @@ namespace MvcKickstart.Infrastructure
 			For<SqlConnection>().Use(() =>
 			{
 				var connStr = "Default";
-				var userConnStr = string.Join("_", connStr, Environment.MachineName);
-				if (ConfigurationManager.ConnectionStrings[userConnStr] != null)
-					connStr = userConnStr;
+				if (ConfigurationManager.ConnectionStrings[Environment.MachineName] != null)
+					connStr = Environment.MachineName;
 				return new SqlConnection(ConfigurationManager.ConnectionStrings[connStr].ConnectionString);
 			});
 
