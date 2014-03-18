@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
@@ -30,7 +31,14 @@ namespace MvcKickstart.Infrastructure
 						scan.WithDefaultConventions();
 					});
 
-			For<SqlConnection>().Use(() => new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString));
+			For<SqlConnection>().Use(() =>
+			{
+				var connStr = "Default";
+				var userConnStr = string.Join("_", connStr, Environment.MachineName);
+				if (ConfigurationManager.ConnectionStrings[userConnStr] != null)
+					connStr = userConnStr;
+				return new SqlConnection(ConfigurationManager.ConnectionStrings[connStr].ConnectionString);
+			});
 
 			For<IDbConnection>()
 				.HybridHttpOrThreadLocalScoped()
