@@ -55,22 +55,53 @@ namespace MvcKickstart.Infrastructure
 			_memory = new ConcurrentDictionary<string, CacheEntry>();
 			_counters = new ConcurrentDictionary<string, int>();
 			_broadcastNodes = new List<string>();
-			// Expected a list of machine names like bia-web1,bia-web2
-			foreach (var node in (ConfigurationManager.AppSettings["CacheStack:BroadcastNodes"] ?? string.Empty).Split(new [] { ',',';' }, StringSplitOptions.RemoveEmptyEntries))
+			
+			try
 			{
-				// Don't broadcast to yourself
-				if (Environment.MachineName.Equals(node, StringComparison.OrdinalIgnoreCase))
-					continue;
-				_broadcastNodes.Add(node);
+				// Expected a list of machine names like bia-web1,bia-web2
+				foreach (var node in (ConfigurationManager.AppSettings["CacheStack:BroadcastNodes"] ?? string.Empty).Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					Log.InfoFormat("Parsing cache broadcast node: {0}", node);
+					// Don't broadcast to yourself
+					if (Environment.MachineName.Equals(node, StringComparison.OrdinalIgnoreCase))
+					{
+						Log.InfoFormat("Ignoring local machine cache broadcast node: ", node);
+						continue;
+					}
+					var url = node;
+					if (!url.StartsWithIgnoreCase("http"))
+						url = "http://" + url;
+					Log.InfoFormat("Adding cache broadcast url: {0}", url);
+					_broadcastNodes.Add(url);
+				}
+				// Handle list of sites and machine name maps: bia-web1:web1.biacreations.com,bia-web2:web2.biacreations.com
+				foreach (var map in (ConfigurationManager.AppSettings["CacheStack:BroadcastNodeMap"] ?? string.Empty).Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					Log.InfoFormat("Parsing cache broadcast node map: {0}", map);
+					var mapParts = map.Split(new [] { ':' }, 2, StringSplitOptions.RemoveEmptyEntries);
+					// Don't broadcast to yourself
+					if (mapParts.Length != 2)
+					{
+						Log.Warn("Map format seems incorrect. Expected <computer-name>:<url>");
+						continue;
+					}
+					if (Environment.MachineName.Equals(mapParts[0], StringComparison.OrdinalIgnoreCase))
+					{
+						Log.InfoFormat("Ignoring local machine cache broadcast node: ", map);
+						continue;
+					}
+					var url = mapParts[1];
+					if (!url.StartsWithIgnoreCase("http"))
+						url = "http://" + url;
+					Log.InfoFormat("Adding cache broadcast url: {0}", url);
+
+					_broadcastNodes.Add(mapParts[1]);
+				}
 			}
-			// Handle list of sites and machine name maps: bia-web1:web1.biacreations.com,bia-web2:web2.biacreations.com
-			foreach (var map in (ConfigurationManager.AppSettings["CacheStack:BroadcastNodeMap"] ?? string.Empty).Split(new [] { ',',';' }, StringSplitOptions.RemoveEmptyEntries))
+			catch (Exception ex)
 			{
-				var mapParts = map.Split(new [] { ':' }, 1, StringSplitOptions.RemoveEmptyEntries);
-				// Don't broadcast to yourself
-				if (Environment.MachineName.Equals(mapParts[0], StringComparison.OrdinalIgnoreCase))
-					continue;
-				_broadcastNodes.Add(mapParts[1]);
+				// We don't want to disable the entire app if the cluster caching invalidation doesn't init properly. Just log and continue
+				Log.Error("Error parsing cache broadcast node information", ex);
 			}
 		}
 
