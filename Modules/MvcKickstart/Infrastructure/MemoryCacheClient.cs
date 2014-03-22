@@ -95,7 +95,7 @@ namespace MvcKickstart.Infrastructure
 						url = "http://" + url;
 					Log.InfoFormat("Adding cache broadcast url: {0}", url);
 
-					_broadcastNodes.Add(mapParts[1]);
+					_broadcastNodes.Add(url);
 				}
 			}
 			catch (Exception ex)
