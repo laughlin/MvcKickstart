@@ -355,15 +355,17 @@ namespace MvcKickstart.Infrastructure
 				{
 					AllowAutoRedirect = true
 				};
+			var tasks = new List<Task>();
 			foreach (var node in _broadcastNodes)
 			{
 				var client = new HttpClient(httpOptions);
-				client.GetAsync("{0}/Cache.axd?action={1}{2}".Fmt(
+				tasks.Add(client.GetAsync("{0}/Cache.axd?action={1}{2}".Fmt(
 					node,
 					action,
 					additionalValues.ToString()
-				)).Start();
+				), HttpCompletionOption.ResponseHeadersRead));
 			}
+			Task.WaitAll(tasks.ToArray());
 		}
 
 		public IDictionary<string, T> GetAll<T>(IEnumerable<string> keys)
