@@ -31,7 +31,7 @@ namespace MvcKickstart.Infrastructure.Extensions
 
 		public static string Image(this UrlHelper helper, string file)
 		{
-			return helper.GetHashedContentFile("~/Content/images/{0}".Fmt(file));
+			return helper.GetHashedContentFile("~/content/images/{0}".Fmt(file));
 		}
 
 		/// <summary>
