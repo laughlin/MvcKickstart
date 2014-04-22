@@ -147,10 +147,7 @@ namespace MvcKickstart.Infrastructure.Extensions
 
 			var div = new TagBuilder("div");
 			div.AddCssClass("alert");
-			if (notification.Type != NotificationType.Warning)
-			{
-				div.AddCssClass("alert-" + notification.Type.ToString().ToLower());
-			}
+			div.AddCssClass("alert-" + notification.Type.ToString().ToLower());
 			if (!string.IsNullOrWhiteSpace(notification.Title))
 			{
 				var title = new TagBuilder("h4");
