@@ -1,0 +1,21 @@
+﻿@model DateTime?
+@{
+	var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+	if (!string.IsNullOrEmpty(ViewData.ModelMetadata.DisplayName)) {
+		name = ViewData.ModelMetadata.DisplayName;
+	}
+	var required = false;
+	var className = "form-control datepicker";
+	if (ViewData.ModelMetadata.IsRequired) {
+		className += " required";
+		required = true;
+	}
+}
+<div class="form-group">
+	@Html.Label("", name) @if (required) {<text>*</text>}
+	@if (Model == null || Model.Value == DateTime.MinValue) {
+		@Html.TextBox("", string.Empty, new { @class = className, placeholder = ViewData.ModelMetadata.Watermark })
+	} else {
+		@Html.TextBox("", Model.Value.ToString("yyyy-MM-dd"), new { @class = className, placeholder = ViewData.ModelMetadata.Watermark })
+	}
+</div>

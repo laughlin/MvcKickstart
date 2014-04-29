@@ -29,8 +29,12 @@ namespace KickstartTemplate.Controllers
 
 		private void SetToAndFromValues(EmailBase model)
 		{
-			To.Add(model.To);
+			if (!string.IsNullOrEmpty(model.To))
+			{
+				To.Add(model.To);
+			}
 			From = model.From ?? ConfigurationManager.AppSettings["Email:Support"];
+			model.SiteTitle = ConfigurationManager.AppSettings["Site:Title"];
 		}
 	}
 }

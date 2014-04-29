@@ -8,7 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{29FD2C9A-A11F-4495-9799-E50866C89878}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KickstartTemplate</RootNamespace>
@@ -237,7 +237,6 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\Index.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MailController.cs" />
@@ -274,8 +273,9 @@
     <Compile Include="ViewModels\Home\Index.cs" />
     <Compile Include="ViewModels\Mail\EmailBase.cs" />
     <Compile Include="ViewModels\Mail\ForgotPassword.cs" />
-    <Compile Include="ViewModels\Mail\TrackClick.cs" />
     <Compile Include="ViewModels\Mail\Welcome.cs" />
+    <Compile Include="ViewModels\Shared\Analytics.cs" />
+    <Compile Include="ViewModels\Shared\TagManager.cs" />
     <Compile Include="ViewModels\Shared\Menu.cs" />
     <Compile Include="ViewModels\Shared\RedirectError.cs" />
   </ItemGroup>
@@ -425,6 +425,10 @@
     <Content Include="Views\Shared\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Shared\_Analytics.cshtml" />
+    <Content Include="Views\Shared\_TagManager.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

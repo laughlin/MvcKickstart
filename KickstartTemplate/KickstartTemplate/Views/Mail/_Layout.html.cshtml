@@ -7,9 +7,9 @@
 	<title>
 		@if (IsSectionDefined("Title")) {
 			@RenderSection("Title", false)
-			<text> :: LaughlinProjectRequest</text>
+			<text> :: @Model.SiteTitle</text>
 		} else {
-			<text>LaughlinProjectRequest</text>
+			<text>@Model.SiteTitle</text>
 		}
 	</title>
 
@@ -17,7 +17,6 @@
 
 <body>
 	@RenderBody()
-
 	<img src="@Url.Absolute(Url.Email().TrackView(Model.TrackingId.ToString("N")))" alt="" width="1" height="1" border="0" style="height: 1px !important; width: 1px !important; border-width: 0 !important; margin-top: 0 !important; margin-bottom: 0 !important; margin-right: 0 !important; margin-left: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; padding-right: 0 !important; padding-left: 0 !important;" />
 </body>
 </html>

@@ -6,6 +6,6 @@ namespace KickstartTemplate.ViewModels.Mail
 	{
 		public string To { get; set; }
 		public string From { get; set; }
-		public Guid TrackingId { get; set; }
+		public string SiteTitle { get; set; }
 	}
 }

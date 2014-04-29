@@ -1,6 +1,7 @@
 ﻿@{
 	Bundles.Reference("~/Content/css/Shared/global.css");
 	Bundles.Reference("~/Content/js/Shared/global.js");
+	var title = System.Configuration.ConfigurationManager.AppSettings["Site:Title"];
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -10,18 +11,20 @@
 	<title>
 		@if (IsSectionDefined("Title")) {
 			@RenderSection("Title", false)
-			<text> :: KickstartTemplate</text>
+			<text> :: @title</text>
 		} else {
-			<text>KickstartTemplate</text>
+			<text>@title</text>
 		}
 	</title>
 	@RenderSection("Meta", false)
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="icon" href="@Url.Image("~/content/images/favicon.png")" />
 	@Bundles.RenderStylesheets()
+	@Html.Action("Analytics", "Home", new { Area = "" })
 	@Bundles.RenderScripts("head")
 </head>
 <body>
+	@Html.Action("TagManager", "Home", new { Area = "" })
 	@Html.Action("Menu", "Home", new { Area = "Admin" }, true)
 	<header class="navbar navbar-default navbar-static-top" role="banner">
 		<div class="container">

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
 using System.IO;
 using System.Web.Mvc;
 using System.Xml.Linq;
@@ -78,6 +79,40 @@ namespace KickstartTemplate.Controllers
 					Nav = nav
 				};
 			return PartialView("_Menu", model);
+		}
+
+		[Route("__partial__Home_Analytics")]
+		[DonutOutputCache]
+		public ActionResult Analytics()
+		{
+			var model = new Analytics
+				{
+					Id = ConfigurationManager.AppSettings["Analytics:Id"],
+					Domain = ConfigurationManager.AppSettings["Analytics:Domain"]
+				};
+
+			if (string.IsNullOrEmpty(model.Id))
+				return new EmptyResult();
+
+			if (string.IsNullOrEmpty(model.Domain))
+				model.Domain = "auto";
+
+			return PartialView("_Analytics", model);
+		}
+
+		[Route("__partial__Home_TagManager")]
+		[DonutOutputCache]
+		public ActionResult TagManager()
+		{
+			var model = new TagManager
+				{
+					Id = ConfigurationManager.AppSettings["Analytics:TagManagerId"],
+				};
+
+			if (string.IsNullOrEmpty(model.Id))
+				return new EmptyResult();
+
+			return PartialView("_TagManager", model);
 		}
 
 		#endregion
