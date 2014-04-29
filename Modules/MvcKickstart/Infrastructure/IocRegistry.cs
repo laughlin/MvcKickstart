@@ -55,7 +55,7 @@ namespace MvcKickstart.Infrastructure
 				     	{
 				     		int port;
 				     		int.TryParse(ConfigurationManager.AppSettings["Metrics:Port"], out port);
-				     		return new MetricTracker(ConfigurationManager.AppSettings["Metrics:Host"], port);
+				     		return new MetricTracker(ConfigurationManager.AppSettings["Metrics:Host"], port, ConfigurationManager.AppSettings["Metrics:Prefix"]);
 				     	})
 				.Named("Metric Tracker");
 

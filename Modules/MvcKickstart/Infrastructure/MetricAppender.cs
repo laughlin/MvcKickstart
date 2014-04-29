@@ -11,21 +11,23 @@ namespace MvcKickstart.Infrastructure
 
 		private string Host { get; set; }
 		private int Port { get; set; }
+		private string Prefix { get; set; }
 
 		public MetricAppender()
 		{
 			Value = 1;
 
 			// Not able to easily use structuremap at this point, so I'll just create the object myself. 
-			Host = ConfigurationManager.AppSettings["MetricTracking_Host"];
+			Host = ConfigurationManager.AppSettings["Metrics:Host"];
 			int port;
-			int.TryParse(ConfigurationManager.AppSettings["MetricTracking_Port"], out port);
+			int.TryParse(ConfigurationManager.AppSettings["Metrics:Port"], out port);
 			Port = port;
+			Prefix = ConfigurationManager.AppSettings["Metrics:Prefix"] ?? string.Empty;
 		}
 
 		protected override void Append(LoggingEvent loggingEvent)
 		{
-			using (var tracker = new MetricTracker(Host, Port))
+			using (var tracker = new MetricTracker(Host, Port, Prefix))
 			{
 				tracker.Increment(Increment, Value);
 			}

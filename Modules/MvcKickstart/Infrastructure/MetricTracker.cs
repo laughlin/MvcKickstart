@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -9,9 +10,12 @@ namespace MvcKickstart.Infrastructure
 	{
 		private readonly UdpClient _udpClient;
 		private readonly Random _random = new Random();
+		private readonly string _prefix;
 
-		public MetricTracker(string host, int port)
+		public MetricTracker(string host, int port, string prefix)
 		{
+			_prefix = prefix ?? string.Empty;
+
 			try
 			{
 				if (!string.IsNullOrEmpty(host))
@@ -162,7 +166,7 @@ namespace MvcKickstart.Infrastructure
 					if (_random.NextDouble() > sampleRate) 
 						continue;
 
-					var statFormatted = String.Format("{0}|@{1:f}", stat, sampleRate);
+					var statFormatted = String.Format("{0}{1}|@{2:f}", _prefix, stat, sampleRate);
 					if (DoSend(statFormatted))
 					{
 						retval = true;
