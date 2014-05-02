@@ -63,21 +63,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CacheStack.1.0.9\lib\net45\CacheStack.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette, Version=2.4.0.18555, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette, Version=2.4.1.23586, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.2.4.0\lib\net40-client\Cassette.dll</HintPath>
+      <HintPath>..\packages\Cassette.2.4.1\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Aspnet, Version=2.4.0.18555, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.Aspnet, Version=2.4.1.23587, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.Aspnet.2.4.0\lib\net40\Cassette.Aspnet.dll</HintPath>
+      <HintPath>..\packages\Cassette.Aspnet.2.4.1\lib\net40\Cassette.Aspnet.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Less, Version=2.4.0.18555, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.Less, Version=2.4.1.23587, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.Less.2.4.0\lib\net40-client\Cassette.Less.dll</HintPath>
+      <HintPath>..\packages\Cassette.Less.2.4.1\lib\net40-client\Cassette.Less.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Views, Version=2.4.0.18555, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.Views, Version=2.4.1.23587, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.Views.2.4.0\lib\net40\Cassette.Views.dll</HintPath>
+      <HintPath>..\packages\Cassette.Views.2.4.1\lib\net40\Cassette.Views.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=1.12.1.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
