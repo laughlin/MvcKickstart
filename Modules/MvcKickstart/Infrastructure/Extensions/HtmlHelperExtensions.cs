@@ -24,7 +24,7 @@ namespace MvcKickstart.Infrastructure.Extensions
 		}
 		public static MvcHtmlString TextAreaWithMaxLengthFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
 		{
-			return htmlHelper.TextAreaWithMaxLengthFor(expression, 0, 0, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+			return htmlHelper.TextAreaWithMaxLengthFor(expression, 0, 0, htmlAttributes);
 		}
 		public static MvcHtmlString TextAreaWithMaxLengthFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, int rows, int columns, object htmlAttributes)
 		{
