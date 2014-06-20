@@ -11,7 +11,7 @@ namespace KickstartTemplate
 		{
 			filters.Add(new HandlesErrorAttribute());
 			filters.Add(new ProfileActionAttribute());
-			filters.Add(new StackExchange.Profiling.MVCHelpers.ProfilingActionFilter());
+			filters.Add(new StackExchange.Profiling.Mvc.ProfilingActionFilter());
 			filters.Add(new TrackAuthenticationMetricsAttribute());			
 		}
 
