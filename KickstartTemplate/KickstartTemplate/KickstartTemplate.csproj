@@ -111,17 +111,17 @@
     <Reference Include="MiniProfiler.Mvc">
       <HintPath>..\packages\MiniProfiler.MVC4.3.0.11\lib\net40\MiniProfiler.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="MvcKickstart, Version=1.2.47.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MvcKickstart, Version=1.2.48.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcKickstart.1.2.47\lib\net45\MvcKickstart.dll</HintPath>
+      <HintPath>..\packages\MvcKickstart.1.2.48\lib\net45\MvcKickstart.dll</HintPath>
     </Reference>
-    <Reference Include="MvcKickstart.Analytics, Version=1.2.47.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MvcKickstart.Analytics, Version=1.2.48.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcKickstart.Analytics.1.2.47\lib\net45\MvcKickstart.Analytics.dll</HintPath>
+      <HintPath>..\packages\MvcKickstart.Analytics.1.2.48\lib\net45\MvcKickstart.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="MvcKickstart.RestSharp, Version=1.2.47.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MvcKickstart.RestSharp, Version=1.2.48.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcKickstart.RestSharp.1.2.47\lib\net45\MvcKickstart.RestSharp.dll</HintPath>
+      <HintPath>..\packages\MvcKickstart.RestSharp.1.2.48\lib\net45\MvcKickstart.RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
