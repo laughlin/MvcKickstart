@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using MvcKickstart.Analytics.Models;
 using Spruce;
 using Spruce.Schema;
@@ -9,6 +10,14 @@ namespace MvcKickstart.Analytics.Infrastructure.Data.Migrations
 	public class InitKickstartAnalytics : IMigration
 	{
 		public int Order { get { return 1000; } }
+
+		public Type[] ScriptedObjectsToRecreate
+		{
+			get
+			{
+				return null;
+			}
+		}
 
 		public void Execute(IDbConnection db)
 		{
