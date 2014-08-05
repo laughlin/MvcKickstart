@@ -49,8 +49,18 @@ namespace KickstartTemplate.Infrastructure.Data
 				return db.BulkInsert(migrations);
 			}
 
+			var scriptedObjectsToRecreate = new List<Type>();
 			foreach (var migration in migrationTypes.Where(t => !alreadyExecutedMigrations.Any(m => m.Name == t.Name)).Select(x => (IMigration)Activator.CreateInstance(x)).OrderBy(x => x.Order))
 			{
+				// Collect the scripted objects to recreate after migrations are run
+				if (migration.ScriptedObjectsToRecreate != null && migration.ScriptedObjectsToRecreate.Any())
+				{
+					foreach (var viewType in migration.ScriptedObjectsToRecreate.Where(viewType => !scriptedObjectsToRecreate.Any(v => v == viewType)))
+					{
+						scriptedObjectsToRecreate.Add(viewType);
+					}
+				}
+
 				migration.Execute(db);
 				// add migration to database
 				var migrationData = new DataMigration
@@ -60,6 +70,13 @@ namespace KickstartTemplate.Infrastructure.Data
 					                    };
 				db.Save(migrationData);
 				migrationsRun++;
+			}
+			if (scriptedObjectsToRecreate.Any())
+			{
+				foreach (var viewType in scriptedObjectsToRecreate)
+				{
+					db.RecreateScriptedObject(viewType);
+				}
 			}
 
 			return migrationsRun;

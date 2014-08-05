@@ -140,9 +140,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sigil.4.2.1\lib\net45\Sigil.dll</HintPath>
     </Reference>
-    <Reference Include="Spruce, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Spruce, Version=1.1.15.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Spruce.1.0.13\lib\net45\Spruce.dll</HintPath>
+      <HintPath>..\packages\Spruce.1.1.15\lib\net45\Spruce.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
@@ -229,7 +229,9 @@
     <Compile Include="Utilities\Terminator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.Review.config">
       <DependentUpon>App.config</DependentUpon>
     </None>

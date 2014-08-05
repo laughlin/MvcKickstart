@@ -11,6 +11,11 @@ namespace KickstartTemplate.Infrastructure.Data.Migrations
 	{
 		public int Order { get { return 20130330; } }
 
+		public Type[] ScriptedObjectsToRecreate
+		{
+			get { return null; }
+		}
+
 		public void Execute(IDbConnection db)
 		{
 			db.Save(new User
