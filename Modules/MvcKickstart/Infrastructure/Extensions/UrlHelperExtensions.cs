@@ -31,7 +31,9 @@ namespace MvcKickstart.Infrastructure.Extensions
 
 		public static string Image(this UrlHelper helper, string file)
 		{
-			return helper.GetHashedContentFile("~/content/images/{0}".Fmt(file));
+			var imageDir = ConfigurationManager.AppSettings.Get("ImagesDirectory");
+			if (string.IsNullOrWhiteSpace(imageDir)) imageDir = "images";
+			return helper.GetHashedContentFile("~/content/{0}/{1}".Fmt(imageDir, file));
 		}
 
 		/// <summary>
