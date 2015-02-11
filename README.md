@@ -1,7 +1,7 @@
 MvcKickstart
 ===========
 
-A base site template I use to start a new asp.net mvc project.  This is a .net 4.5, asp.net mvc 5 project. 
+A base site template we use to start a new asp.net mvc project.  This is a .net 4.5, asp.net mvc 5 project. 
 
 Overview
 --------
@@ -31,7 +31,7 @@ Optional inclusions
 Technology Choices
 ------------------
 * [Dapper](https://github.com/SamSaffron/dapper-dot-net) is the ORM of choice.
-* [Spruce](https://github.com/jgeurts/spruce) compliments Dapper
+* [Spruce](https://github.com/laughlin/laughlin_spruce) compliments Dapper
 * [CacheStack](https://github.com/laughlin/laughlin_cachestack) takes care of a lot of the caching throughout the project
 * Asset bundling and minification is handled by [cassette](http://getcassette.net/).  The built in asp.net bundler sucks in comparison.
 * This template uses [bootstrap](http://twitter.github.com/bootstrap/) for a UI starting point. Enjoy...
@@ -44,4 +44,4 @@ When you run that file, it will prompt you for the new name. Once the name is en
 
 Questions
 -----------------
-Please have a look at the [wiki](https://github.com/laughlin/MvcKickstart/wiki). If you have a question about something that isn't in the wiki, please feel free to submit an [issue](https://github.com/laughlin/MvcKickstart/issues) and I'll do my best to provide an answer.
+Please have a look at the [wiki](https://github.com/laughlin/MvcKickstart/wiki). If you have a question about something that isn't in the wiki, please feel free to submit an [issue](https://github.com/laughlin/MvcKickstart/issues) and we'll do our best to provide an answer.
