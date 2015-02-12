@@ -1,4 +1,4 @@
-MvcKickstart
+MVC Kickstart
 ===========
 
 A base site template we use to start a new asp.net mvc project.  This is a .net 4.5, asp.net mvc 5 project. 
@@ -18,7 +18,7 @@ Conventions
 * All actions can have their own js and less file.  These files will automatically be loaded via _ViewStart.cshtml.  If the files do not exist, the site will not fail.  The default convention is to place a file named the same as the action, inside a folder named the same as the controller.  
     * Eg. ~/content/js/Account/Login.js and ~/content/js/Admin/Home/Index.js
     * Similarly: ~/content/less/Account/Register.less and ~/content/less/Admin/Users/Index.less
-* The site takes advantage of the mythical donut caching technique from the [CacheStack library](https://github.com/laughlin/laughlin_cachestack). Action results should be cached via the *DonutOutputCache* attribute.
+* The site takes advantage of the mythical donut caching technique from the [CacheStack library](https://github.com/laughlin/CacheStack). Action results should be cached via the *DonutOutputCache* attribute.
 * Only MS SQL Server is supported at this time. It should take just a few tweaks to support other databases.
 * Data model objects can add CreatedBy, CreatedOn, ModifiedBy and ModifiedOn properties. The Save() method will auto update those properties, if they're present.
 
@@ -31,8 +31,8 @@ Optional inclusions
 Technology Choices
 ------------------
 * [Dapper](https://github.com/SamSaffron/dapper-dot-net) is the ORM of choice.
-* [Spruce](https://github.com/laughlin/laughlin_spruce) compliments Dapper
-* [CacheStack](https://github.com/laughlin/laughlin_cachestack) takes care of a lot of the caching throughout the project
+* [Spruce](https://github.com/laughlin/Spruce) compliments Dapper
+* [CacheStack](https://github.com/laughlin/CacheStack) takes care of a lot of the caching throughout the project
 * Asset bundling and minification is handled by [cassette](http://getcassette.net/).  The built in asp.net bundler sucks in comparison.
 * This template uses [bootstrap](http://twitter.github.com/bootstrap/) for a UI starting point. Enjoy...
 * [Service Stack](http://www.servicestack.net/) is used throughout this project.  Service Stack is to asp.net projects as Resharper is to Visual Studio.
