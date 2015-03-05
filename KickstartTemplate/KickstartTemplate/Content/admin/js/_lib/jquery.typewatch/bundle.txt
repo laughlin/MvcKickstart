@@ -1,0 +1,4 @@
+﻿*
+
+[references]
+~/Content/admin/js/_lib/jquery

@@ -1,0 +1,99 @@
+@page {
+	@media print {
+		margin: 1cm;
+	}
+}
+
+* {
+	@media print {
+		background: transparent !important;
+		color: #000 !important;
+		text-shadow: none !important;
+	}
+}
+
+img,
+embed,
+object,
+video {
+	max-width: 100%;
+}
+
+nav,
+embed,
+object,
+video {
+	@media print {
+		display: none !important;
+	}
+}
+
+pre,
+blockquote,
+img {
+	@media print {
+		page-break-inside: avoid;
+	}
+}
+
+:focus {
+	outline: none;
+}
+
+.align-left {
+	text-align: left;
+}
+
+.align-right {
+	text-align: right;
+	}
+
+.align-center {
+	text-align: center;
+}
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+.clear {
+	clear: both;
+}
+
+.clear-left {
+	clear: left;
+}
+
+.clear-right {
+	clear: right;
+}
+
+.assistive-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+.print {
+	@media screen {
+		display: none !important;
+	}
+}
+
+.no-mobile [href^="tel:"] {
+	text-decoration: none;
+	color: inherit;
+	cursor: inherit;
+
+	&:hover {
+		color: inherit;
+	}
+}

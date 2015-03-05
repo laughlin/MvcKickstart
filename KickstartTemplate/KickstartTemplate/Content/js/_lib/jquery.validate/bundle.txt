@@ -1,7 +1,0 @@
-﻿jquery.validate.js
-jquery.validate.unobtrusive.js
-jquery.unobtrusive-ajax.js
-jquery.validate.bootstrap.js
-
-[references]
-~/Content/js/_lib/jquery

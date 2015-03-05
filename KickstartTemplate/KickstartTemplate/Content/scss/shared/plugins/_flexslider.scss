@@ -1,0 +1,33 @@
+.slide {
+	position: relative;
+	display: none;
+
+	&:first-child {
+		display: inherit;
+	}
+}
+
+.flex-control-nav {
+	@extend .reduced;
+	margin: 0;
+	text-align: center;
+
+	li {
+		display: inline-block;
+		margin: 0 .5em;
+	}
+
+	a {
+		display: block;
+		cursor: pointer;
+		text-indent: -999em;
+		background-color: #ddd;
+		width: 17px;
+		height: 17px;
+		border-radius: 100%;
+
+		&.flex-active { background-color: $link-color; }
+
+		&:hover { background-color: #ccc; }
+	}
+}

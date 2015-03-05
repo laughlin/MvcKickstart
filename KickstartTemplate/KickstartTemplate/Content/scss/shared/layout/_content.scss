@@ -1,0 +1,72 @@
+.breadcrumb {
+	margin-bottom: .5em;
+
+	ol {
+		@extend .reduced;
+	}
+
+	li {
+		display: inline;
+		font-size: .85em;
+
+		& + li:before {
+			content: $breadcrumb-separator;
+			padding: 0 .25em;
+		}
+	}
+}
+
+.page-header {
+	padding: 10px 0;
+	background-color: $panel-bg;
+	border-bottom: 1px solid $panel-border-color;
+}
+
+.page-title {
+	font-size: floor($font-size-h1 * 1.25);
+	margin-bottom: 0;
+}
+
+.page-description {
+	font-size: $font-size-large;
+}
+
+.section {
+	padding: 40px 0;
+
+	& + .section {
+		border-top: 1px solid #e5e5e5;
+	}
+
+	&.no-divider {
+		padding-top: 0;
+		border-top: none;
+	}
+
+	.section {
+		padding: 0;
+
+		& + .section {
+			padding-top: 20px;
+			border-top: none;
+		}
+	}
+}
+
+.section-header {
+	padding-bottom: 20px;
+}
+
+.section-title {
+	font-size: $font-size-h1;
+}
+
+.section-description {
+	font-size: $font-size-large;
+}
+
+.form-container {
+	max-width: 350px;
+	margin-right: auto;
+	margin-left: auto;
+}

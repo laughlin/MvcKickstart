@@ -1,0 +1,48 @@
+html {
+	cursor: default;
+
+	@media only screen and (max-width: 767px) {
+		overflow-x: hidden;
+	}
+}
+
+body {
+	font-size: $font-size-base;
+	font-family: $font-family-base;
+	line-height: $line-height-base;
+	font-weight: $font-weight-base;
+	color: $color-base;
+	background: $body-bg;
+
+	@media only screen and (max-width: 767px) {
+		background-color: #222;
+		overflow-x: hidden;
+	}
+}
+
+a {
+	color: $link-color;
+
+	&:hover {
+		color: $link-hover-color;
+	}
+}
+
+.container {
+	position: relative;
+	z-index: 2;
+	margin: 0 auto;
+	background-color: $container-bg;
+	-webkit-transition: -webkit-transform .3s;
+	transition: transform .3s;
+}
+
+.mobile-nav-visible .container {
+	-webkit-transform: translateX(275px);
+	transform: translateX(275px);
+
+	@media only screen and (min-width: 768px) {
+		-webkit-transform: none;
+		transform: none;
+	}
+}

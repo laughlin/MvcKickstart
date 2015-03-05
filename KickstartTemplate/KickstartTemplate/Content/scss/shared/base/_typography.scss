@@ -1,0 +1,72 @@
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	font-family: $headings-font-family;
+	line-height: $headings-line-height;
+	font-weight: $headings-font-weight;
+	color: $headings-color;
+	margin: $headings-margin;
+}
+
+h1,
+.h1 {
+	font-size: $font-size-h1;
+}
+
+h2,
+.h2 {
+	font-size: $font-size-h2;
+}
+
+h3,
+.h3 {
+	font-size: $font-size-h3;
+}
+
+h4,
+.h4 {
+	font-size: $font-size-h4;
+}
+
+h5,
+.h5 {
+	font-size: $font-size-h5;
+}
+
+h6,
+.h6 {
+	font-size: $font-size-h6;
+}
+
+p {
+	margin: 0 0 1em;
+}
+
+small,
+.small {
+	font-size: $font-size-small;
+}
+
+.large {
+	font-size: $font-size-large;
+}
+
+.line,
+.block {
+	display: block;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.word-group {
+	display: inline-block;
+}
+
+.nowrap {
+	white-space: nowrap;
+}

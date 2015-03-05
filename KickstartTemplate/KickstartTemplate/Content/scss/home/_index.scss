@@ -1,0 +1,72 @@
+.rotator {
+	position: relative;
+	max-width: 1280px;
+	min-width: 320px;
+	margin: 0 auto;
+
+	li {
+		margin-bottom: 0;
+	}
+
+	img {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.flex-viewport {
+
+		@media only screen and (max-width: 1023px) {
+			background-color: #222;
+		}
+
+	}
+
+	.flex-control-nav {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 9;
+		width: 100%;
+		padding-bottom: 10px;
+
+		@media only screen and (max-width: 1023px) {
+			position: static;
+			background-color: #222;
+		}
+	}
+}
+
+.slide-caption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 4;
+	width: 100%;
+	background-color: #222;
+	background-color: rgba(0,0,0,.75);
+	color: #fff;
+	padding: 20px 10px 40px;
+
+	@media only screen and (max-width: 1023px) {
+		position: relative;
+		bottom: auto;
+		padding-bottom: 20px;
+		background-color: #222;
+	}
+
+	h2 {
+		color: inherit;
+	}
+
+	p {
+		font-size: $font-size-large;
+
+		@media only screen and (max-width: 1023px) {
+
+			p {
+				font-size: $font-size-base;
+			}
+
+		}
+	}
+}

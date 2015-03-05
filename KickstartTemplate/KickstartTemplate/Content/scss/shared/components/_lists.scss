@@ -1,0 +1,39 @@
+ol,
+ul,
+dl {
+	margin: 0 0 1em;
+}
+
+li {
+	margin: 0 0 0.25em;
+}
+
+.reduced {
+	padding-left: 0;
+	list-style: none;
+}
+
+.list-unstyled {
+	@extend .reduced;
+}
+
+.list-inline {
+	@extend .reduced;
+
+	li {
+		display: inline-block;
+		margin-bottom: 0;
+
+		& + li {
+			margin-left: 7px;
+		}
+	}
+
+	&.piped li + li {
+
+		&:before {
+			content: '\007c\00a0';
+			margin-right: 7px;
+		}
+	}
+}

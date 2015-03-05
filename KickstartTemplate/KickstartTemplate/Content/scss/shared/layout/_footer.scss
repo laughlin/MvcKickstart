@@ -1,0 +1,41 @@
+#site-footer {
+	text-align: center;
+	padding: 1em 0;
+	background-color: $panel-bg;
+	border-top: 1px solid $panel-border-color;
+
+	.utility {
+		font-size: $font-size-small;
+
+		ul {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.social {
+
+	ul {
+		height: 30px;
+	}
+
+	li {
+		height: 30px;
+	}
+
+	a {
+		color: #fff;
+		font-size: 21px;
+		background: $link-color;
+		text-align: center;
+		line-height: 30px;
+		width: 30px;
+		overflow: hidden;
+
+		&:hover { background: $link-hover-color; }
+	}
+}
+
+.copyright {
+	margin-bottom: 1em;
+}
