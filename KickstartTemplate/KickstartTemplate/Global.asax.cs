@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
-using KickstartTemplate.Infrastructure;
 using MvcKickstart.Infrastructure;
 using StackExchange.Profiling;
 using StructureMap;

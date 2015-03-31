@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KickstartTemplate.ViewModels.Mail
+﻿namespace KickstartTemplate.ViewModels.Mail
 {
 	public abstract class EmailBase
 	{

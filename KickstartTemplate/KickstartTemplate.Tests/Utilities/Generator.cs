@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.Models.Users;
 using FizzWare.NBuilder;
 using FizzWare.NBuilder.Generators;

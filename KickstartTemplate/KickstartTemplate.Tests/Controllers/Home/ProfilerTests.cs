@@ -1,6 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
-using Moq;
+﻿using System.Web.Mvc;
 using KickstartTemplate.Controllers;
 using KickstartTemplate.Models.Users;
 using KickstartTemplate.Tests.Utilities;

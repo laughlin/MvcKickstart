@@ -6,7 +6,6 @@ using CacheStack.DonutCaching;
 using KickstartTemplate.Infrastructure;
 using KickstartTemplate.ViewModels.Error;
 using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Attributes;
 using ServiceStack.CacheAccess;
 
 namespace KickstartTemplate.Controllers

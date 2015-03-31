@@ -1,6 +1,5 @@
 ﻿using KickstartTemplate.Controllers;
 using KickstartTemplate.Tests.Utilities;
-using NUnit.Framework;
 
 namespace KickstartTemplate.Tests.Controllers.Home
 {

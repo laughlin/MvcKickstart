@@ -1,21 +1,16 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using System.Data.SqlClient;
 using System.Net;
 using System.Security.Principal;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Dapper;
 using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.Models.Users;
 using KickstartTemplate.Services;
 using KickstartTemplate.ViewModels.Shared;
 using MvcKickstart.Infrastructure;
 using ServiceStack.CacheAccess;
-using ServiceStack.Text;
-using Spruce;
 using StructureMap;
 
 namespace KickstartTemplate.Infrastructure.Attributes

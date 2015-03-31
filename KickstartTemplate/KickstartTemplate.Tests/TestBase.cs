@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using Moq;
 using KickstartTemplate.Tests.Utilities;
 using MvcKickstart.Infrastructure;

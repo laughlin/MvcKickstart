@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Web.Mvc;
-using System.Web.Routing;
+﻿using System.Data;
 using KickstartTemplate.Infrastructure.Data;
-using MvcKickstart.Infrastructure;
 using NUnit.Framework;
 using StructureMap;
 

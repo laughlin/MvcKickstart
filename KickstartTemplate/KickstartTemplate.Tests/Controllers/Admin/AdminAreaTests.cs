@@ -1,5 +1,4 @@
-﻿using System;
-using KickstartTemplate.Areas.Admin;
+﻿using KickstartTemplate.Areas.Admin;
 using NUnit.Framework;
 
 namespace KickstartTemplate.Tests.Controllers.Admin

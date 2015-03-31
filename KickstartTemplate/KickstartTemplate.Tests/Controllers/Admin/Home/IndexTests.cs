@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using KickstartTemplate.Areas.Admin.ViewModels.Home;
 using KickstartTemplate.Tests.Utilities;
 using NUnit.Framework;

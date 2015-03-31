@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using KickstartTemplate.ViewModels.Mail;
 
 namespace KickstartTemplate.Infrastructure.Extensions
 {

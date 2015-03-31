@@ -46,9 +46,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="CacheStack, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CacheStack.1.0.9\lib\net45\CacheStack.dll</HintPath>
+    <Reference Include="CacheStack">
+      <HintPath>..\packages\CacheStack.1.0\lib\net45\CacheStack.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=1.25.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -79,9 +78,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="MiniProfiler, Version=3.0.11.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+    <Reference Include="MiniProfiler, Version=3.1.1.140, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MiniProfiler.3.1\lib\net40\MiniProfiler.dll</HintPath>
+      <HintPath>..\packages\MiniProfiler.3.1.1.140\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.2.1312.1622, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -90,9 +89,8 @@
     <Reference Include="MvcContrib.TestHelper">
       <HintPath>..\packages\MvcContrib.Mvc3.TestHelper-ci.3.0.100.0\lib\MvcContrib.TestHelper.dll</HintPath>
     </Reference>
-    <Reference Include="MvcKickstart, Version=1.2.48.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcKickstart.1.2.48\lib\net45\MvcKickstart.dll</HintPath>
+    <Reference Include="MvcKickstart.Helpers">
+      <HintPath>..\packages\MvcKickstart.Helpers.1.0\lib\net45\MvcKickstart.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -108,6 +106,9 @@
     <Reference Include="PublicBroadcasting, Version=1.0.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PublicBroadcasting.1.0.12\lib\net45\PublicBroadcasting.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
@@ -126,7 +127,7 @@
     </Reference>
     <Reference Include="ServiceStack.Text, Version=3.9.58.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Text.3.9.58\lib\net35\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="Should, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -140,9 +141,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sigil.4.2.1\lib\net45\Sigil.dll</HintPath>
     </Reference>
-    <Reference Include="Spruce, Version=1.1.15.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Spruce.1.1.15\lib\net45\Spruce.dll</HintPath>
+    <Reference Include="Spruce">
+      <HintPath>..\packages\Spruce.1.0\lib\net45\Spruce.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>

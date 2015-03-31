@@ -1,5 +1,4 @@
-﻿using Moq;
-using KickstartTemplate.Areas.Admin.Controllers;
+﻿using KickstartTemplate.Areas.Admin.Controllers;
 using KickstartTemplate.Models.Users;
 using KickstartTemplate.Tests.Utilities;
 

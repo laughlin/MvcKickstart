@@ -8,8 +8,8 @@ using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Extensions;
 using KickstartTemplate.ViewModels.Home;
 using KickstartTemplate.ViewModels.Shared;
+using MvcKickstart.Analytics.Infrastructure.Extensions;
 using MvcKickstart.Infrastructure;
-using MvcKickstart.Infrastructure.Extensions;
 using ServiceStack.CacheAccess;
 using StackExchange.Profiling;
 

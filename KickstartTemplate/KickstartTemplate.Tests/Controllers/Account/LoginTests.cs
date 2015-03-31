@@ -1,8 +1,6 @@
 ﻿using System.Web.Mvc;
-using KickstartTemplate.Infrastructure.Extensions;
 using FizzWare.NBuilder.Generators;
 using Moq;
-using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Models.Users;
 using KickstartTemplate.Tests.Utilities;
 using KickstartTemplate.ViewModels.Account;

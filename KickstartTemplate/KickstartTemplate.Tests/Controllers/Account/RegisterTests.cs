@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using FizzWare.NBuilder.Generators;
-using KickstartTemplate.Infrastructure;
 using KickstartTemplate.Infrastructure.Extensions;
 using Moq;
 using KickstartTemplate.Tests.Utilities;
