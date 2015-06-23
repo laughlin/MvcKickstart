@@ -13,7 +13,7 @@
 		<tags>asp.net mvc kickstart mvckickstart restsharp</tags>
 		<dependencies>
 			<dependency id="RestSharp" version="104.4" />
-			<dependency id="ServiceStack.Text" version="3.9.71" />
+			<dependency id="ServiceStack.Text" version="[3.9.71, 4)" />
 		</dependencies>
 	</metadata>
 	<files>
